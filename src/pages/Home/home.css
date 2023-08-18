@@ -1,7 +1,7 @@
 .overlay_img {
   background-image: url("../../../public/images/top_bg_img.png");
 
-  height: 95vh;
+  height: 75vh;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -92,7 +92,7 @@
 .google_overlay_img {
   background-image: url("../../../public/images/mob_bg.png");
 
-  height: 82vh;
+  height: 65vh;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -100,7 +100,7 @@
 
 .google_pos_absolute {
   position: absolute;
-  top: 440%;
+  top: 315%;
   width: 99%;
 }
 .google_text_overlay h1 {
