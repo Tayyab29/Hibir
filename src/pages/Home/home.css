@@ -1,0 +1,71 @@
+.overlay_img {
+  background-image: url("../../images/top_bg_img.png");
+  height: 65vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.select_style,
+.select_style:focus,
+.select_style:focus-visible {
+  width: 100%;
+  border: 0;
+  padding: 10px 12px;
+  outline: none;
+}
+.input_style,
+.input_style:focus,
+.input_style:focus-visible {
+  width: 100%;
+  border: 0;
+  padding: 10px 12px;
+  outline: none;
+}
+.search_btn {
+  width: 180px;
+  border: 0;
+  background-color: #1eb560;
+  color: #fff;
+  padding: 10px 10px;
+  border-radius: 4px;
+}
+.pos_absolute {
+  position: absolute;
+  top: 30%;
+  width: 99%;
+}
+.wdth_55 {
+  width: 45%;
+  margin: 0 auto;
+  padding: 5px 5px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.flex_div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.text_overlay {
+  text-align: center;
+}
+.text_overlay h1 {
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 45px;
+  padding-bottom: 1rem;
+}
+.img_heading {
+  padding-top: 0.5rem;
+  /* padding-bottom: 0.5rem; */
+}
+.img_div img {
+  width: 100%;
+}
+.img_plain_text {
+  font-size: 12px;
+  margin: 0;
+  padding-top: 0.5rem;
+}
