@@ -3,6 +3,7 @@ import "./home.css";
 import Property from "./homecomponents/propert";
 import AboutUs from "./homecomponents/aboutUs";
 import GooglePlay from "./homecomponents/playStore";
+import Footer from "./footer";
 
 const home = () => {
   return (
@@ -38,9 +39,12 @@ const home = () => {
       <section className="pt-3 pb-3">
         <AboutUs />
       </section>
-      <section className="pt-5 pb-3">
+      <section className="pt-5 pb-3 mob_pos">
         <GooglePlay />
       </section>
+      <footer className="pt-5">
+        <Footer />
+      </footer>
     </>
   );
 };

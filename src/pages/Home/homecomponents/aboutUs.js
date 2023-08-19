@@ -14,7 +14,11 @@ const AboutUs = () => {
           <p className="img_plain_text">Incididunt ut labore et dolore magna aliqua.</p>
         </div>
         <div className="about_img_div">
-          <img src="images/aboutUs.png"></img>
+          <img className="over_lay_bg" src="images/aboutUs.png"></img>
+          <div className="play_icon">
+            <img src="images/Vector.png" className="play_img" />
+            <p className="watch_now_text">WATCH NOW</p>
+          </div>
         </div>
       </div>
     </>
