@@ -1,6 +1,7 @@
 import React from "react";
 import { BsSend, BsTelephone } from "react-icons/bs";
 import { BiMap } from "react-icons/bi";
+import "./footer.css";
 
 const Footer = () => {
   return (

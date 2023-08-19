@@ -1,0 +1,71 @@
+.footer_main {
+  background-color: black;
+  margin-top: 7rem;
+  position: relative;
+}
+.footer_main .news_letter_div {
+  position: absolute;
+  width: 100%;
+  top: -100px;
+}
+.main_input_div {
+  background: #fff;
+  padding: 5px 3px;
+  border-radius: 6px;
+  margin-top: 15px;
+}
+.wdth_60 {
+  width: 60%;
+  margin: 0 auto;
+  background: #1eb560;
+  padding: 60px 35px 40px 35px;
+  border: 1px solid #1eb560;
+  border-radius: 4px;
+}
+.footer_input,
+.footer_input:focus-visible,
+.footer_input:focus {
+  width: 100%;
+  border: 0;
+  padding: 10px 12px;
+  outline: none;
+}
+.subscribe_btn {
+  background-color: black;
+  border-radius: 5px;
+  color: #fff;
+  padding: 5px 20px;
+  font-size: 13px;
+}
+.newsletter_text {
+  font-weight: 500;
+}
+.display_input_button {
+  display: flex;
+  flex-direction: row;
+}
+.footer_text_container {
+  padding-top: 10rem;
+  padding-bottom: 3rem;
+  margin: 0;
+}
+
+.copyright_div {
+  border-top: 0.2px solid rgba(255, 255, 255, 0.63);
+  width: 100%;
+  padding: 15px 0px 1px;
+  text-align: center;
+}
+.copyright_text {
+  color: #fff;
+}
+
+.footer_text_color {
+  color: #fff;
+}
+.img_div_icon {
+  margin-right: 10px;
+}
+.img_div_icon_twitter {
+  margin-right: 6px;
+}

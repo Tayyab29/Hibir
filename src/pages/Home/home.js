@@ -3,7 +3,7 @@ import "./home.css";
 import Property from "./homecomponents/propert";
 import AboutUs from "./homecomponents/aboutUs";
 import GooglePlay from "./homecomponents/playStore";
-import Footer from "./footer";
+import Footer from "./Footer/footer";
 
 const home = () => {
   return (
