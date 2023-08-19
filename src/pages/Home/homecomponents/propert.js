@@ -16,7 +16,7 @@ const Property = () => {
             return (
               <div className="col-md-3 col-12" key={index}>
                 <div className="img_div">
-                  <img src={item.img} />
+                  <img src={item.img} alt="img" />
                 </div>
                 <div className="img_heading">
                   <h4>
@@ -27,8 +27,7 @@ const Property = () => {
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
                   <p className="img_plain_text">{item.description}</p>
-
-                  <img src="images/propertyicon.png" />
+                  <img src="images/propertyicon.png" alt="propertimg" />
                 </div>
               </div>
             );

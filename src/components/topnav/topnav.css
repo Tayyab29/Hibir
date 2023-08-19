@@ -56,7 +56,7 @@
 
 .nav-text {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
   padding: 8px 0px 8px 1px;
   list-style: none;
