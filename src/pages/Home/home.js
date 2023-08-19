@@ -3,7 +3,7 @@ import "./home.css";
 import Property from "./homecomponents/propert";
 import AboutUs from "./homecomponents/aboutUs";
 import GooglePlay from "./homecomponents/playStore";
-import Footer from "./Footer/footer";
+import Footer from "../../components/Footer/footer";
 
 const home = () => {
   return (
@@ -26,7 +26,11 @@ const home = () => {
                   <option value="1">property 1</option>
                   <option value="2">property 2</option>
                 </select>
-                <input type="text" placeholder="Enter A Location" className="input_style" />
+                <input
+                  type="text"
+                  placeholder="Enter A Location"
+                  className="input_style"
+                />
                 <button className="search_btn">Search</button>
               </div>
             </div>

@@ -20,7 +20,11 @@ const Footer = () => {
             <div className="col-md-7">
               <div className="main_input_div">
                 <div className="display_input_button">
-                  <input type="text" placeholder="Your Email Address" className="footer_input" />
+                  <input
+                    type="text"
+                    placeholder="Your Email Address"
+                    className="footer_input"
+                  />
                   <button className="subscribe_btn">Subscribe</button>
                 </div>
               </div>
@@ -32,11 +36,11 @@ const Footer = () => {
       <div className="row footer_text_container">
         <div className="col-md-1"></div>
         <div className="col-12 col-md-4 mr-5">
-          <img src="images/footer.png" />
+          <img src="images/footer.png" alt="footer img" />
           <p className="footer_text_color pt-4">
-            Ut ut neque pellentesque massa dignissim auctor sed non orci. Aenean porttitor, dui
-            iaculis ornare pellentesque, elit nisi consequat ipsum, gravida pellentesque lacus ipsum
-            ac nisi.
+            Ut ut neque pellentesque massa dignissim auctor sed non orci. Aenean
+            porttitor, dui iaculis ornare pellentesque, elit nisi consequat
+            ipsum, gravida pellentesque lacus ipsum ac nisi.
           </p>
         </div>
 
@@ -93,7 +97,9 @@ const Footer = () => {
       </div>
 
       <div className="copyright_div">
-        <p className="copyright_text">Copyright © 2023 Hibir. All Rights Reserved.</p>
+        <p className="copyright_text">
+          Copyright © 2023 Hibir. All Rights Reserved.
+        </p>
       </div>
     </div>
   );

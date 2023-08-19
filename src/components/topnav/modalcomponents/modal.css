@@ -1,0 +1,113 @@
+.input_text_login,
+.input_text_login:focus,
+.input_text_login:focus-visible {
+  width: 100%;
+  border: 1px solid #1eb560;
+  padding: 12px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  margin-top: 1rem;
+}
+.input_text_signup_first,
+.input_text_signup_first:focus,
+.input_text_signup_first:focus-visible {
+  width: 98%;
+  border: 1px solid #1eb560;
+  padding: 12px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  margin-top: 1rem;
+}
+.input_text_signup,
+.input_text_signup:focus,
+.input_text_signup:focus-visible {
+  width: 98%;
+  border: 1px solid #1eb560;
+  padding: 12px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+}
+.sign_button,
+.sign_button:focus,
+.sign_button:hover,
+.sign_button:active {
+  width: 100%;
+  background: #1eb560;
+  color: #fff;
+  font-weight: 500;
+  outline: none;
+  border: 0;
+  padding: 12px 10px;
+  border-radius: 5px;
+}
+.forgot_text {
+  text-align: right;
+  text-decoration: none;
+}
+.hr_clas {
+  width: 46%;
+  float: left;
+  border-top: 1px solid #1eb560;
+  opacity: 1;
+}
+.or_clas {
+  float: left;
+  width: 4%;
+  margin-left: 10px;
+  margin-right: 8px;
+}
+.google_social_button {
+  width: 100%;
+  border: 1px solid #1eb560 !important;
+  color: #757575;
+  background: transparent;
+  font-weight: 500;
+  outline: none;
+  border: 0;
+  padding: 12px 10px;
+  border-radius: 5px;
+  background-image: url("/public/images/googleLogo.png");
+  background-repeat: no-repeat;
+  background-position: 7px;
+}
+.fb_social_button {
+  width: 100%;
+  border: 1px solid #1eb560 !important;
+  color: #757575;
+  background: transparent;
+  font-weight: 500;
+  outline: none;
+  border: 0;
+  padding: 12px 10px;
+  border-radius: 5px;
+  background-image: url("/public/images/FacebookLogo.png");
+  background-repeat: no-repeat;
+  background-position: 7px;
+}
+.apple_social_button {
+  width: 100%;
+  border: 1px solid #1eb560 !important;
+  color: #757575;
+  background: transparent;
+  font-weight: 500;
+  outline: none;
+  border: 0;
+  padding: 12px 10px;
+  border-radius: 5px;
+  background-image: url("/public/images/applelogo.png");
+  background-repeat: no-repeat;
+  background-position: 7px;
+}
+.modal-dialog {
+  margin-top: 10%;
+}
+.signle_line_input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

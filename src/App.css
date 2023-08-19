@@ -34,3 +34,6 @@
   --delete-row-bg: #fde6e6;
   --text-light0-color: #757575;
 }
+body {
+  font-family: "Roboto";
+}
