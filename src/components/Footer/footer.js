@@ -3,10 +3,11 @@ import { BsSend, BsTelephone } from "react-icons/bs";
 import { BiMap } from "react-icons/bi";
 import "./footer.css";
 
-const Footer = () => {
+const Footer = (props) => {
+  const { display = "block", marginTop = "7rem" } = props;
   return (
-    <div className="footer_main">
-      <div className="news_letter_div">
+    <div className="footer_main" style={{ marginTop: marginTop }}>
+      <div className="news_letter_div" style={{ display: display }}>
         <div className="wdth_60">
           <div className="row">
             <div className="col-md-5">

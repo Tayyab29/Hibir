@@ -43,7 +43,7 @@ const TopNav = () => {
                 <img src="images/Hibir Bet Logo-01 1.svg" alt="Logo" />
               </div>
             </Link>
-            <Link className="link_deco commonheader_btn">
+            <Link to="/advertise" className="link_deco commonheader_btn">
               <div className="">Advertise</div>
             </Link>
             <Link to="/manage" className="link_deco commonheader_btn">

@@ -1,39 +1,39 @@
 :root {
-  --prime-color: #1b3870;
-  --primary-color-light: #27b5fd;
-  --text-color: #555960;
-  --card-number-bold: #152a55;
-  --card-text-light: #68727b;
-  --color-success: #8adca5;
-  --sidebar-active-color: #3165cb;
-  --icon-dark-color: #292d32;
-  --input-border-color: #ced4da;
-  --success-bg: #8adca5;
-  --bg-white: #fff;
-  --body-bg: #e7e7e7;
-  --heading-color: #050505;
-  --purp-color: #525bd9;
-  --purp-light-backround: #f9f5ff;
-  --error-color: #d60500;
-  --cancl-text-color: #909090;
-  --brder-div-color: #ccc;
-  --bg-icon: #f2f4f7;
-  --rtext-color: #272b33;
-  --bg-error: #f9b2b0;
-  --attachment-iconbg: #bfcfef;
-  --attachment-color: #2d5cb9;
-  --profile-header-color: #eaeaea;
-  --role-title-bg: #f2f2f2;
-  --filter-icon-color: #9d9fa3;
-  --bg-notification-icon: #f5f8fa;
-  --notification-text-color: #2b2f38;
-  --documents-checklist-color: #344054;
-  --document-check-icon: #00b23b;
-  --none-active-color: #a0b8e7;
-  --chat-bg: #ebf7f5;
-  --delete-row-bg: #fde6e6;
-  --text-light0-color: #757575;
 }
 body {
   font-family: "Roboto";
+  height: auto;
+  overflow-y: auto;
+  overscroll-behavior-x: none;
+}
+textarea {
+  resize: none;
+  font-family: "Inter", sans-serif !important;
+}
+body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+body::-webkit-scrollbar-track {
+  background: #eaecf0;
+  border-radius: 5px;
+}
+body::-webkit-scrollbar-thumb {
+  background: #1eb560;
+  border-radius: 5px;
+  opacity: 0.3;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background: #1eb560;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
