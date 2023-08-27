@@ -146,23 +146,21 @@ const CheckOut = () => {
               <div className="header_display checkout_header_displ">
                 <div>
                   <h3>
-                    <b>Platinum</b>
+                    <b>Diamond</b>
                   </h3>
-                  <p>Starting at</p>
+                  {/* <p>Starting at</p> */}
                 </div>
                 <div>
-                  <h1>
-                    <b>
-                      £420/<small className="euro_div">month</small>
-                    </b>
-                  </h1>
+                  <h3>
+                    <b>£820/Month</b>
+                  </h3>
                 </div>
               </div>
               <hr></hr>
 
               {/* body section */}
 
-              <div className="pt-3 checkout_p_padding">
+              <div className="pt-3 checkout_p_padding check_out_ul">
                 <p>
                   There are many variations of passages of Lorem Ipsum
                   available, but the majority have suffered alteration in some
@@ -185,12 +183,32 @@ const CheckOut = () => {
                 </ul>
               </div>
               <hr></hr>
-              <div className="continuebutton_div">
-                <button className="continue_btn" type="button">
-                  Continue
-                </button>
+              <div className="service_bottom_style">
+                <h6>
+                  <b>Service Charges</b>
+                </h6>
+                <h6>
+                  <b> £20</b>
+                </h6>
               </div>
-
+              <hr></hr>
+              <div className="service_bottom_style">
+                <h6>
+                  <b>Tax</b>
+                </h6>
+                <h6>
+                  <b> £1%</b>
+                </h6>
+              </div>
+              <hr></hr>
+              <div className="service_bottom_style mb-3">
+                <h6>
+                  <b>Total Ammount</b>
+                </h6>
+                <h6>
+                  <b> £909</b>
+                </h6>
+              </div>
               {/* body section */}
             </div>
           </div>

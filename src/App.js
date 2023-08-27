@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home/home";
 import Manage from "./pages/Manage/manage";
 import Advertise from "./pages/Advertise/advertise";
+import CondominiumDetails from "./pages/Advertise/condominiumdetails";
 // import notfound from "./components/NotFound/notfound";
 
 function App() {
@@ -17,6 +18,11 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/manage" exact component={Manage} />
           <Route path="/advertise" exact component={Advertise} />
+          <Route
+            path="/condominiumdetails"
+            exact
+            component={CondominiumDetails}
+          />
         </Switch>
       </Router>
     </>

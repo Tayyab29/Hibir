@@ -1,6 +1,7 @@
 import React from "react";
-
+import { useHistory } from "react-router-dom"; // version 5.2.0
 const SingleUnit = () => {
+  const history = useHistory();
   return (
     <>
       <div className="row mt-4">
@@ -54,21 +55,25 @@ const SingleUnit = () => {
             </div>
           </div>
           <div className="add_prop_button">
-            <button className="addprop_btn" type="button">
+            <button
+              className="addprop_btn"
+              type="button"
+              onClick={() => history.push("./condominiumdetails")}
+            >
               Add My Property
             </button>
           </div>
           <div className="pt-5 text-center">
             <p>
               By clicking Add My Property above, I agree that I will provide
-              accurate and{" "}
+              accurate and
               <span className="non_discriminatory">
                 non<br></br> discriminatory
-              </span>{" "}
-              information and I will comply with the Hibir.com{" "}
+              </span>
+              information and I will comply with the Hibir.com
               <span className="non_discriminatory">
                 Terms and <br></br> Conditions
-              </span>{" "}
+              </span>
               and the Add a Property Terms of Service.
             </p>
           </div>

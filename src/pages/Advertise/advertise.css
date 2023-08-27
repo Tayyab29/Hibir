@@ -169,6 +169,7 @@
 }
 .subs_header {
   background: rgba(30, 181, 96, 0.2);
+  padding: 12px 10px;
 }
 .checkout_header_displ,
 .checkout_p_padding p {
@@ -177,4 +178,164 @@
 .checkout_p_padding ul {
   padding: 5px 5px 5px 45px;
 }
+.service_bottom_style {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 1.3rem;
+  margin-right: 1.3rem;
+}
+.packgr_card hr {
+  margin-left: 1.3rem;
+  margin-right: 1.3rem;
+}
+.check_out_ul {
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+}
+.checkout_header_displ {
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+}
 /* check out details */
+/* condominium details */
+.save_publish {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  align-items: center;
+}
+.condominium_save,
+.condominium_save:hover,
+.condominium_save:active,
+.condominium_save:focus {
+  border: 1px solid #1eb560;
+  width: 120px;
+  border-radius: 6px;
+  padding: 7px 12px;
+  color: #1eb560;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 14px;
+}
+.condominium_publish,
+.condominium_publish:hover,
+.condominium_publish:active,
+.condominium_publish:focus {
+  background-color: #1eb560;
+  width: 120px;
+  border-radius: 6px;
+  padding: 7px 12px;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  font-size: 14px;
+}
+.condominum_p_text {
+  color: #757575;
+  font-size: 14px;
+}
+.props_view_all {
+  text-align: right;
+}
+.View_all_props {
+  background-color: transparent;
+  color: #1eb560;
+  border: 0;
+  outline: none;
+  font-size: 13px;
+  font-weight: bold;
+}
+.condominium_table_head {
+  border: 1px solid #1eb560;
+  border-radius: 6px;
+  text-align: center;
+}
+.condominium_table_head > thead > tr > th {
+  border: 0;
+  background: #deede5;
+}
+.condominium_table_head > tbody > tr > td {
+  border: 0;
+  color: #1eb560;
+  text-align: center;
+  width: 150px;
+  white-space: nowrap;
+  text-align: left;
+}
+.condominium_table_head > tbody > tr > td span,
+.condominium_table_head > tbody > tr > td .input_tbl,
+.condominium_table_head > tbody > tr > td .select_tbl {
+  margin: 0;
+  border: 1px solid #1eb560;
+  width: 125px;
+  display: block;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  display: flex;
+  align-items: center;
+}
+.info_hov {
+  cursor: pointer;
+}
+input[type="date"] {
+}
+input[type="date"] {
+  padding: 10px !important;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: block;
+  background: url("../../../public/images/calender_img.svg") no-repeat;
+  width: 15px;
+  height: 15px;
+  border-width: thin;
+}
+.add_another_style .plus_icon {
+  border: 1px solid #1eb560;
+  color: #1eb560;
+  border-radius: 30px;
+}
+.add_another_style span {
+  font-size: 13px;
+  color: #1eb560;
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+/* img_ css */
+/* Copy code */
+.dropzone {
+  border: 2px dashed #1eb560;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #f1f4e3;
+}
+
+.preview {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.preview img {
+  max-width: 100%;
+  height: 200px;
+}
+.text_area {
+  width: 100%;
+  border-radius: 6px;
+  resize: none;
+  padding: 7px 12px;
+}
+.text_area_char_text {
+  margin: 0;
+  color: #757575;
+  font-size: 12px;
+}
+/* condominium details */
