@@ -285,7 +285,7 @@
 input[type="date"] {
 }
 input[type="date"] {
-  padding: 10px !important;
+  /* padding: 10px; */
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
   color: rgba(0, 0, 0, 0);
@@ -337,5 +337,107 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   margin: 0;
   color: #757575;
   font-size: 12px;
+}
+.condominium_input,
+.condominium_input:focus,
+.condominium_input:focus-visible {
+  width: 100%;
+  border: 1px solid #1eb560;
+  padding: 7px 12px;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  outline: none;
+}
+/* checkbox */
+.container_radio {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 55px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 17px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container_radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container_radio:hover input ~ .checkmark {
+  background-color: #757575;
+}
+
+/* When the radio button is checked, add a blue background */
+.container_radio input:checked ~ .checkmark {
+  background-color: #1eb560;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container_radio input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container_radio .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+.checkbox_class {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.checkbox_hide_span {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 15px;
+}
+.checkbox_hide_span span {
+  margin-left: 0;
+  color: #757575;
+  font-size: 14px;
+}
+.checkbox_hide_bottom {
+  display: flex;
+  /* align-items: center; */
+  flex-direction: row;
+  gap: 15px;
+}
+.checkbox_hide_bottom span {
+  margin-left: 0;
+  color: #757575;
+  font-size: 14px;
+  padding-top: 1.2rem;
 }
 /* condominium details */
