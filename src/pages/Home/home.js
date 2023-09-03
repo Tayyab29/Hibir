@@ -4,8 +4,11 @@ import Property from "./homecomponents/propert";
 import AboutUs from "./homecomponents/aboutUs";
 import GooglePlay from "./homecomponents/playStore";
 import Footer from "../../components/Footer/footer";
+//useHistory
+// import { useHistory } from "react-router-dom";
 
-const home = () => {
+const Home = () => {
+  // const history = useHistory();
   return (
     <>
       <section>
@@ -31,7 +34,14 @@ const home = () => {
                   placeholder="Enter A Location"
                   className="input_style"
                 />
-                <button className="search_btn">Search</button>
+                <button
+                  className="search_btn"
+                  // onClick={() => {
+                  //   history.push("./searchbypropertyindex");
+                  // }}
+                >
+                  Search
+                </button>
               </div>
             </div>
           </div>
@@ -53,4 +63,4 @@ const home = () => {
   );
 };
 
-export default home;
+export default Home;

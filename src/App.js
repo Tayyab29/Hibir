@@ -7,6 +7,7 @@ import Advertise from "./pages/Advertise/advertise";
 import CondominiumDetails from "./pages/Advertise/condominiumdetails";
 import CheckoutModal from "./pages/Advertise/advertisecomponents/checkoutmodal";
 import ManagePropertyIndex from "./pages/Advertise/manageproperty";
+import SearchByPropertyIndex from "./pages/Home/searchpropertycomponent";
 // import notfound from "./components/NotFound/notfound";
 
 function App() {
@@ -30,6 +31,11 @@ function App() {
             path="/managepropertyindex"
             exact
             component={ManagePropertyIndex}
+          />
+          <Route
+            path="/searchbypropertyindex"
+            exact
+            component={SearchByPropertyIndex}
           />
         </Switch>
       </Router>
