@@ -104,6 +104,7 @@
   margin-bottom: 0.5rem;
   outline: none;
 }
+
 .inline_select_unit {
   display: flex;
   flex-direction: row;
@@ -233,6 +234,7 @@
   border: 0;
   font-size: 14px;
 }
+
 .condominum_p_text {
   color: #757575;
   font-size: 14px;
@@ -441,3 +443,119 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding-top: 1.2rem;
 }
 /* condominium details */
+.hr_class {
+  width: 46%;
+  float: left;
+  border-top: 1px solid #757575;
+  opacity: 1;
+}
+.or_class {
+  float: left;
+  width: 4%;
+  margin-left: 10px;
+  margin-right: 8px;
+}
+.checkout_modal_font {
+  font-size: 156px;
+  text-align: center;
+}
+.checkout_modal_font .svg_size {
+  background: #1eb560;
+  color: #eee;
+  border-radius: 160px;
+  margin: 0 auto;
+  display: inline-flex;
+  align-items: center;
+}
+.section_padding_top {
+  padding-top: 6rem;
+}
+
+/* Manage Property Section */
+.manage_container_bg {
+  background-color: #deede5;
+  padding: 7px 5px 5px 5px;
+  border-radius: 6px;
+}
+
+.manage_input,
+.manage_input:focus,
+.manage_input:focus-visible {
+  width: 100%;
+  border: 1px solid #1eb560;
+  padding: 12px 12px;
+  border-radius: 6px;
+  /* margin-bottom: 0.5rem; */
+  outline: none;
+  font-size: 16px;
+  background-color: #fff;
+}
+
+.manage_searchbtn,
+.manage_searchbtn:hover,
+.manage_searchbtn:active,
+.manage_searchbtn:focus {
+  background-color: #1eb560;
+  width: 85px;
+  border-radius: 6px;
+  padding: 13px 12px;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  font-size: 14px;
+}
+.manage_clear_filter,
+.manage_clear_filter:hover,
+.manage_clear_filter:active,
+.manage_clear_filter:focus {
+  border: 1px solid #1eb560;
+  width: 87px;
+  border-radius: 6px;
+  padding: 12px 8px;
+  color: #1eb560;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+.propset_ptext {
+  font-size: 12px;
+}
+.cancel_property_detail {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.cancel_property {
+  width: 100%;
+  border: 0;
+  background-color: rgba(199, 44, 65, 0.4);
+  color: #c72c41;
+  padding: 10px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.propset_unit {
+  color: #757575;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+.manage_unit_text_button {
+  background-color: #fff;
+  border: 0;
+  color: #1eb560;
+  font-weight: 500;
+  outline: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.border_grid {
+  border: 2px solid #1eb560;
+  border-radius: 6px;
+}
+.pd_left_right {
+  padding-left: 0.71rem;
+  padding-right: 0.71rem;
+}
+/* Manage Property Section */

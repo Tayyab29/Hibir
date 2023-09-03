@@ -5,6 +5,8 @@ import Home from "./pages/Home/home";
 import Manage from "./pages/Manage/manage";
 import Advertise from "./pages/Advertise/advertise";
 import CondominiumDetails from "./pages/Advertise/condominiumdetails";
+import CheckoutModal from "./pages/Advertise/advertisecomponents/checkoutmodal";
+import ManagePropertyIndex from "./pages/Advertise/manageproperty";
 // import notfound from "./components/NotFound/notfound";
 
 function App() {
@@ -22,6 +24,12 @@ function App() {
             path="/condominiumdetails"
             exact
             component={CondominiumDetails}
+          />
+          <Route path="/checkoutmodal" exact component={CheckoutModal} />
+          <Route
+            path="/managepropertyindex"
+            exact
+            component={ManagePropertyIndex}
           />
         </Switch>
       </Router>

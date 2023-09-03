@@ -1,6 +1,7 @@
 import React from "react";
-
+import { useHistory } from "react-router-dom";
 const CheckOut = () => {
+  const history = useHistory();
   return (
     <>
       <div className="container">
@@ -127,14 +128,18 @@ const CheckOut = () => {
               </div>
             </div>
             <div className="add_prop_button">
-              <button className="addprop_btn" type="button">
+              <button
+                className="addprop_btn"
+                type="button"
+                onClick={() => history.push("./checkoutmodal")}
+              >
                 Checkout Now
               </button>
             </div>
             <div className="pt-2 pb-2">
-              <hr className="hr_clas"></hr>
-              <span className="or_clas">OR</span>
-              <hr className="hr_clas"></hr>
+              <hr className="hr_class"></hr>
+              <span className="or_class">OR</span>
+              <hr className="hr_class"></hr>
             </div>
           </div>
           {/*  */}
