@@ -38,6 +38,7 @@ const SignupModal = (props) => {
   const googleAuth = () => {
     window.open(`${process.env.REACT_APP_GOOGLE_URL}auth/google/callback`, "_self");
   };
+
   return (
     <>
       <div>
