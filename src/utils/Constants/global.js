@@ -1,9 +1,55 @@
-import React from "react";
-import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
-import * as IoIcons from "react-icons/io";
+export const UNPROTECTED_PAGE = [
+  {
+    title: "RENTER TOOLS",
+    path: "/",
+    // icon: <AiIcons.AiFillHome />,
+    cName: "nav-text",
+  },
+  {
+    title: "MANAGE RENTALS",
+    path: "/reports",
+    // icon: <IoIcons.IoIosPaper />,
+    cName: "nav-text",
+  },
+  {
+    title: "APARTMENTS",
+    path: "/products",
+    // // icon: <FaIcons.FaCartPlus />,
+    cName: "nav-text",
+  },
+  {
+    title: "HOMES",
+    path: "/team",
+    // // icon: <IoIcons.IoMdPeople />,
+    cName: "nav-text",
+  },
+  {
+    title: "CONDOS",
+    path: "/messages",
+    // // icon: <FaIcons.FaEnvelopeOpenText />,
+    cName: "nav-text",
+  },
+  {
+    title: "TOWNHOMES",
+    path: "/support",
+    // // icon: <IoIcons.IoMdHelpCircle />,
+    cName: "nav-text",
+  },
+  {
+    title: "BASEMENT",
+    path: "/",
+    // icon: <AiIcons.AiFillHome />,
+    cName: "nav-text",
+  },
+  {
+    title: "ROOMS",
+    path: "/reports",
+    // icon: <IoIcons.IoIosPaper />,
+    cName: "nav-text",
+  },
+];
 
-export const SidebarData = [
+export const PROTECTED_PAGE = [
   {
     title: "RENTER TOOLS",
     path: "/",
