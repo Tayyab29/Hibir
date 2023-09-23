@@ -1,10 +1,54 @@
 import React from "react";
 
 import Modal from "react-bootstrap/Modal";
-import "./modal.css";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { login } from "../../../services/users";
+
+// Styles
+import "./modal.css";
 
 const LoginModal = ({ onHide }) => {
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  // Handlers
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user,
+      [name]: value,
+    });
+    console.log({ name, value });
+  };
+  const saveHandler = async () => {
+    try {
+      // setloading(true);
+
+      let resp = await login(user);
+      console.log({ resp });
+      if (resp.data.status) {
+        localStorage.setItem("accessToken", resp.data.access_token);
+        // localStorage.setItem("refreshToken", resp.data.refresh_token);
+
+        // getUserData()
+
+        // setloading(false);
+
+        // history.replace("/home");
+        onHide();
+      } else {
+      }
+    } catch (error) {
+      // toastContext.showMessage(
+      //   "Error",
+      //   "Email or Password you entered doesn't match your account.",
+      //   "error"
+      // );
+    }
+  };
   return (
     <>
       <div>
@@ -25,14 +69,18 @@ const LoginModal = ({ onHide }) => {
             <div className="form-group">
               <input
                 type="email"
+                name="email"
                 placeholder="Email Address"
                 className="input_text_login"
+                onChange={inputHandler}
               />
 
               <input
                 type="password"
+                name="password"
                 placeholder="Password"
                 className="input_text_login"
+                onChange={inputHandler}
               />
 
               <div className="pt-2 forgot_text">
@@ -42,7 +90,7 @@ const LoginModal = ({ onHide }) => {
               </div>
             </div>
             <div className="pt-3">
-              <button className="sign_button" type="button">
+              <button className="sign_button" type="button" onClick={() => saveHandler()}>
                 Sign In
               </button>
             </div>
@@ -69,9 +117,7 @@ const LoginModal = ({ onHide }) => {
             <div className="text-center pt-3">
               <p style={{ color: "#757575" }}>
                 By signing in, I accept the
-                <span style={{ textDecoration: "underline", margin: "0" }}>
-                  Terms of Use.
-                </span>
+                <span style={{ textDecoration: "underline", margin: "0" }}>Terms of Use.</span>
               </p>
             </div>
           </div>

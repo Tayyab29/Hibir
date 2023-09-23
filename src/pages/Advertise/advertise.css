@@ -1,0 +1,561 @@
+.active_card {
+  border-bottom: 2px solid #1eb560;
+  padding-bottom: 1.5rem;
+  cursor: pointer;
+}
+.noactive_card {
+  /* border-bottom: 2px solid #1eb560; */
+  padding-bottom: 1.5rem;
+  cursor: pointer;
+}
+.count_bg {
+  background-color: #1eb560;
+  color: #fff;
+  border: 1px solid;
+  border-radius: 50px;
+  margin: 0 0.5rem 0 0;
+  padding: 10px 15px;
+}
+.nocount_bg {
+  background-color: rgba(30, 181, 96, 0.2);
+  color: #000;
+  border: 1px solid #1eb560;
+  border-radius: 50px;
+  margin: 0 0.5rem 0 0;
+  padding: 10px 15px;
+}
+.bg-overlay-color {
+  background: #f7f7f7;
+  padding: 3rem 1rem;
+  margin-top: 1rem;
+}
+.pckg_text_header {
+  width: 55%;
+  margin: 0 auto;
+  color: #757575;
+}
+.packgr_card {
+  border: 1px solid #757575;
+  padding: 15px;
+  border-radius: 4px;
+}
+.packgr_card .header_display {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.packgr_card p {
+  color: #757575;
+}
+.packgr_card .euro_div {
+  font-size: 14px;
+}
+.packgr_card .header_display h3 {
+  margin: 0.7rem 0rem 0.1rem 0rem;
+}
+.packgr_card .header_display p {
+  margin: 0rem 0rem;
+}
+.packgr_card ul {
+  padding-left: 1.5rem;
+  color: #757575;
+}
+.continuebutton_div .continue_btn {
+  background: rgba(30, 181, 96, 0.2);
+  border: 1px solid #1eb560;
+  color: #1eb560;
+  padding: 10px 12px;
+  border-radius: 6px;
+  text-align: center;
+  width: 100%;
+}
+.active_button {
+  background-color: #1eb560;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 30px 15px;
+  margin-right: 0.3rem;
+  cursor: pointer;
+}
+.noactive_button {
+  background: rgba(30, 181, 96, 0.2);
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 30px 15px;
+  margin-right: 0.3rem;
+  cursor: pointer;
+}
+.icon_text_singleunit {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 10px;
+}
+.single_unit_input,
+.single_unit_input:focus,
+.single_unit_input:focus-visible {
+  width: 100%;
+  border: 1px solid #1eb560;
+  padding: 7px 12px;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  outline: none;
+}
+
+.inline_select_unit {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+.form-group {
+  margin-bottom: 0.5rem;
+}
+.form-group label {
+  margin-bottom: 0.5rem;
+}
+.inline_select_unit .form-group {
+  width: 100%;
+}
+.inline_select_unit .single_unit_input,
+.inline_select_unit .single_unit_input:focus,
+.inline_select_unit .single_unit_input:focus-visible {
+  width: 100%;
+  border: 1px solid #1eb560;
+  padding: 7px 12px;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  outline: none;
+}
+.add_prop_button .addprop_btn,
+.add_prop_button .addprop_btn:hover,
+.add_prop_button .addprop_btn:active,
+.add_prop_button .addprop_btn:focus {
+  width: 100%;
+  padding: 10px 12px;
+  background: #1eb560;
+  color: #fff;
+  outline: none;
+  margin-top: 0.7rem;
+  border: 0;
+  border-radius: 6px;
+}
+.non_discriminatory {
+  margin: 0;
+  text-decoration: underline;
+}
+/* check out details */
+
+.checkout_header {
+  padding-top: 5rem;
+  padding-bottom: rem;
+}
+.checkout_p {
+  text-align: right;
+}
+.checkout_p p {
+  color: #757575;
+  cursor: pointer;
+  font-size: 13px;
+}
+.radio_button {
+}
+.radio_span {
+  margin-left: 5px;
+  color: #757575;
+}
+.subs_header {
+  background: rgba(30, 181, 96, 0.2);
+  padding: 12px 10px;
+}
+.checkout_header_displ,
+.checkout_p_padding p {
+  padding: 0px 10px;
+}
+.checkout_p_padding ul {
+  padding: 5px 5px 5px 45px;
+}
+.service_bottom_style {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 1.3rem;
+  margin-right: 1.3rem;
+}
+.packgr_card hr {
+  margin-left: 1.3rem;
+  margin-right: 1.3rem;
+}
+.check_out_ul {
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+}
+.checkout_header_displ {
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
+}
+/* check out details */
+/* condominium details */
+.save_publish {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  align-items: center;
+}
+.condominium_save,
+.condominium_save:hover,
+.condominium_save:active,
+.condominium_save:focus {
+  border: 1px solid #1eb560;
+  width: 120px;
+  border-radius: 6px;
+  padding: 7px 12px;
+  color: #1eb560;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 14px;
+}
+.condominium_publish,
+.condominium_publish:hover,
+.condominium_publish:active,
+.condominium_publish:focus {
+  background-color: #1eb560;
+  width: 120px;
+  border-radius: 6px;
+  padding: 7px 12px;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  font-size: 14px;
+}
+
+.condominum_p_text {
+  color: #757575;
+  font-size: 14px;
+}
+.props_view_all {
+  text-align: right;
+}
+.View_all_props {
+  background-color: transparent;
+  color: #1eb560;
+  border: 0;
+  outline: none;
+  font-size: 13px;
+  font-weight: bold;
+}
+.condominium_table_head {
+  border: 1px solid #1eb560;
+  border-radius: 6px;
+  text-align: center;
+}
+.condominium_table_head > thead > tr > th {
+  border: 0;
+  background: #deede5;
+}
+.condominium_table_head > tbody > tr > td {
+  border: 0;
+  color: #1eb560;
+  text-align: center;
+  width: 150px;
+  white-space: nowrap;
+  text-align: left;
+}
+.condominium_table_head > tbody > tr > td span,
+.condominium_table_head > tbody > tr > td .input_tbl,
+.condominium_table_head > tbody > tr > td .select_tbl {
+  margin: 0;
+  border: 1px solid #1eb560;
+  width: 125px;
+  display: block;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  outline: none;
+  display: flex;
+  align-items: center;
+}
+.info_hov {
+  cursor: pointer;
+}
+input[type="date"] {
+}
+input[type="date"] {
+  /* padding: 10px; */
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: block;
+  background: url("../../../public/images/calender_img.svg") no-repeat;
+  width: 15px;
+  height: 15px;
+  border-width: thin;
+}
+.add_another_style .plus_icon {
+  border: 1px solid #1eb560;
+  color: #1eb560;
+  border-radius: 30px;
+}
+.add_another_style span {
+  font-size: 13px;
+  color: #1eb560;
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+/* img_ css */
+/* Copy code */
+.dropzone {
+  border: 2px dashed #1eb560;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #f1f4e3;
+}
+
+.preview {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.preview img {
+  max-width: 100%;
+  height: 200px;
+}
+.text_area {
+  width: 100%;
+  border-radius: 6px;
+  resize: none;
+  padding: 7px 12px;
+}
+.text_area_char_text {
+  margin: 0;
+  color: #757575;
+  font-size: 12px;
+}
+.condominium_input,
+.condominium_input:focus,
+.condominium_input:focus-visible {
+  width: 100%;
+  border: 1px solid #1eb560;
+  padding: 7px 12px;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  outline: none;
+}
+/* checkbox */
+.container_radio {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 55px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 17px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container_radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container_radio:hover input ~ .checkmark {
+  background-color: #757575;
+}
+
+/* When the radio button is checked, add a blue background */
+.container_radio input:checked ~ .checkmark {
+  background-color: #1eb560;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container_radio input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container_radio .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+.checkbox_class {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.checkbox_hide_span {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 15px;
+}
+.checkbox_hide_span span {
+  margin-left: 0;
+  color: #757575;
+  font-size: 14px;
+}
+.checkbox_hide_bottom {
+  display: flex;
+  /* align-items: center; */
+  flex-direction: row;
+  gap: 15px;
+}
+.checkbox_hide_bottom span {
+  margin-left: 0;
+  color: #757575;
+  font-size: 14px;
+  padding-top: 1.2rem;
+}
+/* condominium details */
+.hr_class {
+  width: 46%;
+  float: left;
+  border-top: 1px solid #757575;
+  opacity: 1;
+}
+.or_class {
+  float: left;
+  width: 4%;
+  margin-left: 10px;
+  margin-right: 8px;
+}
+.checkout_modal_font {
+  font-size: 156px;
+  text-align: center;
+}
+.checkout_modal_font .svg_size {
+  background: #1eb560;
+  color: #eee;
+  border-radius: 160px;
+  margin: 0 auto;
+  display: inline-flex;
+  align-items: center;
+}
+.section_padding_top {
+  padding-top: 6rem;
+}
+
+/* Manage Property Section */
+.manage_container_bg {
+  background-color: #deede5;
+  padding: 7px 5px 5px 5px;
+  border-radius: 6px;
+}
+
+.manage_input,
+.manage_input:focus,
+.manage_input:focus-visible {
+  width: 100%;
+  border: 1px solid #1eb560;
+  padding: 12px 12px;
+  border-radius: 6px;
+  /* margin-bottom: 0.5rem; */
+  outline: none;
+  font-size: 16px;
+  background-color: #fff;
+}
+
+.manage_searchbtn,
+.manage_searchbtn:hover,
+.manage_searchbtn:active,
+.manage_searchbtn:focus {
+  background-color: #1eb560;
+  width: 85px;
+  border-radius: 6px;
+  padding: 13px 12px;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  border: 0;
+  font-size: 14px;
+}
+.manage_clear_filter,
+.manage_clear_filter:hover,
+.manage_clear_filter:active,
+.manage_clear_filter:focus {
+  border: 1px solid #1eb560;
+  width: 87px;
+  border-radius: 6px;
+  padding: 12px 8px;
+  color: #1eb560;
+  outline: none;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+.propset_ptext {
+  font-size: 12px;
+}
+.cancel_property_detail {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.cancel_property {
+  width: 100%;
+  border: 0;
+  background-color: rgba(199, 44, 65, 0.4);
+  color: #c72c41;
+  padding: 10px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.propset_unit {
+  color: #757575;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+}
+.manage_unit_text_button {
+  background-color: #fff;
+  border: 0;
+  color: #1eb560;
+  font-weight: 500;
+  outline: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.border_grid {
+  border: 2px solid #1eb560;
+  border-radius: 6px;
+}
+.pd_left_right {
+  padding-left: 0.71rem;
+  padding-right: 0.71rem;
+}
+/* Manage Property Section */

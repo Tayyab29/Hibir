@@ -27,7 +27,7 @@
 .manage_getstarted:hover,
 .manage_getstarted:active,
 .manage_getstarted:focus {
-  width: 100px;
+  width: 120px;
   outline: none;
   background-color: #1eb560;
   border-radius: 6px;
