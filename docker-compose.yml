@@ -1,0 +1,18 @@
+version: '3'
+services:
+  backend:
+    image: hibir-backend:latest
+    ports:
+      - "5000:5000"
+    networks:
+      - hibir-network
+
+  frontend:
+    image: hibir-frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - hibir-network
+
+networks:
+  hibir-network:
