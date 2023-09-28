@@ -141,3 +141,32 @@ export const PROTECTED_PAGE = [
     cName: "nav-text",
   },
 ];
+
+// Advertise
+const ADVERTISE_INTIAL_STATE = {
+  isPackage: "",
+  propertyUnit: "",
+  propertyAdress: "",
+  propertyType: "",
+  propertyBeds: "",
+  propertyBaths: "",
+  sizeSqft: [],
+  rent: [],
+  deposit: [],
+  leaseLength: [],
+  availableDate: [],
+  images: [],
+  description: "",
+  rentTitle: "",
+  rentStartDate: "",
+  rentEndDate: "",
+  rentDescription: "",
+  petsAllowed: "",
+  laundryType: "",
+  parkingType: "",
+  amenities: "",
+  userType: "",
+  contactPreference: "",
+  isHideName: false,
+  user: "",
+};

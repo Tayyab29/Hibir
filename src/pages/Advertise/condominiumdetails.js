@@ -12,16 +12,19 @@ import ContactInfo from "./advertisecomponents/condominiumcomponents/contactinfo
 import { useDispatch, useSelector } from "react-redux";
 import { mainViewState, onFormAdvertiseDataChange } from "../../redux/main-view";
 import { advertiseCreate } from "../../services/advertise";
+import { useHistory } from "react-router-dom";
 
 const CondominiumDetails = () => {
   // Redux
   const { screens } = useSelector(mainViewState);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const saveHandler = async () => {
     const res = await advertiseCreate(screens.advertise.data);
     if (res) {
       dispatch(onFormAdvertiseDataChange(null));
+      history.replace("/");
     }
   };
 

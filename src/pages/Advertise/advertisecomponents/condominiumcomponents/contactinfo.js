@@ -28,7 +28,10 @@ const ContactInfo = () => {
     const fetchUserById = async () => {
       const id = localStorage.getItem("Id");
       const resp = await getUserDetailsById({ id });
-      setUserDetails(resp.data);
+      if (resp) {
+        setUserDetails(resp.data);
+        dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, user: id }));
+      }
     };
     fetchUserById();
   }, []);
