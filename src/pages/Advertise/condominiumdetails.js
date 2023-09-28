@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { mainViewState, onFormAdvertiseDataChange } from "../../redux/main-view";
 import { advertiseCreate } from "../../services/advertise";
 import { useHistory } from "react-router-dom";
+import { ADVERTISE_INTIAL_STATE } from "../../utils/Constants/global";
 
 const CondominiumDetails = () => {
   // Redux
@@ -23,7 +24,7 @@ const CondominiumDetails = () => {
   const saveHandler = async () => {
     const res = await advertiseCreate(screens.advertise.data);
     if (res) {
-      dispatch(onFormAdvertiseDataChange(null));
+      dispatch(onFormAdvertiseDataChange(ADVERTISE_INTIAL_STATE));
       history.replace("/");
     }
   };

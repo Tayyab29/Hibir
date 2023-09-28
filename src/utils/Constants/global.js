@@ -143,7 +143,7 @@ export const PROTECTED_PAGE = [
 ];
 
 // Advertise
-const ADVERTISE_INTIAL_STATE = {
+export const ADVERTISE_INTIAL_STATE = {
   isPackage: "",
   propertyUnit: "",
   propertyAdress: "",
