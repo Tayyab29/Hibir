@@ -3,20 +3,21 @@ import SingleUnit from "./addpropertycomponents/singleunit";
 import MultiUnit from "./addpropertycomponents/multiunit";
 
 const AddProperty = () => {
-  const [activeCard, setActiveCard] = useState(0);
+  const [activeUnit, setActiveUnit] = useState(0);
 
   const handleCardClick = (index) => {
-    setActiveCard(index);
+    setActiveUnit(index);
   };
 
   const renderCardComponent = () => {
-    if (activeCard === 0) {
+    if (activeUnit === 0) {
       return <SingleUnit />;
-    } else if (activeCard === 1) {
+    } else if (activeUnit === 1) {
       return <MultiUnit />;
     }
     return null;
   };
+
   return (
     <>
       <section>
@@ -30,12 +31,11 @@ const AddProperty = () => {
                 </b>
               </h1>
               <p className="manage_heaader_ptext">
-                There are many variations of passages of Lorem Ipsum available,
-                but the majority have suffered alteration in some form, by
-                injected humour, or randomised words which don't look even
-                slightly believable. If you are going to use a passage of Lorem
-                Ipsum, you need to be sure there isn't anything embarrassing
-                hidden in the middle of text.
+                There are many variations of passages of Lorem Ipsum available, but the majority
+                have suffered alteration in some form, by injected humour, or randomised words which
+                don't look even slightly believable. If you are going to use a passage of Lorem
+                Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of
+                text.
               </p>
             </div>
             <div className="col-md-6">
@@ -65,7 +65,7 @@ const AddProperty = () => {
             <div className="col-md-2"></div>
             <div
               className={`col-md-4 col-12 ${
-                activeCard === 0 ? "active_button" : "noactive_button"
+                activeUnit === 0 ? "active_button" : "noactive_button"
               }`}
               onClick={() => handleCardClick(0)}
             >
@@ -76,9 +76,9 @@ const AddProperty = () => {
             </div>
             <div
               className={`col-md-4 col-12 ${
-                activeCard === 1 ? "active_button" : "noactive_button"
+                activeUnit === 1 ? "active_button" : "noactive_button"
               }`}
-              onClick={() => handleCardClick(1)}
+              // onClick={() => handleCardClick(1)}
             >
               <div className="icon_text_singleunit text-center">
                 <img src="images/multiunit.png" alt="multi unit" />

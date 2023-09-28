@@ -4,7 +4,7 @@ import { Route, useLocation, BrowserRouter as Router, Redirect } from "react-rou
 import Home from "./pages/Home/home";
 import Manage from "./pages/Manage/manage";
 import TopNav from "./components/topnav/topnav";
-import Advertise from "./pages/Advertise/advertise";
+import Advertise from "./pages/Advertise";
 import ManagePropertyIndex from "./pages/Advertise/manageproperty";
 import CondominiumDetails from "./pages/Advertise/condominiumdetails";
 import SearchByPropertyIndex from "./pages/Home/searchpropertycomponent";
@@ -14,12 +14,23 @@ import CheckoutModal from "./pages/Advertise/advertisecomponents/checkoutmodal";
 import "./App.css";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { ProtectedRouteAuth } from "./ProtectedRouteAuth";
+import { useEffect } from "react";
+import { getUserDetails } from "./services/users";
 // import notfound from "./components/NotFound/notfound";
 
 function App() {
   const redirectToLogin = () => {
     return <Redirect to="/" />;
   };
+
+  // useEffect(() => {
+  //   const getUserDetailsData = async () => {
+  //     const res = await getUserDetails();
+  //     console.log({ res });
+  //   };
+  //   getUserDetailsData();
+  // }, []);
+
   return (
     <>
       <Router>

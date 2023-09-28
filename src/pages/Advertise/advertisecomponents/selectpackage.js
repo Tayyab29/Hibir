@@ -1,6 +1,19 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { mainViewState, onFormAdvertiseDataChange, onFormDirty } from "../../../redux/main-view";
 
-const SelectPackage = () => {
+const SelectPackage = (props) => {
+  const { setActiveCard } = props;
+
+  // Redux
+  const { screens } = useSelector(mainViewState);
+  const dispatch = useDispatch();
+
+  const continueHandler = (type) => {
+    dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, isPackage: type }));
+    setActiveCard(1);
+  };
+
   return (
     <>
       <section>
@@ -14,12 +27,11 @@ const SelectPackage = () => {
                 </b>
               </h1>
               <p className="manage_heaader_ptext">
-                There are many variations of passages of Lorem Ipsum available,
-                but the majority have suffered alteration in some form, by
-                injected humour, or randomised words which don't look even
-                slightly believable. If you are going to use a passage of Lorem
-                Ipsum, you need to be sure there isn't anything embarrassing
-                hidden in the middle of text.
+                There are many variations of passages of Lorem Ipsum available, but the majority
+                have suffered alteration in some form, by injected humour, or randomised words which
+                don't look even slightly believable. If you are going to use a passage of Lorem
+                Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of
+                text.
               </p>
             </div>
             <div className="col-md-6">
@@ -39,8 +51,8 @@ const SelectPackage = () => {
               </h1>
               <div className="pckg_text_header">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua.
                   {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua. */}
                 </p>
@@ -71,29 +83,32 @@ const SelectPackage = () => {
 
                 <div className="pt-3">
                   <p>
-                    There are many variations of passages of Lorem Ipsum
-                    available, but the majority have suffered alteration in some
-                    form, by injected humour, or randomised words which don't
-                    look even slightly believable.
+                    There are many variations of passages of Lorem Ipsum available, but the majority
+                    have suffered alteration in some form, by injected humour, or randomised words
+                    which don't look even slightly believable.
                   </p>
                   <ul>
                     <li>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt ut labore et dolore
                     </li>
                     <li>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt ut labore et dolore
                     </li>
                     <li>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt ut labore et dolore
                     </li>
                   </ul>
                 </div>
                 <hr></hr>
                 <div className="continuebutton_div">
-                  <button className="continue_btn" type="button">
+                  <button
+                    className="continue_btn"
+                    type="button"
+                    onClick={() => continueHandler("diamond")}
+                  >
                     Continue
                   </button>
                 </div>
@@ -124,29 +139,32 @@ const SelectPackage = () => {
 
                 <div className="pt-3">
                   <p>
-                    There are many variations of passages of Lorem Ipsum
-                    available, but the majority have suffered alteration in some
-                    form, by injected humour, or randomised words which don't
-                    look even slightly believable.
+                    There are many variations of passages of Lorem Ipsum available, but the majority
+                    have suffered alteration in some form, by injected humour, or randomised words
+                    which don't look even slightly believable.
                   </p>
                   <ul>
                     <li>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt ut labore et dolore
                     </li>
                     <li>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt ut labore et dolore
                     </li>
                     <li>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                      incididunt ut labore et dolore
                     </li>
                   </ul>
                 </div>
                 <hr></hr>
                 <div className="continuebutton_div">
-                  <button className="continue_btn" type="button">
+                  <button
+                    className="continue_btn"
+                    type="button"
+                    onClick={() => continueHandler("platinum")}
+                  >
                     Continue
                   </button>
                 </div>

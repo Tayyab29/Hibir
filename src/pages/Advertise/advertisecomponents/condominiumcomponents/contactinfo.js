@@ -1,6 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
+import { getUserDetailsById } from "../../../../services/users";
 
 const ContactInfo = () => {
+  // Redux
+  const { screens } = useSelector(mainViewState);
+  const dispatch = useDispatch();
+
+  const [userDetails, setUserDetails] = useState("");
+
+  // Handler
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    if (name === "isHideName") {
+      dispatch(
+        onFormAdvertiseDataChange({
+          ...screens.advertise.data,
+          [name]: !screens.advertise.data.isHideName,
+        })
+      );
+    } else {
+      dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: value }));
+    }
+  };
+  useEffect(() => {
+    const fetchUserById = async () => {
+      const id = localStorage.getItem("Id");
+      const resp = await getUserDetailsById({ id });
+      setUserDetails(resp.data);
+    };
+    fetchUserById();
+  }, []);
   return (
     <div className="container">
       <div className="row">
@@ -14,12 +45,7 @@ const ContactInfo = () => {
             <div className="checkbox_class">
               <label className="container_radio">
                 I am an Owner
-                <input
-                  type="radio"
-                  checked="checked"
-                  name="radio"
-                  value="owner"
-                />
+                <input type="radio" checked="checked" name="radio" value="owner" />
                 <span className="checkmark"></span>
               </label>
               <label className="container_radio">
@@ -45,6 +71,8 @@ const ContactInfo = () => {
                 className="condominium_input"
                 placeholder="Jhon"
                 type="text"
+                value={userDetails.firstName}
+                disabled={true}
               />
             </div>
           </div>
@@ -59,6 +87,8 @@ const ContactInfo = () => {
                 className="condominium_input"
                 placeholder="Smith"
                 type="text"
+                value={userDetails.lastName}
+                disabled={true}
               />
             </div>
           </div>
@@ -69,10 +99,15 @@ const ContactInfo = () => {
               <b>Contact Preferences</b>
             </label>
             <div>
-              <select className="condominium_input">
-                <option value="0">Select</option>
-                <option value="1">Contact Preferences</option>
-                <option value="2">Contact Preferences</option>
+              <select
+                className="condominium_input"
+                name="contactPreference"
+                onChange={inputHandler}
+              >
+                <option value="">Select</option>
+                <option value="1">Phone & Email Only</option>
+                <option value="2">Phone Only</option>
+                <option value="3">Email Only</option>
               </select>
             </div>
           </div>
@@ -87,6 +122,8 @@ const ContactInfo = () => {
                 className="condominium_input"
                 type="email"
                 placeholder="jhonsmith@gmail.com"
+                value={userDetails.email}
+                disabled={true}
               />
             </div>
           </div>
@@ -100,7 +137,9 @@ const ContactInfo = () => {
               <input
                 className="condominium_input"
                 type="number"
-                placeholder="(123) 456 789"
+                placeholder="Phone No"
+                value={userDetails?.phone}
+                disabled={true}
               />
             </div>
           </div>
@@ -108,7 +147,13 @@ const ContactInfo = () => {
       </div>
       <div className="col-12 pb-2">
         <div className="checkbox_hide_span">
-          <input type="checkbox" /> <span>Hide my Name on Hibir.com</span>
+          <input
+            type="checkbox"
+            checked={screens.advertise.data.isHideName}
+            name="isHideName"
+            onChange={inputHandler}
+          />
+          <span>Hide my Name on Hibir.com</span>
         </div>
       </div>
       <hr></hr>

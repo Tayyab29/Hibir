@@ -1,13 +1,19 @@
 import React from "react";
 import { BsInfoCircle, BsPlus } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
 
 const UnitComponent = () => {
-  //   const [selectedDate, setSelectedDate] = useState("");
+  // Redux
+  const { screens } = useSelector(mainViewState);
+  const dispatch = useDispatch();
 
-  //   const handleDateChange = (event) => {
-  //     const selectedDateValue = event.target.value;
-  //     setSelectedDate(selectedDateValue);
-  //   };
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    console.log({ name, value });
+    dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: [value] }));
+  };
+
   return (
     <div className="container">
       <div className="row">
@@ -39,37 +45,84 @@ const UnitComponent = () => {
                   <span>No Image Available</span>
                 </td>
                 <td>
-                  <input type="number" className="input_tbl" placeholder="2" />
+                  <input
+                    type="text"
+                    className="input_tbl"
+                    placeholder="Unit"
+                    value={screens.advertise.data.propertyUnit}
+                    disabled={true}
+                  />
                 </td>
                 <td>
-                  <select className="select_tbl">
+                  <select
+                    className="select_tbl"
+                    value={screens.advertise.data.propertyBeds}
+                    disabled={true}
+                  >
+                    <option value="">Select</option>
                     <option value="0">1.0</option>
                     <option value="1">2.0</option>
                   </select>
                 </td>
                 <td>
-                  <select className="select_tbl">
+                  <select
+                    className="select_tbl"
+                    value={screens.advertise.data.propertyBaths}
+                    disabled={true}
+                  >
+                    <option value="">Select</option>
                     <option value="0">1.0</option>
                     <option value="1">2.0</option>
                   </select>
                 </td>
                 <td>
-                  <input type="number" className="input_tbl" placeholder="2" />
+                  <input
+                    type="text"
+                    name="sizeSqft"
+                    className="input_tbl"
+                    placeholder="Enter"
+                    value={screens.advertise.data.sizeSqft}
+                    onChange={inputHandler}
+                  />
                 </td>
                 <td>
-                  <input type="number" className="input_tbl" placeholder="2" />
+                  <input
+                    type="text"
+                    name="rent"
+                    className="input_tbl"
+                    placeholder="Enter"
+                    value={screens.advertise.data.rent}
+                    onChange={inputHandler}
+                  />
                 </td>
                 <td>
-                  <input type="number" className="input_tbl" placeholder="2" />
+                  <input
+                    type="text"
+                    name="deposit"
+                    className="input_tbl"
+                    placeholder="Enter"
+                    value={screens.advertise.data.deposit}
+                    onChange={inputHandler}
+                  />
                 </td>
                 <td>
-                  <input type="number" className="input_tbl" placeholder="2" />
+                  <input
+                    type="text"
+                    name="leaseLength"
+                    className="input_tbl"
+                    placeholder="Enter"
+                    value={screens.advertise.data.leaseLength}
+                    onChange={inputHandler}
+                  />
                 </td>
                 <td>
                   <input
                     type="date"
+                    name="availableDate"
                     className="input_tbl"
                     placeholder="mm/dd/yyyy"
+                    value={screens.advertise.data.availableDate}
+                    onChange={inputHandler}
                     // value={selectedDate}
                     // onChange={handleDateChange}
                     // max={new Date().toISOString().split("T")[0]}
