@@ -39,6 +39,7 @@ const LoginModal = ({ onHide }) => {
 
         // history.replace("/home");
         onHide();
+        window.location.reload();
       } else {
       }
     } catch (error) {

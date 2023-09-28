@@ -20,6 +20,7 @@ function App() {
   const redirectToLogin = () => {
     return <Redirect to="/" />;
   };
+
   return (
     <>
       <Router>
