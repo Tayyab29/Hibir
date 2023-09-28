@@ -1,6 +1,17 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
 
 const RecentSpecial = () => {
+  // Redux
+  const { screens } = useSelector(mainViewState);
+  const dispatch = useDispatch();
+
+  // Handler
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: value }));
+  };
   return (
     <div className="container">
       <div className="row">
@@ -18,6 +29,8 @@ const RecentSpecial = () => {
               <div>
                 <input
                   type="text"
+                  name="rentTitle"
+                  onChange={inputHandler}
                   className="condominium_input"
                   placeholder=""
                 />
@@ -34,6 +47,8 @@ const RecentSpecial = () => {
               <div>
                 <input
                   type="date"
+                  name="rentStartDate"
+                  onChange={inputHandler}
                   className="condominium_input"
                   placeholder=""
                 />
@@ -50,6 +65,8 @@ const RecentSpecial = () => {
               <div>
                 <input
                   type="date"
+                  name="rentEndDate"
+                  onChange={inputHandler}
                   className="condominium_input"
                   placeholder=""
                 />
@@ -62,7 +79,13 @@ const RecentSpecial = () => {
             <label>
               <b>Rest Special Description(Optional)</b>
             </label>
-            <textarea className="text_area" rows="5" placeholder=""></textarea>
+            <textarea
+              className="text_area"
+              name="rentDescription"
+              onChange={inputHandler}
+              rows="5"
+              placeholder=""
+            ></textarea>
           </div>
         </div>
       </div>

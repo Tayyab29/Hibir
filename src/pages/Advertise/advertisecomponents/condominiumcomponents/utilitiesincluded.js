@@ -1,17 +1,23 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
 
 const UtilitiesIncluded = () => {
+  // Redux
+  const { screens } = useSelector(mainViewState);
+  const dispatch = useDispatch();
+
   //checkbox array
   const checkboxData = [
-    { id: 1, label: "Gas", checked: false },
-    { id: 2, label: "Water", checked: false },
-    { id: 3, label: "Electricity", checked: false },
-    { id: 4, label: "Heat", checked: false },
-    { id: 5, label: "Trash Removal", checked: false },
-    { id: 6, label: "Sewer", checked: false },
-    { id: 7, label: "Cable", checked: false },
-    { id: 8, label: "Air Condition", checked: false },
+    { id: "1", label: "Gas", checked: false },
+    { id: "2", label: "Water", checked: false },
+    { id: "3", label: "Electricity", checked: false },
+    { id: "4", label: "Heat", checked: false },
+    { id: "5", label: "Trash Removal", checked: false },
+    { id: "6", label: "Sewer", checked: false },
+    { id: "7", label: "Cable", checked: false },
+    { id: "8", label: "Air Condition", checked: false },
     // ... Add more checkbox data objects
   ];
   //checkbox state
@@ -20,9 +26,7 @@ const UtilitiesIncluded = () => {
   const handleCheckboxChange = (id) => {
     setCheckboxes((prevCheckboxes) =>
       prevCheckboxes.map((checkbox) =>
-        checkbox.id === id
-          ? { ...checkbox, checked: !checkbox.checked }
-          : checkbox
+        checkbox.id === id ? { ...checkbox, checked: !checkbox.checked } : checkbox
       )
     );
   };

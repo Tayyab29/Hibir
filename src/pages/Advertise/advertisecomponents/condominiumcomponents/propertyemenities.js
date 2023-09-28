@@ -1,7 +1,18 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
 
 const PropertyEmenities = () => {
+  // Redux
+  const { screens } = useSelector(mainViewState);
+  const dispatch = useDispatch();
+
+  // Handler
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: value }));
+  };
   // emenitiescheckboxes
   const emenitiescheckboxesData = [
     { id: 1, label: "Furnished", checked: false },
@@ -18,17 +29,13 @@ const PropertyEmenities = () => {
     { id: 12, label: "Swimming Pool", checked: false },
   ];
   //Emenities Checkboxes
-  const [emenitiescheckboxes, setEmenitiescheckboxes] = useState(
-    emenitiescheckboxesData
-  );
+  const [emenitiescheckboxes, setEmenitiescheckboxes] = useState(emenitiescheckboxesData);
 
   // emenitiescheckboxes
   const handleemenitiescheckboxesChange = (id) => {
     setEmenitiescheckboxes((prevCheckboxes) =>
       prevCheckboxes.map((checkbox) =>
-        checkbox.id === id
-          ? { ...checkbox, checked: !checkbox.checked }
-          : checkbox
+        checkbox.id === id ? { ...checkbox, checked: !checkbox.checked } : checkbox
       )
     );
   };
@@ -46,10 +53,10 @@ const PropertyEmenities = () => {
               <b>Pets Allowed</b>
             </label>
             <div>
-              <select className="condominium_input">
-                <option value="0">Pets Allowed</option>
-                <option value="1">Pets Allowed</option>
-                <option value="2">Pets Allowed</option>
+              <select className="condominium_input" name="petsAllowed" onChange={inputHandler}>
+                <option value="">Select</option>
+                <option value="Cats">Cats</option>
+                <option value="Dogs">Dogs</option>
               </select>
             </div>
           </div>
@@ -60,10 +67,11 @@ const PropertyEmenities = () => {
               <b>Laundry Type</b>
             </label>
             <div>
-              <select className="condominium_input">
-                <option value="0">Laundry Type</option>
-                <option value="1">Laundry Type</option>
-                <option value="2">Laundry Type</option>
+              <select className="condominium_input" name="laundryType" onChange={inputHandler}>
+                <option value="">Select</option>
+                <option value="1">Washer/Dryer - In Unit</option>
+                <option value="2">Washer/Dryer Hookup</option>
+                <option value="3">Laundry Facilities</option>
               </select>
             </div>
           </div>
@@ -74,10 +82,12 @@ const PropertyEmenities = () => {
               <b>Parking Type</b>
             </label>
             <div>
-              <select className="condominium_input">
-                <option value="0">Parking Type</option>
-                <option value="1">Parking Type</option>
-                <option value="2">Parking Type</option>
+              <select className="condominium_input" name="parkingType" onChange={inputHandler}>
+                <option value="">Select</option>
+                <option value="1">Covered</option>
+                <option value="2">Street</option>
+                <option value="3">Garage</option>
+                <option value="4">Other</option>
               </select>
             </div>
           </div>

@@ -14,7 +14,7 @@ const Advertise = () => {
 
   const renderCardComponent = () => {
     if (activeCard === 0) {
-      return <SelectPackage />;
+      return <SelectPackage setActiveCard={setActiveCard} />;
     } else if (activeCard === 1) {
       return <AddProperty />;
     } else if (activeCard === 2) {
@@ -22,47 +22,36 @@ const Advertise = () => {
     }
     return null;
   };
+
   return (
     <>
       <section>
         <div className="container">
           <div className="row mt-5 mb-3">
             <div
-              className={`col-md-4 col-12 ${
-                activeCard === 0 ? "active_card" : "noactive_card"
-              }`}
+              className={`col-md-4 col-12 ${activeCard === 0 ? "active_card" : "noactive_card"}`}
               onClick={() => handleCardClick(0)}
             >
               <div className="text-center">
-                <span className={activeCard == 0 ? "count_bg" : "nocount_bg"}>
-                  1
-                </span>
+                <span className={activeCard == 0 ? "count_bg" : "nocount_bg"}>1</span>
                 <b> Select Package</b>
               </div>
             </div>
             <div
-              className={`col-md-4 col-12 ${
-                activeCard === 1 ? "active_card" : "noactive_card"
-              }`}
+              className={`col-md-4 col-12 ${activeCard === 1 ? "active_card" : "noactive_card"}`}
               onClick={() => handleCardClick(1)}
             >
               <div className="text-center">
-                <span className={activeCard == 1 ? "count_bg" : "nocount_bg"}>
-                  2
-                </span>
+                <span className={activeCard == 1 ? "count_bg" : "nocount_bg"}>2</span>
                 <b> Add Your Property</b>
               </div>
             </div>
             <div
-              className={`col-md-4 col-12 ${
-                activeCard === 2 ? "active_card" : "noactive_card"
-              }`}
+              className={`col-md-4 col-12 ${activeCard === 2 ? "active_card" : "noactive_card"}`}
               onClick={() => handleCardClick(2)}
             >
               <div className="text-center">
-                <span className={activeCard == 2 ? "count_bg" : "nocount_bg"}>
-                  3
-                </span>
+                <span className={activeCard == 2 ? "count_bg" : "nocount_bg"}>3</span>
                 <b> Checkout</b>
               </div>
             </div>

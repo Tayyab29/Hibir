@@ -1,6 +1,17 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
 
 const DescriptionGeneral = () => {
+  // Redux
+  const { screens } = useSelector(mainViewState);
+  const dispatch = useDispatch();
+
+  // Handler
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: value }));
+  };
   return (
     <>
       <div className="container">
@@ -11,13 +22,14 @@ const DescriptionGeneral = () => {
                 <b>Description(Optional)</b>
               </label>
               <textarea
-                className="text_area"
                 rows="5"
+                className="text_area"
+                id="description"
+                name="description"
+                onChange={inputHandler}
                 placeholder="What’s Great about , this property"
               ></textarea>
-              <span className="text_area_char_text">
-                7000 Characters Remaining
-              </span>
+              <span className="text_area_char_text">7000 Characters Remaining</span>
             </div>
             <hr></hr>
           </div>

@@ -11,7 +11,6 @@ export async function getData(endpoint, withToken = true) {
 }
 
 export async function postData(endpoint, data, withToken = true) {
-  console.log("first", process.env);
   if (withToken) {
     return axiosInstance.post(endpoint, data);
   } else {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BsChevronRight } from "react-icons/bs";
 import Footer from "../../components/Footer/footer";
 import MapComponent from "./advertisecomponents/condominiumcomponents/mapcomponent";
@@ -9,8 +9,22 @@ import RecentSpecial from "./advertisecomponents/condominiumcomponents/recentspe
 import UtilitiesIncluded from "./advertisecomponents/condominiumcomponents/utilitiesincluded";
 import PropertyEmenities from "./advertisecomponents/condominiumcomponents/propertyemenities";
 import ContactInfo from "./advertisecomponents/condominiumcomponents/contactinfo";
+import { useDispatch, useSelector } from "react-redux";
+import { mainViewState, onFormAdvertiseDataChange } from "../../redux/main-view";
+import { advertiseCreate } from "../../services/advertise";
 
 const CondominiumDetails = () => {
+  // Redux
+  const { screens } = useSelector(mainViewState);
+  const dispatch = useDispatch();
+
+  const saveHandler = async () => {
+    const res = await advertiseCreate(screens.advertise.data);
+    if (res) {
+      dispatch(onFormAdvertiseDataChange(null));
+    }
+  };
+
   return (
     <>
       <section className="pt-3">
@@ -84,12 +98,11 @@ const CondominiumDetails = () => {
               <div className="checkbox_hide_bottom">
                 <input type="checkbox" />
                 <span>
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form, by injected humour, or randomised words which don't look
-                  even slightly believable. If you are going to use a passage of
-                  Lorem Ipsum, you need to be sure there isn't anything
-                  embarrassing hidden in the middle of text.
+                  There are many variations of passages of Lorem Ipsum available, but the majority
+                  have suffered alteration in some form, by injected humour, or randomised words
+                  which don't look even slightly believable. If you are going to use a passage of
+                  Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the
+                  middle of text.
                 </span>
               </div>
             </div>
@@ -102,7 +115,7 @@ const CondominiumDetails = () => {
             <div className="col-md-8 col-12"></div>
             <div className="col-md-4 col-12">
               <div className="save_publish">
-                <button className="condominium_save" type="button">
+                <button className="condominium_save" type="button" onClick={saveHandler}>
                   Save
                 </button>
                 <button className="condominium_publish" type="button">

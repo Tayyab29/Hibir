@@ -31,6 +31,7 @@ const LoginModal = ({ onHide }) => {
       console.log({ resp });
       if (resp.data.status) {
         localStorage.setItem("accessToken", resp.data.access_token);
+        localStorage.setItem("Id", resp.data.user._id);
         // localStorage.setItem("refreshToken", resp.data.refresh_token);
 
         // getUserData()
