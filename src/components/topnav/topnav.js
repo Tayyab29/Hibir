@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Icons
 import * as FaIcons from "react-icons/fa";
@@ -29,7 +29,7 @@ const TopNav = () => {
   const token = localStorage.getItem("accessToken");
 
   // Hooks
-  const history = useHistory();
+  // const history = useHistory();
 
   // View State
   const [show, setShow] = useState(false);

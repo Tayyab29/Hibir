@@ -106,7 +106,7 @@ export const PROTECTED_PAGE = [
   },
   {
     title: "ACCOUNT",
-    path: "/team",
+    path: "/accounts",
     // // icon: <IoIcons.IoMdPeople />,
     cName: "nav-text",
   },
