@@ -40,6 +40,7 @@ const ContactInfo = () => {
             <b>Contact Info</b>
           </h3>
         </div>
+        
         <div className="col-12 pb-3">
           <div className="condominim_radio_button">
             <div className="checkbox_class">
