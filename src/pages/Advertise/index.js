@@ -33,7 +33,7 @@ const Advertise = () => {
               onClick={() => handleCardClick(0)}
             >
               <div className="text-center">
-                <span className={activeCard == 0 ? "count_bg" : "nocount_bg"}>1</span>
+                <span className={activeCard === 0 ? "count_bg" : "nocount_bg"}>1</span>
                 <b> Select Package</b>
               </div>
             </div>
@@ -42,7 +42,7 @@ const Advertise = () => {
               onClick={() => handleCardClick(1)}
             >
               <div className="text-center">
-                <span className={activeCard == 1 ? "count_bg" : "nocount_bg"}>2</span>
+                <span className={activeCard === 1 ? "count_bg" : "nocount_bg"}>2</span>
                 <b> Add Your Property</b>
               </div>
             </div>
@@ -51,7 +51,7 @@ const Advertise = () => {
               onClick={() => handleCardClick(2)}
             >
               <div className="text-center">
-                <span className={activeCard == 2 ? "count_bg" : "nocount_bg"}>3</span>
+                <span className={activeCard === 2 ? "count_bg" : "nocount_bg"}>3</span>
                 <b> Checkout</b>
               </div>
             </div>

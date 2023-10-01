@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
+// import { useDispatch, useSelector } from "react-redux";
+// import { mainViewState } from "../../../../redux/main-view";
 
 const UtilitiesIncluded = () => {
   // Redux
-  const { screens } = useSelector(mainViewState);
-  const dispatch = useDispatch();
+  // const { screens } = useSelector(mainViewState);
+  // const dispatch = useDispatch();
 
   //checkbox array
   const checkboxData = [

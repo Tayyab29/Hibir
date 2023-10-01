@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { mainViewState, onFormAdvertiseDataChange, onFormDirty } from "../../../redux/main-view";
+import { mainViewState, onFormAdvertiseDataChange } from "../../../redux/main-view";
 
 const SelectPackage = (props) => {
   const { setActiveCard } = props;

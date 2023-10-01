@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BsChevronRight } from "react-icons/bs";
 import Footer from "../../components/Footer/footer";
 import MapComponent from "./advertisecomponents/condominiumcomponents/mapcomponent";
