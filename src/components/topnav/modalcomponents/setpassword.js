@@ -16,7 +16,6 @@ const SetPassordModal = (props) => {
       ...user,
       [name]: value,
     });
-    console.log({ name, value });
   };
 
   const saveHandler = async () => {
@@ -24,10 +23,8 @@ const SetPassordModal = (props) => {
       ...data,
       password: user.password,
     };
-    console.log({ dto });
     try {
       const resp = await signup(dto);
-      console.log({ resp });
       if (resp) {
         onHide();
       }

@@ -16,20 +16,33 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { ProtectedRouteAuth } from "./ProtectedRouteAuth";
 import { useEffect } from "react";
 import { getUserDetails } from "./services/users";
+import { useDispatch, useSelector } from "react-redux";
+import { loginState, setUser } from "./redux/login";
 // import notfound from "./components/NotFound/notfound";
 
 function App() {
+  const { user } = useSelector(loginState);
+
+  const dispatch = useDispatch();
+
+  // Handler
   const redirectToLogin = () => {
     return <Redirect to="/" />;
   };
 
-  // useEffect(() => {
-  //   const getUserDetailsData = async () => {
-  //     const res = await getUserDetails();
-  //     console.log({ res });
-  //   };
-  //   getUserDetailsData();
-  // }, []);
+  useEffect(() => {
+    const getUserDetailsData = async () => {
+      try {
+        if (localStorage.getItem("accessToken")) {
+          const res = await getUserDetails();
+          dispatch(setUser(res?.data));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getUserDetailsData();
+  }, []);
 
   return (
     <>

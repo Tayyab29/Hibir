@@ -15,6 +15,14 @@ export async function getUserDetailsById(data) {
   return postData(appUrl["users"].userById, data);
 }
 
+// Google Login and Sign Up
+export async function googleLogin(data) {
+  return postData(appUrl["google"].login, data);
+}
+export async function googleSignup(data) {
+  return postData(appUrl["google"].signup, data);
+}
+
 export async function logout() {
   localStorage.clear();
   window.location.reload();

@@ -2,8 +2,9 @@ import React from "react";
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import "./modal.css";
-import { signup } from "../../../services/users";
+import { googleSignup, signup } from "../../../services/users";
 import SetPassordModal from "./setpassword";
+import { useGoogleLogin } from "@react-oauth/google";
 // import { Link } from "react-router-dom";
 
 const SignupModal = (props) => {
@@ -17,26 +18,37 @@ const SignupModal = (props) => {
       ...user,
       [name]: value,
     });
-    console.log({ name, value });
   };
 
   const saveHandler = async () => {
     setShowPassword(true);
     onHide();
-
-    // try {
-    //   const resp = await signup(user);
-    //   console.log({ resp });
-    //   if (resp) {
-    //     onHide();
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
-  const googleAuth = () => {
-    window.open(`${process.env.REACT_APP_GOOGLE_URL}auth/google/callback`, "_self");
+  // const googleAuth = () => {
+  //   window.open(`${process.env.REACT_APP_GOOGLE_URL}auth/google/callback`, "_self");
+  // };
+  const googleHandler = useGoogleLogin({
+    onSuccess: (CodeResponse) => responseGoogle(CodeResponse),
+  });
+
+  const responseGoogle = async (response) => {
+    console.log({ response });
+    if (response && response.access_token) {
+      try {
+        const resp = await googleSignup({ token: response.access_token });
+        if (resp.data.status) {
+          localStorage.setItem("accessToken", resp.data.access_token);
+          localStorage.setItem("Id", resp.data.user._id);
+          onHide();
+        } else {
+          // Handle Google login failure
+          onHide();
+        }
+      } catch (error) {
+        console.error("Error signing in:", error);
+      }
+    }
   };
 
   return (
@@ -98,7 +110,7 @@ const SignupModal = (props) => {
               <hr className="hr_clas"></hr>
             </div>
             <div className="pt-3">
-              <button className="google_social_button" type="button" onClick={googleAuth}>
+              <button className="google_social_button" type="button" onClick={googleHandler}>
                 Continue With Google
               </button>
             </div>

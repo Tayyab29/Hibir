@@ -14,7 +14,6 @@ export async function postData(endpoint, data, withToken = true) {
   if (withToken) {
     return axiosInstance.post(endpoint, data);
   } else {
-    console.log({ endpoint, data });
     return axios.post(BASE_URL + endpoint, data);
   }
 }
