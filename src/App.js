@@ -1,33 +1,32 @@
+import { useEffect } from "react";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 
 // Components
 import Home from "./pages/Home/home";
+import Advertise from "./pages/Advertise";
 import Manage from "./pages/Manage/manage";
 import TopNav from "./components/topnav/topnav";
-import Advertise from "./pages/Advertise";
+import AccountsIndex from "./pages/Accounts/accounts";
 import ManagePropertyIndex from "./pages/Advertise/manageproperty";
 import CondominiumDetails from "./pages/Advertise/condominiumdetails";
 import SearchByPropertyIndex from "./pages/Home/searchpropertycomponent";
 import CheckoutModal from "./pages/Advertise/advertisecomponents/checkoutmodal";
 
-// Styles
-import "./App.css";
-//Routes
+// Redux
+import { loginState, setUser } from "./redux/login";
+import { useDispatch, useSelector } from "react-redux";
+
+// Routes
 import { ProtectedRoute } from "./ProtectedRoute";
 import { ProtectedRouteAuth } from "./ProtectedRouteAuth";
-import { useEffect } from "react";
+
+// Services
 import { getUserDetails } from "./services/users";
-import { useDispatch, useSelector } from "react-redux";
-import { loginState, setUser } from "./redux/login";
-import AccountsIndex from "./pages/Accounts/accounts";
-// import { ProtectedRouteAuth } from "./ProtectedRouteAuth";
-// import { useEffect } from "react";
-// import { getUserDetails } from "./services/users";
-// import notfound from "./components/NotFound/notfound";
+
+// Styles
+import "./App.css";
 
 function App() {
-  const { user } = useSelector(loginState);
-
   const dispatch = useDispatch();
 
   // Handler
@@ -63,12 +62,15 @@ function App() {
         <ProtectedRoute path="/advertise" exact>
           <Advertise />
         </ProtectedRoute>
+        <ProtectedRoute path="/accounts" exact>
+          <AccountsIndex />
+        </ProtectedRoute>
         {/* <Route path="/advertise" exact component={Advertise} /> */}
         <Route path="/condominiumdetails" exact component={CondominiumDetails} />
         <Route path="/checkoutmodal" exact component={CheckoutModal} />
         <Route path="/managepropertyindex" exact component={ManagePropertyIndex} />
         <Route path="/searchbypropertyindex" exact component={SearchByPropertyIndex} />
-        <Route path="/accounts" exact component={AccountsIndex} />
+        {/* <Route path="/accounts" exact component={AccountsIndex} /> */}
         {/* </Switch> */}
       </Router>
     </>

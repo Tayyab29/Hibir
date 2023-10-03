@@ -1,5 +1,5 @@
 import appUrl from "../../utils/Constants/appUrl";
-import { getData, postData } from "../generic";
+import { getData, postData, putData } from "../generic";
 
 export async function login(data) {
   return postData(appUrl["users"].login, data);
@@ -13,6 +13,9 @@ export async function getUserDetails(data) {
 
 export async function getUserDetailsById(data) {
   return postData(appUrl["users"].userById, data);
+}
+export async function updateUser(data) {
+  return putData(appUrl["users"].updateUser, data);
 }
 
 // Google Login and Sign Up

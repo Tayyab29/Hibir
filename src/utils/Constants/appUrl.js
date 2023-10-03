@@ -4,6 +4,7 @@ const appUrl = {
     signup: "users/signup",
     userDetails: "users/get-user-details",
     userById: "users/get-user-id",
+    updateUser: "users/edit-user",
   },
   google: {
     login: "auth/google",
