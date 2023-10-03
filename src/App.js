@@ -1,4 +1,4 @@
-import { Route, useLocation, BrowserRouter as Router, Redirect } from "react-router-dom";
+import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 
 // Components
 import Home from "./pages/Home/home";
@@ -12,12 +12,17 @@ import CheckoutModal from "./pages/Advertise/advertisecomponents/checkoutmodal";
 
 // Styles
 import "./App.css";
+//Routes
 import { ProtectedRoute } from "./ProtectedRoute";
 import { ProtectedRouteAuth } from "./ProtectedRouteAuth";
 import { useEffect } from "react";
 import { getUserDetails } from "./services/users";
 import { useDispatch, useSelector } from "react-redux";
 import { loginState, setUser } from "./redux/login";
+import AccountsIndex from "./pages/Accounts/accounts";
+// import { ProtectedRouteAuth } from "./ProtectedRouteAuth";
+// import { useEffect } from "react";
+// import { getUserDetails } from "./services/users";
 // import notfound from "./components/NotFound/notfound";
 
 function App() {
@@ -63,6 +68,7 @@ function App() {
         <Route path="/checkoutmodal" exact component={CheckoutModal} />
         <Route path="/managepropertyindex" exact component={ManagePropertyIndex} />
         <Route path="/searchbypropertyindex" exact component={SearchByPropertyIndex} />
+        <Route path="/accounts" exact component={AccountsIndex} />
         {/* </Switch> */}
       </Router>
     </>
