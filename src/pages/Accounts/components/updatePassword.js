@@ -1,31 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { signup } from "../../../services/users";
+import { loginState, setUser } from "../../../redux/login";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../../../services/users";
 
-const SetPassordModal = (props) => {
-  const { onHide, data } = props;
-  const [user, setUser] = useState({
+const UpdatePassword = (props) => {
+  const { onHide } = props;
+  const { user } = useSelector(loginState);
+
+  const [userData, setUserData] = useState({
+    _id: "",
     password: "",
     confirm_password: "",
   });
+
+  const dispatch = useDispatch();
+
   // Handlers
   const inputHandler = (e) => {
     const { name, value } = e.target;
-    setUser({
-      ...user,
+    setUserData({
+      ...userData,
       [name]: value,
     });
   };
 
   const saveHandler = async () => {
     let dto = {
-      ...data,
-      password: user.password,
+      password: userData.password,
+      _id: user._id,
     };
     try {
-      const resp = await signup(dto);
-      if (resp) {
+      const resp = await updateUser(dto);
+      if (resp.data.status) {
+        dispatch(setUser(resp?.data.user));
         onHide();
       }
     } catch (error) {
@@ -33,13 +42,22 @@ const SetPassordModal = (props) => {
     }
   };
 
+  useEffect(() => {
+    setUserData({
+      ...userData,
+      _id: user?._id,
+    });
+  }, [user]);
+
   return (
     <>
       <div>
         <Modal.Body>
           <div className="text-center">
             <p>
-              <span style={{ textDecoration: "underline", marginLeft: "5px" }}>Set Password</span>
+              <span style={{ textDecoration: "underline", marginLeft: "5px" }}>
+                Update Password
+              </span>
             </p>
           </div>
 
@@ -63,7 +81,7 @@ const SetPassordModal = (props) => {
             </div>
             <div className="pt-3">
               <button className="sign_button" type="button" onClick={() => saveHandler()}>
-                Set Password
+                Update Password
               </button>
             </div>
           </div>
@@ -73,4 +91,4 @@ const SetPassordModal = (props) => {
   );
 };
 
-export default SetPassordModal;
+export default UpdatePassword;
