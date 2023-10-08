@@ -212,6 +212,36 @@ const InformationData = () => {
                         </div>
                     </div>
                 </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingfour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <b> Account Data</b>
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingfour" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div className='row'>
+                                <div className='col-12'>
+                                    <h6 className='account_deactivate_class'><b>Deactivate My Account </b></h6>
+                                    <p className='account_deactivate_class'>By deactivate your account, you will no longer be able to access your account or sign in to Hibir.com </p>
+                                </div>
+                                <div className='col-12'>
+                                    <button className='deactive_account_btn' type='button'>
+                                        Deactivate Account
+                                    </button>
+                                </div>
+                                <hr></hr>
+                                <div className='col-12'>
+                                    <h6 className='account_deactivate_class'><b>Personal Data </b></h6>
+                                    <p className='account_deactivate_class'>At Hibir.com, protecting your privacy is important to us. You can use these tools to view data you provided to our site. If you are a California resident you have certain additional rights: <a className='account_click_rights' href='#accounts'>Click here </a> to view these rights</p>
+                                </div>
+                               
+                                <hr></hr>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )

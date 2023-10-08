@@ -46,8 +46,7 @@ const AccountsIndex = () => {
                     </div>
                     <div className='row'>
                         <div className='col-12'>
-                            <InformationData/>
-                           
+                            <InformationData/>                           
                         </div>
                     </div>
                 </section>
