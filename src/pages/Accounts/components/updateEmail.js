@@ -1,37 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { signup } from "../../../services/users";
+import { updateUser } from "../../../services/users";
+import { useDispatch, useSelector } from "react-redux";
+import { loginState, setUser } from "../../../redux/login";
 
-const SetPassordModal = (props) => {
-  const { onHide, data } = props;
-  const [user, setUser] = useState({
-    password: "",
-    confirm_password: "",
+const UpdateEmail = (props) => {
+  const { onHide } = props;
+  const { user } = useSelector(loginState);
+
+  const dispatch = useDispatch();
+
+  const [userData, setUserData] = useState({
+    email: "",
+    _id: "",
   });
   // Handlers
   const inputHandler = (e) => {
     const { name, value } = e.target;
-    setUser({
-      ...user,
+    setUserData({
+      ...userData,
       [name]: value,
     });
   };
 
   const saveHandler = async () => {
-    let dto = {
-      ...data,
-      password: user.password,
-    };
-    try {
-      const resp = await signup(dto);
-      if (resp) {
-        onHide();
-      }
-    } catch (error) {
-      console.log(error);
+    const resp = await updateUser(userData);
+    if (resp.data.status) {
+      dispatch(setUser(resp?.data.user));
+      onHide();
     }
   };
+
+  useEffect(() => {
+    setUserData({
+      ...userData,
+      _id: user?._id,
+    });
+  }, [user]);
 
   return (
     <>
@@ -39,31 +45,32 @@ const SetPassordModal = (props) => {
         <Modal.Body>
           <div className="text-center">
             <p>
-              <span style={{ textDecoration: "underline", marginLeft: "5px" }}>Set Password</span>
+              <span style={{ textDecoration: "underline", marginLeft: "5px" }}>Update Email</span>
             </p>
           </div>
 
           <div className="pt-3">
             <div className="form-group">
               <input
-                type="password"
-                name="password"
-                placeholder="Enter Password"
+                type="email"
+                name="email"
+                placeholder="Enter email"
                 className="input_text_login"
+                value={userData.email}
                 onChange={inputHandler}
               />
 
-              <input
+              {/* <input
                 type="confirm_password"
                 name="confirm_password"
                 placeholder="Enter Confirm Password"
                 className="input_text_login"
                 onChange={inputHandler}
-              />
+              /> */}
             </div>
             <div className="pt-3">
               <button className="sign_button" type="button" onClick={() => saveHandler()}>
-                Set Password
+                Update
               </button>
             </div>
           </div>
@@ -73,4 +80,4 @@ const SetPassordModal = (props) => {
   );
 };
 
-export default SetPassordModal;
+export default UpdateEmail;
