@@ -9,6 +9,7 @@
   outline: none;
   margin-top: 1rem;
 }
+
 .input_text_signup_first,
 .input_text_signup_first:focus,
 .input_text_signup_first:focus-visible {
@@ -20,6 +21,7 @@
   outline: none;
   margin-top: 1rem;
 }
+
 .input_text_signup,
 .input_text_signup:focus,
 .input_text_signup:focus-visible {
@@ -32,6 +34,7 @@
   margin-top: 1rem;
   margin-left: 0.5rem;
 }
+
 .sign_button,
 .sign_button:focus,
 .sign_button:hover,
@@ -45,22 +48,26 @@
   padding: 12px 10px;
   border-radius: 5px;
 }
+
 .forgot_text {
   text-align: right;
   text-decoration: none;
 }
+
 .hr_clas {
   width: 46%;
   float: left;
   border-top: 1px solid #1eb560;
   opacity: 1;
 }
+
 .or_clas {
   float: left;
   width: 4%;
   margin-left: 10px;
   margin-right: 8px;
 }
+
 .google_social_button {
   width: 100%;
   border: 1px solid #1eb560 !important;
@@ -75,6 +82,7 @@
   background-repeat: no-repeat;
   background-position: 7px;
 }
+
 .fb_social_button {
   width: 100%;
   border: 1px solid #1eb560 !important;
@@ -89,6 +97,7 @@
   background-repeat: no-repeat;
   background-position: 7px;
 }
+
 .apple_social_button {
   width: 100%;
   border: 1px solid #1eb560 !important;
@@ -103,11 +112,24 @@
   background-repeat: no-repeat;
   background-position: 7px;
 }
+
 .modal-dialog {
   margin-top: 10%;
 }
+
 .signle_line_input {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+.custom_position{
+  position: relative;
+}
+.validate_email {
+  border: none;
+  text-decoration: underline;
+  background-color: transparent;
+  position: absolute;
+  right: 10px;
+  top: 25px;
 }

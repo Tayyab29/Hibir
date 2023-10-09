@@ -15,6 +15,7 @@ import Modal from "react-bootstrap/Modal";
 import LoginModal from "./modalcomponents/loginmodal";
 import SignupModal from "./modalcomponents/signupmodal";
 import SetPassordModal from "./modalcomponents/setpassword";
+import ForgotModal from "./modalcomponents/forgotmodal";
 
 // Constants
 import { PROTECTED_PAGE, UNPROTECTED_PAGE } from "../../utils/Constants/global";
@@ -23,19 +24,17 @@ import { PROTECTED_PAGE, UNPROTECTED_PAGE } from "../../utils/Constants/global";
 import { logout } from "../../services/users";
 // Styles
 import "./topnav.css";
+import { DropdownButton } from "react-bootstrap"; import Dropdown from 'react-bootstrap/Dropdown';
 
 const TopNav = () => {
   // Local Storage
   const token = localStorage.getItem("accessToken");
-
-  // Hooks
-  // const history = useHistory();
-
   // View State
   const [show, setShow] = useState(false);
   const [showsignup, setShowSignup] = useState(false);
   const [showpassword, setShowPassword] = useState(false);
   const [sidebar, setSidebar] = useState(false);
+  const [showforgotmodal, setShowForgotModal] = useState(false);
 
   // States
   const [menu, setMenu] = useState(token === null ? UNPROTECTED_PAGE : PROTECTED_PAGE);
@@ -67,7 +66,7 @@ const TopNav = () => {
   return (
     <>
       <Modal show={show} onHide={handleClose}>
-        <LoginModal onHide={handleClose} />
+        <LoginModal onHide={handleClose} show={show} setShow={setShow} />
       </Modal>
       <Modal show={showsignup} onHide={handleSignUpClose}>
         <SignupModal
@@ -80,7 +79,9 @@ const TopNav = () => {
       <Modal show={showpassword} onHide={() => setShowPassword(false)}>
         <SetPassordModal onHide={() => setShowPassword(false)} data={user} />
       </Modal>
-
+      <Modal show={showforgotmodal} onHide={() => setShowForgotModal(false)}>
+        <ForgotModal onHide={() => setShowForgotModal(false)} />
+      </Modal>
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className="navbar">
           <Link to="#" className="menu-bars">
@@ -111,9 +112,14 @@ const TopNav = () => {
                 </div>
               </>
             ) : (
-              <div className="link_deco signUp_clrd">
-                <div onClick={logoutHandler}>Log out</div>
-              </div>
+              <>
+                <DropdownButton id="dropdown-basic-button" title="UserName">
+                  <Dropdown.Item onClick={logoutHandler}>
+                    <div className="link_deco signUp_clrd">
+                      <div>Log out</div>
+                    </div></Dropdown.Item>
+                </DropdownButton>
+              </>
             )}
           </div>
         </div>
@@ -138,6 +144,7 @@ const TopNav = () => {
                     {item.icon}
                     <span>{item.title}</span>
                   </Link>
+
                 </li>
               );
             })}

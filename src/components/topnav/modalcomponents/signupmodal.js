@@ -1,15 +1,12 @@
 import React from "react";
-import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import "./modal.css";
-import { googleSignup, signup } from "../../../services/users";
-import SetPassordModal from "./setpassword";
+import { googleSignup } from "../../../services/users";
 import { useGoogleLogin } from "@react-oauth/google";
 // import { Link } from "react-router-dom";
 
 const SignupModal = (props) => {
   const { setUser, user, setShowPassword, onHide } = props;
-  const [show, setShow] = useState(false);
 
   // Handlers
   const inputHandler = (e) => {
@@ -24,10 +21,6 @@ const SignupModal = (props) => {
     setShowPassword(true);
     onHide();
   };
-
-  // const googleAuth = () => {
-  //   window.open(`${process.env.REACT_APP_GOOGLE_URL}auth/google/callback`, "_self");
-  // };
   const googleHandler = useGoogleLogin({
     onSuccess: (CodeResponse) => responseGoogle(CodeResponse),
   });
