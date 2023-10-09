@@ -6,7 +6,7 @@ import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 
 import "./modal.css";
 
-const LoginModal = ({ onHide }) => {
+const LoginModal = ({ onHide,setShowForgotModal ,showforgotmodal}) => {
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -93,9 +93,9 @@ const LoginModal = ({ onHide }) => {
             />
 
             <div className="pt-2 forgot_text">
-              <Link to="" className="forgot_text">
+              <div  className="forgot_text">
                 Forgot your password?
-              </Link>
+              </div>
             </div>
           </div>
           <div className="pt-3">

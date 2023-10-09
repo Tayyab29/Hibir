@@ -11,6 +11,7 @@ import ManagePropertyIndex from "./pages/Advertise/manageproperty";
 import CondominiumDetails from "./pages/Advertise/condominiumdetails";
 import SearchByPropertyIndex from "./pages/Home/searchpropertycomponent";
 import CheckoutModal from "./pages/Advertise/advertisecomponents/checkoutmodal";
+import BillingHistory from "./pages/BillingHistory";
 
 // Redux
 import { loginState, setUser } from "./redux/login";
@@ -64,6 +65,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/accounts" exact>
           <AccountsIndex />
+        </ProtectedRoute>
+        <ProtectedRoute path="/billinghistory" exact>
+          <BillingHistory />
         </ProtectedRoute>
         {/* <Route path="/advertise" exact component={Advertise} /> */}
         <Route path="/condominiumdetails" exact component={CondominiumDetails} />

@@ -133,3 +133,23 @@
   right: 10px;
   top: 25px;
 }
+.eye_pos_rel{
+  position: relative;
+}
+.new_pass{
+  position: absolute;
+  right: 10px;
+  top: 27px;
+  background-color: transparent;
+  border: 0;
+}
+.confirm_pos{
+  position: relative;
+}
+.confirm_pass{
+  position: absolute;
+  right: 10px;
+  top: 27px;
+  background-color: transparent;
+  border: 0;
+}

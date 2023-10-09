@@ -78,7 +78,7 @@ const AddProperty = () => {
               className={`col-md-4 col-12 ${
                 activeUnit === 1 ? "active_button" : "noactive_button"
               }`}
-              // onClick={() => handleCardClick(1)}
+              onClick={() => handleCardClick(1)}
             >
               <div className="icon_text_singleunit text-center">
                 <img src="images/multiunit.png" alt="multi unit" />
