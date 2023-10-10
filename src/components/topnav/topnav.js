@@ -24,14 +24,19 @@ import { PROTECTED_PAGE, UNPROTECTED_PAGE } from "../../utils/Constants/global";
 import { logout } from "../../services/users";
 // Styles
 import "./topnav.css";
-import { DropdownButton } from "react-bootstrap"; import Dropdown from 'react-bootstrap/Dropdown';
+import { DropdownButton } from "react-bootstrap";
+import Dropdown from "react-bootstrap/Dropdown";
 
 // import Button from 'react-bootstrap/Button';
-import { Offcanvas, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Offcanvas, ListGroup, ListGroupItem } from "react-bootstrap";
+import { loginState } from "../../redux/login";
+import { useSelector } from "react-redux";
 
 const TopNav = () => {
   // Local Storage
   const token = localStorage.getItem("accessToken");
+  const { user } = useSelector(loginState);
+  const userName = user ? user.firstName ?? "" + " " + user.lastName ?? "" : "UserName";
 
   // View State
   const [show, setShow] = useState(false);
@@ -42,7 +47,7 @@ const TopNav = () => {
 
   // States
   const [menu, setMenu] = useState(token === null ? UNPROTECTED_PAGE : PROTECTED_PAGE);
-  const [user, setUser] = useState({
+  const [userData, setUserData] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -86,22 +91,26 @@ const TopNav = () => {
     setOpenSubMenuIndex(null);
   };
 
-
   return (
     <>
       <Modal show={show} onHide={handleClose}>
-        <LoginModal onHide={handleClose} setShowForgotModal= {setShowForgotModal} />
+        <LoginModal
+          onHide={handleClose}
+          setShowForgotModal={setShowForgotModal}
+          setShowSignup={setShowSignup}
+        />
       </Modal>
       <Modal show={showsignup} onHide={handleSignUpClose}>
         <SignupModal
           onHide={handleSignUpClose}
-          setUser={setUser}
-          user={user}
+          setUserData={setUserData}
+          userData={userData}
           setShowPassword={setShowPassword}
+          setShow={setShow}
         />
       </Modal>
       <Modal show={showpassword} onHide={() => setShowPassword(false)}>
-        <SetPassordModal onHide={() => setShowPassword(false)} data={user} />
+        <SetPassordModal onHide={() => setShowPassword(false)} data={userData} />
       </Modal>
       <Modal show={showforgotmodal} onHide={() => setShowForgotModal(false)}>
         <ForgotModal onHide={() => setShowForgotModal(false)} />
@@ -137,11 +146,12 @@ const TopNav = () => {
               </>
             ) : (
               <>
-                <DropdownButton id="dropdown-basic-button" title="UserName">
+                <DropdownButton id="dropdown-basic-button" title={userName}>
                   <Dropdown.Item onClick={logoutHandler}>
                     <div className="link_deco signUp_clrd">
                       <div>Log out</div>
-                    </div></Dropdown.Item>
+                    </div>
+                  </Dropdown.Item>
                 </DropdownButton>
               </>
             )}
@@ -149,32 +159,43 @@ const TopNav = () => {
         </div>
         <Offcanvas show={sidebar} onHide={closeSidebar} className="custom-offcanvas">
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title> <Link to="/">
-              <img
-                src="images/Hibir Bet Logo-01 1.svg"
-                className="side_canvas_logo"
-                alt="Hibir Logo"
-              />
-            </Link></Offcanvas.Title>
+            <Offcanvas.Title>
+              <Link to="/">
+                <img
+                  src="images/Hibir Bet Logo-01 1.svg"
+                  className="side_canvas_logo"
+                  alt="Hibir Logo"
+                />
+              </Link>
+            </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             <ListGroup>
               {PROTECTED_PAGE.map((item, index) => (
-                <div key={index} onMouseEnter={(e) => openSubMenu(e, index)} onMouseLeave={closeSubMenu}>
-                  
-                  <Link className="link_remove_underline" to={ item.path}>
-                    <ListGroupItem
-                      action
-                      className={openSubMenuIndex === index ? 'active' : ''}
-                    >
+                <div
+                  key={index}
+                  onMouseEnter={(e) => openSubMenu(e, index)}
+                  onMouseLeave={closeSubMenu}
+                >
+                  <Link className="link_remove_underline" to={item.path}>
+                    <ListGroupItem action className={openSubMenuIndex === index ? "active" : ""}>
                       {item.title}
                     </ListGroupItem>
                   </Link>
                   {item.subMenu && openSubMenuIndex === index && (
-                    <div className="submenu" style={{ top: submenuPosition.top, left: submenuPosition.left }}>
+                    <div
+                      className="submenu"
+                      style={{ top: submenuPosition.top, left: submenuPosition.left }}
+                    >
                       {item.subMenu.map((submenuItem, subIndex) => (
-                        <Link className="link_remove_underline" to={submenuItem.path} key={subIndex}>
-                          <ListGroupItem key={subIndex} action>{submenuItem.title}</ListGroupItem>
+                        <Link
+                          className="link_remove_underline"
+                          to={submenuItem.path}
+                          key={subIndex}
+                        >
+                          <ListGroupItem key={subIndex} action>
+                            {submenuItem.title}
+                          </ListGroupItem>
                         </Link>
                       ))}
                     </div>

@@ -37,3 +37,46 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+/* Custom CSS for PrimeReact Toast */
+.p-toast .p-toast-message.p-toast-message-success {
+  background: #e4f8f0;
+  border: solid #1ea97c;
+  border-width: 0 0 0 6px;
+  color: #1ea97c;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+.p-toast .p-toast-message .p-toast-message-content .p-toast-summary {
+  font-weight: 700;
+}
+.p-toast .p-toast-message .p-toast-message-content .p-toast-message-icon.p-icon {
+  width: 2rem;
+  height: 2rem;
+}
+.p-toast .p-toast-message .p-toast-message-content .p-toast-detail {
+  margin: 0.5rem 0 0 1rem;
+}
+.p-toast-message.p-toast-message-success .p-toast-icon-close {
+  color: #1ea97c;
+}
+.p-toast .p-toast-message .p-toast-message-content .p-toast-message-text {
+  margin: 0 0 0 0rem;
+}
+.p-toast .p-toast-message .p-toast-message-content {
+  padding: 1rem;
+  border-width: 0 0 0 6px;
+}
+
+.p-toast .p-toast-message.p-toast-message-error {
+  background: #ffe7e6;
+  border: solid #ff5757;
+  border-width: 0 0 0 6px;
+  color: #ff5757;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.p-toast-message.p-toast-message-error .p-toast-icon-close {
+  color: #ff5757;
+}

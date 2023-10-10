@@ -17,6 +17,12 @@ export async function getUserDetailsById(data) {
 export async function updateUser(data) {
   return putData(appUrl["users"].updateUser, data);
 }
+export async function valideUserEmail(data) {
+  return postData(appUrl["users"].validateEmail, data);
+}
+export async function forgetPassword(data) {
+  return postData(appUrl["users"].forgetPassword, data);
+}
 
 // Google Login and Sign Up
 export async function googleLogin(data) {

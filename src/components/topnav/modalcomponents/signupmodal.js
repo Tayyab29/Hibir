@@ -6,7 +6,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 // import { Link } from "react-router-dom";
 
 const SignupModal = (props) => {
-  const { setUser, user, setShowPassword, onHide } = props;
+  const { setUser, user, setShowPassword, onHide, setShow } = props;
 
   // Handlers
   const inputHandler = (e) => {
@@ -26,7 +26,6 @@ const SignupModal = (props) => {
   });
 
   const responseGoogle = async (response) => {
-    console.log({ response });
     if (response && response.access_token) {
       try {
         const resp = await googleSignup({ token: response.access_token });
@@ -54,7 +53,13 @@ const SignupModal = (props) => {
             </h3>
             <p>
               Or,
-              <span style={{ textDecoration: "underline", marginLeft: "5px" }}>
+              <span
+                className="create-account-text"
+                onClick={() => {
+                  setShow(true);
+                  onHide();
+                }}
+              >
                 Sign Into Your Account
               </span>
             </p>

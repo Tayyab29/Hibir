@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import { googleLogin, login } from "../../../services/users";
 import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 
 import "./modal.css";
+import { ToastContext } from "../../../context/toast";
 
-const LoginModal = ({ onHide ,setShowForgotModal}) => {
+const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
+  // Context
+  const toast = useContext(ToastContext);
+
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -24,15 +28,23 @@ const LoginModal = ({ onHide ,setShowForgotModal}) => {
     try {
       let resp = await login(user);
       if (resp.data.status) {
+        toast.showMessage("Success", "User has been login successfully.", "success");
         localStorage.setItem("accessToken", resp.data.access_token);
         localStorage.setItem("Id", resp.data.user._id);
         onHide();
+
         window.location.reload();
       } else {
         // Handle login failure
+        toast.showMessage("Error", "Invalid email & password", "error");
       }
     } catch (error) {
       console.log(error);
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
     }
   };
 
@@ -41,7 +53,6 @@ const LoginModal = ({ onHide ,setShowForgotModal}) => {
   });
 
   const responseGoogle = async (response) => {
-    console.log({ response });
     if (response && response.access_token) {
       try {
         const resp = await googleLogin({ token: response.access_token });
@@ -68,7 +79,13 @@ const LoginModal = ({ onHide ,setShowForgotModal}) => {
           </h3>
           <p>
             Or,
-            <span style={{ textDecoration: "underline", marginLeft: "5px" }}>
+            <span
+              className="create-account-text"
+              onClick={() => {
+                setShowSignup(true);
+                onHide();
+              }}
+            >
               Create An Account
             </span>
           </p>
@@ -93,8 +110,13 @@ const LoginModal = ({ onHide ,setShowForgotModal}) => {
             />
 
             <div className="pt-2 forgot_text">
-              <div  className="forgot_text" onClick={()=>{setShowForgotModal(true);
-              onHide()}}>
+              <div
+                className="forgot_text"
+                onClick={() => {
+                  setShowForgotModal(true);
+                  onHide();
+                }}
+              >
                 Forgot your password?
               </div>
             </div>
@@ -138,4 +160,4 @@ const LoginModal = ({ onHide ,setShowForgotModal}) => {
   );
 };
 
-export default LoginModal;
+export default LoginModal;
