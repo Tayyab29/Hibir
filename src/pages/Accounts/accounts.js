@@ -36,7 +36,8 @@ const AccountsIndex = () => {
   });
 
   const saveHandler = async () => {
-    const resp = await updateUser(userDetails);
+    const { email, ...rest } = userDetails;
+    const resp = await updateUser(rest);
     if (resp.data.status) {
       dispatch(setUser(resp?.data.user));
     }

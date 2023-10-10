@@ -5,6 +5,8 @@ const appUrl = {
     userDetails: "users/get-user-details",
     userById: "users/get-user-id",
     updateUser: "users/edit-user",
+    validateEmail: "users/getByEmail",
+    forgetPassword: "users/resetpassword",
   },
   google: {
     login: "auth/google",

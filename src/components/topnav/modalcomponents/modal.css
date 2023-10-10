@@ -9,6 +9,18 @@
   outline: none;
   margin-top: 1rem;
 }
+.input_text_login-disabled,
+.input_text_login-disabled:focus,
+.input_text_login-disabled:focus-visible {
+  width: 100%;
+  border: 1px solid #1eb560;
+  padding: 12px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  margin-top: 1rem;
+  cursor: not-allowed;
+}
 
 .input_text_signup_first,
 .input_text_signup_first:focus,
@@ -48,10 +60,23 @@
   padding: 12px 10px;
   border-radius: 5px;
 }
+.create-account-text {
+  text-decoration: underline;
+  margin-left: "5px";
+}
+.create-account-text:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
 
 .forgot_text {
   text-align: right;
   text-decoration: none;
+  cursor: pointer;
+}
+.forgot_text:hover {
+  text-decoration: underline;
+  color: blue;
 }
 
 .hr_clas {
@@ -122,7 +147,7 @@
   flex-direction: row;
   justify-content: space-around;
 }
-.custom_position{
+.custom_position {
   position: relative;
 }
 .validate_email {
@@ -133,23 +158,40 @@
   right: 10px;
   top: 25px;
 }
-.eye_pos_rel{
+.eye_pos_rel {
   position: relative;
 }
-.new_pass{
+.new_pass {
   position: absolute;
   right: 10px;
   top: 27px;
   background-color: transparent;
   border: 0;
 }
-.confirm_pos{
-  position: relative;
-}
-.confirm_pass{
+.new_pass-disabled {
   position: absolute;
   right: 10px;
   top: 27px;
   background-color: transparent;
   border: 0;
+  cursor: not-allowed !important;
+}
+.confirm_pos {
+  position: relative;
+}
+.confirm_pass {
+  position: absolute;
+  right: 10px;
+  top: 27px;
+  background-color: transparent;
+  border: 0;
+}
+
+.confirm_pass-disabled {
+  position: absolute;
+  right: 10px;
+  top: 27px;
+  background-color: transparent;
+  border: 0;
+  cursor: not-allowed !important;
 }

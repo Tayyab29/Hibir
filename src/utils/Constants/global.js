@@ -59,31 +59,33 @@ export const PROTECTED_PAGE = [
   {
     title: "MANAGE RENTALS",
     cName: "nav-text",
+    path: "/",
+
     subMenu: [
       {
         title: "Property",
-        // path: "/accounts",
+        path: "/",
       },
 
       {
         title: "Update Profiles",
-        // path: "/accounts",
+        path: "/",
       },
 
       {
         title: "Add Another Property",
-        // path: "/accounts",
+        path: "/",
       },
 
       {
         title: "Cancel Property",
-        // path: "/accounts",
+        path: "/",
       },
 
       {
         title: "Reactive Property",
-        // path: "/accounts",
-      }
+        path: "/",
+      },
     ],
   },
   {
@@ -137,9 +139,7 @@ export const PROTECTED_PAGE = [
         title: "My Account",
         path: "/accounts",
       },
-
     ],
-
   },
   {
     title: "FAVORITE",
