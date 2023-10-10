@@ -559,3 +559,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding-right: 0.71rem;
 }
 /* Manage Property Section */
+.add_more,.remove_unit{
+  cursor: pointer;
+}

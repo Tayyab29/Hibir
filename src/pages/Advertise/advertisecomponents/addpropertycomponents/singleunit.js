@@ -136,7 +136,7 @@ const SingleUnit = () => {
             <p>
               By clicking Add My Property above, I agree that I will provide accurate and
               <span className="non_discriminatory">
-                non<br></br> discriminatory
+                &nbsp; non<br></br> discriminatory &nbsp; 
               </span>
               information and I will comply with the Hibir.com
               <span className="non_discriminatory">

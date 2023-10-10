@@ -15,6 +15,7 @@ import Modal from "react-bootstrap/Modal";
 import LoginModal from "./modalcomponents/loginmodal";
 import SignupModal from "./modalcomponents/signupmodal";
 import SetPassordModal from "./modalcomponents/setpassword";
+import ForgotModal from "./modalcomponents/forgotmodal";
 
 // Constants
 import { PROTECTED_PAGE, UNPROTECTED_PAGE } from "../../utils/Constants/global";
@@ -23,19 +24,21 @@ import { PROTECTED_PAGE, UNPROTECTED_PAGE } from "../../utils/Constants/global";
 import { logout } from "../../services/users";
 // Styles
 import "./topnav.css";
+import { DropdownButton } from "react-bootstrap"; import Dropdown from 'react-bootstrap/Dropdown';
+
+// import Button from 'react-bootstrap/Button';
+import { Offcanvas, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 const TopNav = () => {
   // Local Storage
   const token = localStorage.getItem("accessToken");
-
-  // Hooks
-  // const history = useHistory();
 
   // View State
   const [show, setShow] = useState(false);
   const [showsignup, setShowSignup] = useState(false);
   const [showpassword, setShowPassword] = useState(false);
   const [sidebar, setSidebar] = useState(false);
+  const [showforgotmodal, setShowForgotModal] = useState(false);
 
   // States
   const [menu, setMenu] = useState(token === null ? UNPROTECTED_PAGE : PROTECTED_PAGE);
@@ -49,7 +52,8 @@ const TopNav = () => {
   const logoutHandler = () => {
     logout();
   };
-  const showSidebar = () => setSidebar(!sidebar);
+  const showSidebar = () => setSidebar(true);
+  const closeSidebar = () => setSidebar(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleSignUpClose = () => setShowSignup(false);
@@ -64,10 +68,29 @@ const TopNav = () => {
     }
   }, [token]);
 
+  const [submenu1, setSubmenu1] = useState(false);
+  const [submenu2, setSubmenu2] = useState(false);
+  const toggleSubmenu1 = () => setSubmenu1(!submenu1);
+  const toggleSubmenu2 = () => setSubmenu2(!submenu2);
+  const [openSubMenuIndex, setOpenSubMenuIndex] = useState(null);
+  const [submenuPosition, setSubmenuPosition] = useState({ top: 0, left: 0 });
+
+  const openSubMenu = (e, index) => {
+    const parentItem = e.currentTarget;
+    const rect = parentItem.getBoundingClientRect();
+    setSubmenuPosition({ top: rect.top, left: rect.right });
+    setOpenSubMenuIndex(index);
+  };
+
+  const closeSubMenu = () => {
+    setOpenSubMenuIndex(null);
+  };
+
+
   return (
     <>
       <Modal show={show} onHide={handleClose}>
-        <LoginModal onHide={handleClose} />
+        <LoginModal onHide={handleClose} setShowForgotModal= {setShowForgotModal} />
       </Modal>
       <Modal show={showsignup} onHide={handleSignUpClose}>
         <SignupModal
@@ -80,7 +103,9 @@ const TopNav = () => {
       <Modal show={showpassword} onHide={() => setShowPassword(false)}>
         <SetPassordModal onHide={() => setShowPassword(false)} data={user} />
       </Modal>
-
+      <Modal show={showforgotmodal} onHide={() => setShowForgotModal(false)}>
+        <ForgotModal onHide={() => setShowForgotModal(false)} />
+      </Modal>
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className="navbar">
           <Link to="#" className="menu-bars">
@@ -111,49 +136,54 @@ const TopNav = () => {
                 </div>
               </>
             ) : (
-              <div className="link_deco signUp_clrd">
-                <div onClick={logoutHandler}>Log out</div>
-              </div>
+              <>
+                <DropdownButton id="dropdown-basic-button" title="UserName">
+                  <Dropdown.Item onClick={logoutHandler}>
+                    <div className="link_deco signUp_clrd">
+                      <div>Log out</div>
+                    </div></Dropdown.Item>
+                </DropdownButton>
+              </>
             )}
           </div>
         </div>
-        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-          <ul className="nav-menu-items" onClick={showSidebar}>
-            <li className="navbar-toggle">
-              <Link to="/">
-                <img
-                  src="images/Hibir Bet Logo-01 1.svg"
-                  className="side_canvas_logo"
-                  alt="Hibir Logo"
-                />
-              </Link>
-              <Link to="#" className="menu-bars">
-                <AiIcons.AiOutlineClose color="black" />
-              </Link>
-            </li>
-            {menu.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
+        <Offcanvas show={sidebar} onHide={closeSidebar} className="custom-offcanvas">
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title> <Link to="/">
+              <img
+                src="images/Hibir Bet Logo-01 1.svg"
+                className="side_canvas_logo"
+                alt="Hibir Logo"
+              />
+            </Link></Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <ListGroup>
+              {PROTECTED_PAGE.map((item, index) => (
+                <div key={index} onMouseEnter={(e) => openSubMenu(e, index)} onMouseLeave={closeSubMenu}>
+                  
+                  <Link className="link_remove_underline" to={ item.path}>
+                    <ListGroupItem
+                      action
+                      className={openSubMenuIndex === index ? 'active' : ''}
+                    >
+                      {item.title}
+                    </ListGroupItem>
                   </Link>
-                </li>
-              );
-            })}
-            {token === "undefined" ||
-              (token === null && (
-                <div className="d-flex justify-content-around pt-3">
-                  <button className="nav_login_btn " onClick={handleShow}>
-                    Login In
-                  </button>
-                  <button className="nav_signup_btn" onClick={handleSignupShow}>
-                    Sign Up
-                  </button>
+                  {item.subMenu && openSubMenuIndex === index && (
+                    <div className="submenu" style={{ top: submenuPosition.top, left: submenuPosition.left }}>
+                      {item.subMenu.map((submenuItem, subIndex) => (
+                        <Link className="link_remove_underline" to={submenuItem.path} key={subIndex}>
+                          <ListGroupItem key={subIndex} action>{submenuItem.title}</ListGroupItem>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
-          </ul>
-        </nav>
+            </ListGroup>
+          </Offcanvas.Body>
+        </Offcanvas>
       </IconContext.Provider>
     </>
   );

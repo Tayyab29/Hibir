@@ -153,3 +153,22 @@ span {
   border-radius: 4px;
   font-weight: 600;
 }
+#dropdown-basic-button,#dropdown-basic-button:hover,#dropdown-basic-button:focus,#dropdown-basic-button:active{
+  background: transparent;
+    color: #000;;
+    border: 0;
+}
+.list-group-item {
+  border: 0;
+}
+.submenu{
+  padding-left: 20px;
+  margin-top: 5px;
+}
+.list-group-item.active{
+border: 0;
+background: #757575;
+}
+.link_remove_underline{
+  text-decoration: none;
+}

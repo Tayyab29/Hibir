@@ -1,0 +1,41 @@
+.billinghistory_input,
+.billinghistory_input:focus,
+.billinghistory_input:focus-visible {
+    width: 100%;
+    border: 1px solid #1eb560;
+    padding: 7px 12px;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    outline: none;
+}
+.billinghistory_button {
+    background-color: #1eb560;
+    width: 100px;
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    border: 0;
+    font-size: 14px;
+    margin-bottom: 1.45rem;
+}
+.billinghistoryupdate_button {
+    background: transparent;
+    border:1px solid #1eb560;
+    width: 100px;
+    border-radius: 6px;
+    padding: 9px 12px;
+    color: #757575;
+    outline: none;
+    cursor: pointer;
+    /* border: 0; */
+    font-size: 14px;
+    margin-bottom: 1.45rem;
+}
+
+
+.billing_history_tbl > th,.billing_history_tbl > thead,.billing_history_tbl > tr{
+    border-style: none;
+    font-weight: 600;
+}

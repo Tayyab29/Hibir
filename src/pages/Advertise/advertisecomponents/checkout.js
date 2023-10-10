@@ -13,9 +13,9 @@ const CheckOut = () => {
                 <b>Checkout Details</b>
               </h1>
             </div>
-            <div className="checkout_p">
+            {/* <div className="checkout_p">
               <p>Already Have An Account? Log In</p>
-            </div>
+            </div> */}
             {/*  */}
             <div className="form-group">
               <label>

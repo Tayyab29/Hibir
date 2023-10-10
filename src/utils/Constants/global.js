@@ -58,9 +58,33 @@ export const PROTECTED_PAGE = [
   },
   {
     title: "MANAGE RENTALS",
-    path: "/reports",
-    // icon: <IoIcons.IoIosPaper />,
     cName: "nav-text",
+    subMenu: [
+      {
+        title: "Property",
+        // path: "/accounts",
+      },
+
+      {
+        title: "Update Profiles",
+        // path: "/accounts",
+      },
+
+      {
+        title: "Add Another Property",
+        // path: "/accounts",
+      },
+
+      {
+        title: "Cancel Property",
+        // path: "/accounts",
+      },
+
+      {
+        title: "Reactive Property",
+        // path: "/accounts",
+      }
+    ],
   },
   {
     title: "APARTMENTS",
@@ -106,9 +130,16 @@ export const PROTECTED_PAGE = [
   },
   {
     title: "ACCOUNT",
-    path: "/accounts",
-    // // icon: <IoIcons.IoMdPeople />,
     cName: "nav-text",
+    path: "/accounts",
+    subMenu: [
+      {
+        title: "My Account",
+        path: "/accounts",
+      },
+
+    ],
+
   },
   {
     title: "FAVORITE",
