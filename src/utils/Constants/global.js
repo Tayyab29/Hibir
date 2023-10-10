@@ -131,6 +131,7 @@ export const PROTECTED_PAGE = [
   {
     title: "ACCOUNT",
     cName: "nav-text",
+    path: "/accounts",
     subMenu: [
       {
         title: "My Account",

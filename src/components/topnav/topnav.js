@@ -90,7 +90,7 @@ const TopNav = () => {
   return (
     <>
       <Modal show={show} onHide={handleClose}>
-        <LoginModal onHide={handleClose} />
+        <LoginModal onHide={handleClose} setShowForgotModal= {setShowForgotModal} />
       </Modal>
       <Modal show={showsignup} onHide={handleSignUpClose}>
         <SignupModal
@@ -161,7 +161,8 @@ const TopNav = () => {
             <ListGroup>
               {PROTECTED_PAGE.map((item, index) => (
                 <div key={index} onMouseEnter={(e) => openSubMenu(e, index)} onMouseLeave={closeSubMenu}>
-                  <Link className="link_remove_underline" to={item.path}>
+                  
+                  <Link className="link_remove_underline" to={ item.path}>
                     <ListGroupItem
                       action
                       className={openSubMenuIndex === index ? 'active' : ''}
