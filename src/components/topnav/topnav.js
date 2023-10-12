@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // Icons
 import * as FaIcons from "react-icons/fa";
@@ -33,6 +33,8 @@ import { loginState } from "../../redux/login";
 import { useSelector } from "react-redux";
 
 const TopNav = () => {
+  // History
+  const history = useHistory();
   // Local Storage
   const token = localStorage.getItem("accessToken");
   const { user } = useSelector(loginState);
@@ -147,6 +149,11 @@ const TopNav = () => {
             ) : (
               <>
                 <DropdownButton id="dropdown-basic-button" title={userName}>
+                  <Dropdown.Item onClick={() => history.push("/accounts")}>
+                    <div className="link_deco signUp_clrd">
+                      <div>User Profile</div>
+                    </div>
+                  </Dropdown.Item>
                   <Dropdown.Item onClick={logoutHandler}>
                     <div className="link_deco signUp_clrd">
                       <div>Log out</div>
@@ -171,7 +178,7 @@ const TopNav = () => {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <ListGroup>
-              {PROTECTED_PAGE.map((item, index) => (
+              {menu.map((item, index) => (
                 <div
                   key={index}
                   onMouseEnter={(e) => openSubMenu(e, index)}

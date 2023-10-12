@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import Modal from "react-bootstrap/Modal";
 import "./modal.css";
 import { googleSignup } from "../../../services/users";
 import { useGoogleLogin } from "@react-oauth/google";
+import { ToastContext } from "../../../context/toast";
 // import { Link } from "react-router-dom";
 
 const SignupModal = (props) => {
-  const { setUser, user, setShowPassword, onHide, setShow } = props;
+  const { setUserData, userData, setShowPassword, onHide, setShow } = props;
+
+  // Context
+  const toast = useContext(ToastContext);
 
   // Handlers
   const inputHandler = (e) => {
     const { name, value } = e.target;
-    setUser({
-      ...user,
+    setUserData({
+      ...userData,
       [name]: value,
     });
   };
@@ -33,12 +37,23 @@ const SignupModal = (props) => {
           localStorage.setItem("accessToken", resp.data.access_token);
           localStorage.setItem("Id", resp.data.user._id);
           onHide();
+          toast.showMessage("Success", "User has been created successfully.", "success");
         } else {
           // Handle Google login failure
-          onHide();
+          // onHide();
+          toast.showMessage(
+            "Error",
+            "Sorry, we are unable to process your request at this time.",
+            "error"
+          );
         }
       } catch (error) {
         console.error("Error signing in:", error);
+        toast.showMessage(
+          "Error",
+          "Sorry, we are unable to process your request at this time.",
+          "error"
+        );
       }
     }
   };

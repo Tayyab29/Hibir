@@ -10,7 +10,7 @@ export const ToastStateProvider = ({ children }) => {
       severity: "success",
       summary: `${toTitleCase(title)} Created.`,
       detail: `${title} has been created successfully.`,
-      life: 5000000,
+      life: 5000,
     });
   };
 
@@ -19,7 +19,7 @@ export const ToastStateProvider = ({ children }) => {
       severity: "success",
       summary: `${toTitleCase(title)} Updated.`,
       detail: `${title} has been updated successfully.`,
-      life: 5000000,
+      life: 5000,
     });
   };
 
@@ -28,7 +28,7 @@ export const ToastStateProvider = ({ children }) => {
       severity: "success",
       summary: `${toTitleCase(title)} Assigned.`,
       detail: `${title} has been assigned successfully.`,
-      life: 5000000,
+      life: 5000,
     });
   };
 
@@ -37,12 +37,12 @@ export const ToastStateProvider = ({ children }) => {
       severity: "success",
       summary: `${toTitleCase(title)} Deleted.`,
       detail: `${title} has been deleted successfully.`,
-      life: 5000000,
+      life: 5000,
     });
   };
 
   const showMessage = (title, message, type) => {
-    toast.current.show({ severity: type, summary: title, detail: message, life: 50000 });
+    toast.current.show({ severity: type, summary: title, detail: message, life: 5000 });
   };
 
   function toTitleCase(str) {

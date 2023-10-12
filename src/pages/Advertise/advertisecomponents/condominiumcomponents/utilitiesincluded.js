@@ -1,34 +1,26 @@
 import React from "react";
 import { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { mainViewState } from "../../../../redux/main-view";
+import { ADVERTISE_UTILITIES } from "../../../../utils/Constants/global";
+import { useDispatch, useSelector } from "react-redux";
+import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
 
 const UtilitiesIncluded = () => {
   // Redux
-  // const { screens } = useSelector(mainViewState);
-  // const dispatch = useDispatch();
+  const { screens } = useSelector(mainViewState);
+  const dispatch = useDispatch();
 
-  //checkbox array
-  const checkboxData = [
-    { id: "1", label: "Gas", checked: false },
-    { id: "2", label: "Water", checked: false },
-    { id: "3", label: "Electricity", checked: false },
-    { id: "4", label: "Heat", checked: false },
-    { id: "5", label: "Trash Removal", checked: false },
-    { id: "6", label: "Sewer", checked: false },
-    { id: "7", label: "Cable", checked: false },
-    { id: "8", label: "Air Condition", checked: false },
-    // ... Add more checkbox data objects
-  ];
-  //checkbox state
-  const [checkboxes, setCheckboxes] = useState(checkboxData);
-  //check box
   const handleCheckboxChange = (id) => {
-    setCheckboxes((prevCheckboxes) =>
-      prevCheckboxes.map((checkbox) =>
-        checkbox.id === id ? { ...checkbox, checked: !checkbox.checked } : checkbox
-      )
-    );
+    const selectedIds = screens.advertise.data.utilities;
+    const itemIndex = selectedIds.findIndex((item) => item === id);
+    if (itemIndex === -1) {
+      const temp = [...screens.advertise.data.utilities];
+      temp.push(id);
+      dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, utilities: temp }));
+    } else {
+      const temp = [...selectedIds];
+      temp.splice(itemIndex, 1);
+      dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, utilities: temp }));
+    }
   };
 
   return (
@@ -39,11 +31,11 @@ const UtilitiesIncluded = () => {
             <b>Utilities Included</b>
           </h3>
         </div>
-        {checkboxes.map((checkbox) => (
+        {ADVERTISE_UTILITIES.map((checkbox) => (
           <div key={checkbox.id} className="col-md-3 col-6 mb-3">
             <input
               type="checkbox"
-              checked={checkbox.checked}
+              checked={screens?.advertise?.data?.utilities.includes(checkbox.id)}
               onChange={() => handleCheckboxChange(checkbox.id)}
             />
             <span>{checkbox.label}</span>

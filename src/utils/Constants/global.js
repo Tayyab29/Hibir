@@ -7,9 +7,30 @@ export const UNPROTECTED_PAGE = [
   },
   {
     title: "MANAGE RENTALS",
-    path: "/reports",
-    // icon: <IoIcons.IoIosPaper />,
     cName: "nav-text",
+    path: "/",
+
+    subMenu: [
+      {
+        title: "Property",
+        path: "/",
+      },
+
+      {
+        title: "Add Another Property",
+        path: "/advertise",
+      },
+
+      {
+        title: "Cancel Property",
+        path: "/",
+      },
+
+      {
+        title: "Reactive Property",
+        path: "/",
+      },
+    ],
   },
   {
     title: "APARTMENTS",
@@ -68,13 +89,8 @@ export const PROTECTED_PAGE = [
       },
 
       {
-        title: "Update Profiles",
-        path: "/",
-      },
-
-      {
         title: "Add Another Property",
-        path: "/",
+        path: "/advertise",
       },
 
       {
@@ -192,12 +208,39 @@ export const ADVERTISE_INTIAL_STATE = {
   rentStartDate: "",
   rentEndDate: "",
   rentDescription: "",
+  utilities: [],
   petsAllowed: "",
   laundryType: "",
   parkingType: "",
-  amenities: "",
+  amenities: [],
   userType: "",
   contactPreference: "",
   isHideName: false,
   user: "",
 };
+
+export const ADVERTISE_UTILITIES = [
+  { id: "1", label: "Gas" },
+  { id: "2", label: "Water" },
+  { id: "3", label: "Electricity" },
+  { id: "4", label: "Heat" },
+  { id: "5", label: "Trash Removal" },
+  { id: "6", label: "Sewer" },
+  { id: "7", label: "Cable" },
+  { id: "8", label: "Air Condition" },
+];
+
+export const ADVERTISE_EMENTITIES = [
+  { id: "1", label: "Furnished" },
+  { id: "2", label: "WheelChair Accessible" },
+  { id: "3", label: "Elevator" },
+  { id: "4", label: "No Smoking" },
+  { id: "5", label: "AC" },
+  { id: "6", label: "Storage" },
+  { id: "7", label: "Loft" },
+  { id: "8", label: "Fitness Center" },
+  { id: "9", label: "Fireplace " },
+  { id: "10", label: "Gated Entry " },
+  { id: "11", label: "Dishwasher " },
+  { id: "12", label: "Swimming Pool" },
+];
