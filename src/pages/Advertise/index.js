@@ -4,9 +4,13 @@ import SelectPackage from "./advertisecomponents/selectpackage";
 import CheckOut from "./advertisecomponents/checkout";
 import "./advertise.css";
 import Footer from "../../components/Footer/footer";
+import { useSelector } from "react-redux";
+import { mainViewState } from "../../redux/main-view";
 
 const Advertise = () => {
-  const [activeCard, setActiveCard] = useState(0);
+  const { screens } = useSelector(mainViewState);
+
+  const [activeCard, setActiveCard] = useState(screens.advertise.activeScreen);
 
   const handleCardClick = (index) => {
     setActiveCard(index);

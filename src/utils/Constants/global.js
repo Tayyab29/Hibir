@@ -7,9 +7,30 @@ export const UNPROTECTED_PAGE = [
   },
   {
     title: "MANAGE RENTALS",
-    path: "/reports",
-    // icon: <IoIcons.IoIosPaper />,
     cName: "nav-text",
+    path: "/",
+
+    subMenu: [
+      {
+        title: "Property",
+        path: "/",
+      },
+
+      {
+        title: "Add Another Property",
+        path: "/advertise",
+      },
+
+      {
+        title: "Cancel Property",
+        path: "/",
+      },
+
+      {
+        title: "Reactive Property",
+        path: "/",
+      },
+    ],
   },
   {
     title: "APARTMENTS",
@@ -68,13 +89,8 @@ export const PROTECTED_PAGE = [
       },
 
       {
-        title: "Update Profiles",
-        path: "/",
-      },
-
-      {
         title: "Add Another Property",
-        path: "/",
+        path: "/advertise",
       },
 
       {

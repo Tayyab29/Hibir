@@ -7,7 +7,11 @@ import { BsChevronRight } from "react-icons/bs";
 // Redux
 import { ToastContext } from "../../context/toast";
 import { useDispatch, useSelector } from "react-redux";
-import { mainViewState, onFormAdvertiseDataChange } from "../../redux/main-view";
+import {
+  mainViewState,
+  onAdvertiseCurrentScreen,
+  onFormAdvertiseDataChange,
+} from "../../redux/main-view";
 
 // Componets
 import Footer from "../../components/Footer/footer";
@@ -147,7 +151,14 @@ const CondominiumDetails = () => {
                 <button className="condominium_save" type="button" onClick={saveHandler}>
                   Save
                 </button>
-                <button className="condominium_publish" type="button">
+                <button
+                  className="condominium_publish"
+                  type="button"
+                  onClick={() => {
+                    history.push("/advertise");
+                    dispatch(onAdvertiseCurrentScreen(2));
+                  }}
+                >
                   Publish
                 </button>
               </div>

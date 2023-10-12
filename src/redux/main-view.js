@@ -33,6 +33,7 @@ const initialState = {
       //   user: "65072634a3cda33ef8d7bbc4",
       // },
       data: { ...ADVERTISE_INTIAL_STATE },
+      activeScreen: 0,
     },
   },
 };
@@ -47,6 +48,9 @@ const mainViewSlice = createSlice({
     onFormAdvertiseDataChange: (state, action) => {
       state.screens.advertise.data = action.payload;
     },
+    onAdvertiseCurrentScreen: (state, action) => {
+      state.screens.advertise.activeScreen = action.payload;
+    },
   },
 });
 
@@ -54,6 +58,7 @@ export const {
   // Advertise
   onFormDirty,
   onFormAdvertiseDataChange,
+  onAdvertiseCurrentScreen,
 } = mainViewSlice.actions;
 export const mainViewState = (state) => state.mainView;
 
