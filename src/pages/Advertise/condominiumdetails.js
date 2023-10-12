@@ -1,5 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
+
+// Icons
 import { BsChevronRight } from "react-icons/bs";
+
+// Redux
+import { ToastContext } from "../../context/toast";
+import { useDispatch, useSelector } from "react-redux";
+import { mainViewState, onFormAdvertiseDataChange } from "../../redux/main-view";
+
+// Componets
 import Footer from "../../components/Footer/footer";
 import MapComponent from "./advertisecomponents/condominiumcomponents/mapcomponent";
 import UnitComponent from "./advertisecomponents/condominiumcomponents/unitcomponent";
@@ -9,11 +19,12 @@ import RecentSpecial from "./advertisecomponents/condominiumcomponents/recentspe
 import UtilitiesIncluded from "./advertisecomponents/condominiumcomponents/utilitiesincluded";
 import PropertyEmenities from "./advertisecomponents/condominiumcomponents/propertyemenities";
 import ContactInfo from "./advertisecomponents/condominiumcomponents/contactinfo";
-import { useDispatch, useSelector } from "react-redux";
-import { mainViewState, onFormAdvertiseDataChange } from "../../redux/main-view";
-import { advertiseCreate } from "../../services/advertise";
-import { useHistory } from "react-router-dom";
+
+// Constants
 import { ADVERTISE_INTIAL_STATE } from "../../utils/Constants/global";
+
+// Api's
+import { advertiseCreate } from "../../services/advertise";
 
 const CondominiumDetails = () => {
   // Redux
@@ -21,11 +32,25 @@ const CondominiumDetails = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  // Context
+  const toast = useContext(ToastContext);
+
   const saveHandler = async () => {
-    const res = await advertiseCreate(screens.advertise.data);
-    if (res) {
-      dispatch(onFormAdvertiseDataChange(ADVERTISE_INTIAL_STATE));
-      history.replace("/");
+    try {
+      const res = await advertiseCreate(screens.advertise.data);
+      if (res.data.status) {
+        toast.createdToast("Advertisement");
+        dispatch(onFormAdvertiseDataChange(ADVERTISE_INTIAL_STATE));
+        history.replace("/");
+      } else {
+        toast.showMessage("Error", "Incorrect Data", "error");
+      }
+    } catch (error) {
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
     }
   };
 

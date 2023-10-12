@@ -10,7 +10,6 @@ const UnitComponent = () => {
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
-    console.log({ name, value });
     dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: [value] }));
   };
 
@@ -42,7 +41,7 @@ const UnitComponent = () => {
             <tbody>
               <tr>
                 <td>
-                  <span>No Image Available</span>
+                  <span>No Image</span>
                 </td>
                 <td>
                   <input

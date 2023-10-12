@@ -63,6 +63,9 @@ function App() {
         <ProtectedRoute path="/advertise" exact>
           <Advertise />
         </ProtectedRoute>
+        <ProtectedRoute path="/condominiumdetails" exact>
+          <CondominiumDetails />
+        </ProtectedRoute>
         <ProtectedRoute path="/accounts" exact>
           <AccountsIndex />
         </ProtectedRoute>
@@ -70,7 +73,7 @@ function App() {
           <BillingHistory />
         </ProtectedRoute>
         {/* <Route path="/advertise" exact component={Advertise} /> */}
-        <Route path="/condominiumdetails" exact component={CondominiumDetails} />
+        {/* <Route path="/condominiumdetails" exact component={CondominiumDetails} /> */}
         <Route path="/checkoutmodal" exact component={CheckoutModal} />
         <Route path="/managepropertyindex" exact component={ManagePropertyIndex} />
         <Route path="/searchbypropertyindex" exact component={SearchByPropertyIndex} />

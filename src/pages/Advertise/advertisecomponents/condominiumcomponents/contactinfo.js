@@ -9,6 +9,7 @@ const ContactInfo = () => {
   const dispatch = useDispatch();
 
   const [userDetails, setUserDetails] = useState("");
+  const userType = screens.advertise.data.userType;
 
   // Handler
   const inputHandler = (e) => {
@@ -43,23 +44,41 @@ const ContactInfo = () => {
             <b>Contact Info</b>
           </h3>
         </div>
-        
+
         <div className="col-12 pb-3">
           <div className="condominim_radio_button">
             <div className="checkbox_class">
               <label className="container_radio">
                 I am an Owner
-                <input type="radio" checked="checked" name="radio" value="owner" />
+                <input
+                  type="radio"
+                  checked={userType === "owner"}
+                  name="userType"
+                  value="owner"
+                  onChange={inputHandler}
+                />
                 <span className="checkmark"></span>
               </label>
               <label className="container_radio">
                 I am an Agent/Broker
-                <input type="radio" name="radio" value="agentbroker" />
+                <input
+                  type="radio"
+                  checked={userType === "agentbroker"}
+                  name="userType"
+                  value="agentbroker"
+                  onChange={inputHandler}
+                />
                 <span className="checkmark"></span>
               </label>
               <label className="container_radio">
                 I am an Property Manager
-                <input type="radio" name="radio" value="propertymanager" />
+                <input
+                  type="radio"
+                  checked={userType === "propertymanager"}
+                  name="userType"
+                  value="propertymanager"
+                  onChange={inputHandler}
+                />
                 <span className="checkmark"></span>
               </label>
             </div>
