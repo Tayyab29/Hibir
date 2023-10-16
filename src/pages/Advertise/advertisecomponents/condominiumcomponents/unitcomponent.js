@@ -2,6 +2,7 @@ import React from "react";
 import { BsInfoCircle, BsPlus } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
+import CustomInput from "../../../../ui-components/custominput";
 
 const UnitComponent = () => {
   // Redux
@@ -25,7 +26,7 @@ const UnitComponent = () => {
           <table className="table table-bordered condominium_table_head">
             <thead>
               <tr>
-                <th>Photo</th>
+                {/* <th>Photo</th> */}
                 <th>
                   Unit <BsInfoCircle className="info_hov" />
                 </th>
@@ -40,16 +41,17 @@ const UnitComponent = () => {
             </thead>
             <tbody>
               <tr>
-                <td>
+                {/* <td>
                   <span>No Image</span>
-                </td>
+                </td> */}
                 <td>
-                  <input
+                  <CustomInput
                     type="text"
                     className="input_tbl"
                     placeholder="Unit"
                     value={screens.advertise.data.propertyUnit}
                     disabled={true}
+                    
                   />
                 </td>
                 <td>
@@ -75,43 +77,47 @@ const UnitComponent = () => {
                   </select>
                 </td>
                 <td>
-                  <input
+                  <CustomInput
                     type="text"
                     name="sizeSqft"
                     className="input_tbl"
                     placeholder="Enter"
                     value={screens.advertise.data.sizeSqft}
                     onChange={inputHandler}
+                    maxLength={6}
                   />
                 </td>
                 <td>
-                  <input
+                  <CustomInput
                     type="text"
                     name="rent"
                     className="input_tbl"
                     placeholder="Enter"
                     value={screens.advertise.data.rent}
                     onChange={inputHandler}
+                    maxLength={6}
                   />
                 </td>
                 <td>
-                  <input
+                  <CustomInput
                     type="text"
                     name="deposit"
                     className="input_tbl"
                     placeholder="Enter"
                     value={screens.advertise.data.deposit}
                     onChange={inputHandler}
+                    maxLength={6}
                   />
                 </td>
                 <td>
-                  <input
+                  <CustomInput
                     type="text"
                     name="leaseLength"
                     className="input_tbl"
                     placeholder="Enter"
                     value={screens.advertise.data.leaseLength}
                     onChange={inputHandler}
+                    maxLength={30}
                   />
                 </td>
                 <td>

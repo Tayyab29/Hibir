@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
 import { getUserDetailsById } from "../../../../services/users";
+import CustomInput from "../../../../ui-components/custominput";
 
 const ContactInfo = () => {
   // Redux
@@ -90,12 +91,13 @@ const ContactInfo = () => {
               <b>First Name </b>
             </label>
             <div>
-              <input
+              <CustomInput
                 className="condominium_input"
                 placeholder="Jhon"
                 type="text"
                 value={userDetails.firstName}
                 disabled={true}
+                maxLength={25}
               />
             </div>
           </div>
@@ -106,12 +108,13 @@ const ContactInfo = () => {
               <b>Last Name </b>
             </label>
             <div>
-              <input
+              <CustomInput
                 className="condominium_input"
                 placeholder="Smith"
                 type="text"
                 value={userDetails.lastName}
                 disabled={true}
+                maxLength={25}
               />
             </div>
           </div>
@@ -141,12 +144,13 @@ const ContactInfo = () => {
               <b>Email Address</b>
             </label>
             <div>
-              <input
+              <CustomInput
                 className="condominium_input"
                 type="email"
                 placeholder="jhonsmith@gmail.com"
                 value={userDetails.email}
                 disabled={true}
+                maxLength={40}
               />
             </div>
           </div>
@@ -157,12 +161,13 @@ const ContactInfo = () => {
               <b>Phone</b>
             </label>
             <div>
-              <input
+              <CustomInput
                 className="condominium_input"
                 type="number"
                 placeholder="Phone No"
                 value={userDetails?.phone}
                 disabled={true}
+                maxLength={14}
               />
             </div>
           </div>
@@ -170,7 +175,7 @@ const ContactInfo = () => {
       </div>
       <div className="col-12 pb-2">
         <div className="checkbox_hide_span">
-          <input
+          <CustomInput
             type="checkbox"
             checked={screens.advertise.data.isHideName}
             name="isHideName"

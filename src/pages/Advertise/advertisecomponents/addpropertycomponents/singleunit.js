@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom"; // version 5.2.0
 import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
+import CustomInput from "../../../../ui-components/custominput";
 const SingleUnit = () => {
   const history = useHistory();
 
@@ -45,13 +46,14 @@ const SingleUnit = () => {
               <b>Address</b>
             </label>
             <div>
-              <input
+              <CustomInput
                 type="text"
                 name="propertyAdress"
                 id="propertyAdress"
                 className="single_unit_input"
                 placeholder="Enter address"
                 onChange={inputHandler}
+                maxLength={150}
               />
             </div>
           </div>
@@ -136,7 +138,7 @@ const SingleUnit = () => {
             <p>
               By clicking Add My Property above, I agree that I will provide accurate and
               <span className="non_discriminatory">
-                &nbsp; non<br></br> discriminatory &nbsp; 
+                &nbsp; non<br></br> discriminatory &nbsp;
               </span>
               information and I will comply with the Hibir.com
               <span className="non_discriminatory">

@@ -4,12 +4,16 @@ import { Link } from "react-router-dom";
 import { googleLogin, login } from "../../../services/users";
 import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 
+import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
+
 import "./modal.css";
 import { ToastContext } from "../../../context/toast";
+import CustomInput from "../../../ui-components/custominput";
 
 const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
   // Context
   const toast = useContext(ToastContext);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [user, setUser] = useState({
     email: "",
@@ -69,7 +73,9 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
       }
     }
   };
-
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <div>
       <Modal.Body>
@@ -93,21 +99,39 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
 
         <div className="pt-3">
           <div className="form-group">
-            <input
+            <CustomInput
               type="email"
               name="email"
               placeholder="Email Address"
               className="input_text_login"
               onChange={inputHandler}
+              maxLength={40}
             />
 
-            <input
+            {/* <CustomInput
               type="password"
               name="password"
               placeholder="Password"
               className="input_text_login"
               onChange={inputHandler}
-            />
+              maxLength={20}
+            /> */}
+              <div className="custom_position">
+              <CustomInput
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                placeholder="Enter New Password"
+                className="input_text_login"
+                maxLength={20}
+                onChange={inputHandler}
+              />
+              <button
+                onClick={togglePasswordVisibility}
+                className="new_pass"
+              >
+                {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
+              </button>
+            </div>
 
             <div className="pt-2 forgot_text">
               <div

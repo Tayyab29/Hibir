@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { signup } from "../../../services/users";
 import { ToastContext } from "../../../context/toast";
+import CustomInput from "../../../ui-components/custominput";
 
 const SetPassordModal = (props) => {
   const { onHide, data } = props;
@@ -58,20 +59,22 @@ const SetPassordModal = (props) => {
 
           <div className="pt-3">
             <div className="form-group">
-              <input
+              <CustomInput
                 type="password"
                 name="password"
                 placeholder="Enter Password"
                 className="input_text_login"
                 onChange={inputHandler}
+                maxLength={20}
               />
 
-              <input
-                type="confirm_password"
+              <CustomInput
+                type="password"
                 name="confirm_password"
                 placeholder="Enter Confirm Password"
                 className="input_text_login"
                 onChange={inputHandler}
+                maxLength={20}
               />
             </div>
             <div className="pt-3">

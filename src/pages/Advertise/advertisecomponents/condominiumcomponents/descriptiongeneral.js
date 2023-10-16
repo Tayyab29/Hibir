@@ -12,6 +12,12 @@ const DescriptionGeneral = () => {
     const { name, value } = e.target;
     dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: value }));
   };
+
+  // Calculate remaining characters
+  const maxCharacters = 700;
+  const currentCharacters = screens.advertise.data.description ? screens.advertise.data.description.length : 0;
+  const remainingCharacters = maxCharacters - currentCharacters;
+
   return (
     <>
       <div className="container">
@@ -26,10 +32,11 @@ const DescriptionGeneral = () => {
                 className="text_area"
                 id="description"
                 name="description"
+                value={screens.advertise.data.description} // Set the value from Redux state
                 onChange={inputHandler}
-                placeholder="What’s Great about , this property"
+                placeholder="What’s Great about, this property"
               ></textarea>
-              <span className="text_area_char_text">7000 Characters Remaining</span>
+              <span className="text_area_char_text">{remainingCharacters} Characters Remaining</span>
             </div>
             <hr></hr>
           </div>

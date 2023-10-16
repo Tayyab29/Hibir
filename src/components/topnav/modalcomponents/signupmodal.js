@@ -4,6 +4,7 @@ import "./modal.css";
 import { googleSignup } from "../../../services/users";
 import { useGoogleLogin } from "@react-oauth/google";
 import { ToastContext } from "../../../context/toast";
+import CustomInput from "../../../ui-components/custominput";
 // import { Link } from "react-router-dom";
 
 const SignupModal = (props) => {
@@ -83,28 +84,31 @@ const SignupModal = (props) => {
           <div className="pt-3">
             <div className="form-group">
               <div className="signle_line_input">
-                <input
+                <CustomInput
                   type="text"
                   name="firstName"
                   placeholder="First Name"
                   className="input_text_signup_first"
                   onChange={inputHandler}
+                  maxLength={25}
                 />
-                <input
+                <CustomInput
                   type="text"
                   name="lastName"
                   placeholder="Last Name"
                   className="input_text_signup"
                   onChange={inputHandler}
+                  maxLength={25}
                 />
               </div>
 
-              <input
+              <CustomInput
                 type="email"
                 name="email"
                 placeholder="Email Address"
                 className="input_text_login"
                 onChange={inputHandler}
+                maxLength={40}
               />
 
               <div className="pt-2">

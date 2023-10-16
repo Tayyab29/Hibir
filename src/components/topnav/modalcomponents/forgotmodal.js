@@ -91,6 +91,7 @@ const ForgotModal = (props) => {
                 className="input_text_login"
                 onChange={(e) => setResetData({ ...restData, email: e.target.value })}
                 disabled={!isDisabled}
+                maxLength={40}
               />
               <button className="validate_email" onClick={emailHander}>
                 validate email
@@ -107,6 +108,7 @@ const ForgotModal = (props) => {
                   className={isDisabled ? "input_text_login-disabled" : "input_text_login"}
                   disabled={isDisabled}
                   onChange={(e) => setResetData({ ...restData, password: e.target.value })}
+                  maxLength={20}
                 />
                 <button
                   onClick={() => (isDisabled ? null : togglePasswordVisibility())}
@@ -124,6 +126,7 @@ const ForgotModal = (props) => {
                 placeholder="Enter Confirm New Password"
                 className={isDisabled ? "input_text_login-disabled" : "input_text_login"}
                 disabled={isDisabled}
+                maxLength={20}
               />
               <button
                 onClick={() => (isDisabled ? null : toggleConfirmPasswordVisibility())}
