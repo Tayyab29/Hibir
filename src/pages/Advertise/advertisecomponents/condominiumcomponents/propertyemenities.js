@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
+import { ADVERTISE_EMENTITIES } from "../../../../utils/Constants/global";
 
 const PropertyEmenities = () => {
   // Redux
@@ -13,31 +14,19 @@ const PropertyEmenities = () => {
     const { name, value } = e.target;
     dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: value }));
   };
-  // emenitiescheckboxes
-  const emenitiescheckboxesData = [
-    { id: 1, label: "Furnished", checked: false },
-    { id: 2, label: "WheelChair Accessible", checked: false },
-    { id: 3, label: "Elevator", checked: false },
-    { id: 4, label: "No Smoking", checked: false },
-    { id: 5, label: "AC", checked: false },
-    { id: 6, label: "Storage", checked: false },
-    { id: 7, label: "Loft", checked: false },
-    { id: 8, label: "Fitness Center", checked: false },
-    { id: 9, label: "Fireplace ", checked: false },
-    { id: 10, label: "Gated Entry ", checked: false },
-    { id: 11, label: "Dishwasher ", checked: false },
-    { id: 12, label: "Swimming Pool", checked: false },
-  ];
-  //Emenities Checkboxes
-  const [emenitiescheckboxes, setEmenitiescheckboxes] = useState(emenitiescheckboxesData);
 
-  // emenitiescheckboxes
-  const handleemenitiescheckboxesChange = (id) => {
-    setEmenitiescheckboxes((prevCheckboxes) =>
-      prevCheckboxes.map((checkbox) =>
-        checkbox.id === id ? { ...checkbox, checked: !checkbox.checked } : checkbox
-      )
-    );
+  const handleCheckboxChange = (id) => {
+    const selectedIds = screens.advertise.data.amenities;
+    const itemIndex = selectedIds.findIndex((item) => item === id);
+    if (itemIndex === -1) {
+      const temp = [...screens.advertise.data.amenities];
+      temp.push(id);
+      dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, amenities: temp }));
+    } else {
+      const temp = [...selectedIds];
+      temp.splice(itemIndex, 1);
+      dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, amenities: temp }));
+    }
   };
   return (
     <div className="container">
@@ -92,12 +81,12 @@ const PropertyEmenities = () => {
             </div>
           </div>
         </div>
-        {emenitiescheckboxes.map((checkbox) => (
+        {ADVERTISE_EMENTITIES.map((checkbox) => (
           <div key={checkbox.id} className="col-md-3 col-6 mb-3">
             <input
               type="checkbox"
               checked={checkbox.checked}
-              onChange={() => handleemenitiescheckboxesChange(checkbox.id)}
+              onChange={() => handleCheckboxChange(checkbox.id)}
             />
             <span>{checkbox.label}</span>
           </div>

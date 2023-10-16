@@ -25,7 +25,7 @@ const MultiUnit = () => {
               <b>Address</b>
             </label>
             <div>
-              <input type="text" className="single_unit_input" placeholder="" />
+              <input type="text" className="single_unit_input" placeholder="Enter Address" />
             </div>
           </div>
           <div className="form-group">
@@ -42,7 +42,6 @@ const MultiUnit = () => {
           </div>
           {unitFields.map((field) => (
             <div key={field.id} className="inline_select_unit">
-
               <div className="form-group">
                 <label>
                   <b>Units</b>
@@ -79,9 +78,13 @@ const MultiUnit = () => {
                   </select>
                 </div>
               </div>
-              <div className="remove_unit" onClick={() => removeUnitField(field.id)}>
-                <BsXCircle />
-              </div>
+              {unitFields.length === 1 ? (
+                <></>
+              ) : (
+                <div className="remove_unit" onClick={() => removeUnitField(field.id)}>
+                  <BsXCircle />
+                </div>
+              )}
             </div>
           ))}
           <div className="add_more" onClick={addUnitField}>

@@ -63,17 +63,30 @@ function App() {
         <ProtectedRoute path="/advertise" exact>
           <Advertise />
         </ProtectedRoute>
+        <ProtectedRoute path="/condominiumdetails" exact>
+          <CondominiumDetails />
+        </ProtectedRoute>
+        <ProtectedRoute path="/checkoutmodal" exact>
+          <CheckoutModal />
+        </ProtectedRoute>
         <ProtectedRoute path="/accounts" exact>
           <AccountsIndex />
         </ProtectedRoute>
         <ProtectedRoute path="/billinghistory" exact>
           <BillingHistory />
         </ProtectedRoute>
+        <ProtectedRoute path="/managepropertyindex" exact>
+          <ManagePropertyIndex />
+        </ProtectedRoute>
+        <ProtectedRoute path="/searchbypropertyindex" exact>
+          <SearchByPropertyIndex />
+        </ProtectedRoute>
+
         {/* <Route path="/advertise" exact component={Advertise} /> */}
-        <Route path="/condominiumdetails" exact component={CondominiumDetails} />
-        <Route path="/checkoutmodal" exact component={CheckoutModal} />
-        <Route path="/managepropertyindex" exact component={ManagePropertyIndex} />
-        <Route path="/searchbypropertyindex" exact component={SearchByPropertyIndex} />
+        {/* <Route path="/condominiumdetails" exact component={CondominiumDetails} /> */}
+        {/* <Route path="/checkoutmodal" exact component={CheckoutModal} /> */}
+        {/* <Route path="/managepropertyindex" exact component={ManagePropertyIndex} /> */}
+        {/* <Route path="/searchbypropertyindex" exact component={SearchByPropertyIndex} /> */}
         {/* <Route path="/accounts" exact component={AccountsIndex} /> */}
         {/* </Switch> */}
       </Router>

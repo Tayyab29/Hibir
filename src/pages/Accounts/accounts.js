@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./accounts.css";
 import Footer from "../../components/Footer/footer";
 import InformationData from "./components/informationdata";
@@ -9,8 +9,11 @@ import { Modal } from "react-bootstrap";
 import UpdateEmail from "./components/updateEmail";
 import UpdatePassword from "./components/updatePassword";
 import ConfirmDialog from "./components/confirmDialog";
+import { ToastContext } from "../../context/toast";
 
 const AccountsIndex = () => {
+  // Context
+  const toast = useContext(ToastContext);
   //Redux
   const { user } = useSelector(loginState);
   const dispatch = useDispatch();
@@ -36,10 +39,21 @@ const AccountsIndex = () => {
   });
 
   const saveHandler = async () => {
-    const { email, ...rest } = userDetails;
-    const resp = await updateUser(rest);
-    if (resp.data.status) {
-      dispatch(setUser(resp?.data.user));
+    try {
+      const { email, ...rest } = userDetails;
+      const resp = await updateUser(rest);
+      if (resp.data.status) {
+        dispatch(setUser(resp?.data.user));
+        toast.updateToast("User");
+      } else {
+        toast.showMessage("Error", "Sorry, User could not be updated.", "error");
+      }
+    } catch (error) {
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
     }
   };
 

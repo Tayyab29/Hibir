@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { signup } from "../../../services/users";
+import { ToastContext } from "../../../context/toast";
 
 const SetPassordModal = (props) => {
   const { onHide, data } = props;
+
+  // Context
+  const toast = useContext(ToastContext);
+
   const [user, setUser] = useState({
     password: "",
     confirm_password: "",
@@ -25,11 +30,19 @@ const SetPassordModal = (props) => {
     };
     try {
       const resp = await signup(dto);
-      if (resp) {
+      if (resp.data.status) {
+        toast.showMessage("Success", "User has been created successfully.", "success");
         onHide();
+      } else {
+        toast.showMessage("Error", resp.data.message, "error");
       }
     } catch (error) {
       console.log(error);
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
     }
   };
 

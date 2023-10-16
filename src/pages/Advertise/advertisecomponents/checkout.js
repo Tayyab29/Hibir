@@ -1,7 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { loginState } from "../../../redux/login";
 const CheckOut = () => {
   const history = useHistory();
+  const { user } = useSelector(loginState);
+
   return (
     <>
       <div className="container">
@@ -13,9 +17,7 @@ const CheckOut = () => {
                 <b>Checkout Details</b>
               </h1>
             </div>
-            {/* <div className="checkout_p">
-              <p>Already Have An Account? Log In</p>
-            </div> */}
+
             {/*  */}
             <div className="form-group">
               <label>
@@ -26,6 +28,8 @@ const CheckOut = () => {
                   type="text"
                   className="single_unit_input"
                   placeholder="Email Address"
+                  value={user?.email}
+                  disabled
                 />
               </div>
             </div>
@@ -33,23 +37,10 @@ const CheckOut = () => {
             <div className="form-group">
               <div className="text-left">
                 <input type="radio" className="radio_button" />
-                <span className="radio_span">
-                  Email me with news and offers
-                </span>
+                <span className="radio_span">Email me with news and offers</span>
               </div>
             </div>
-            <div className="form-group">
-              <label>
-                <b>Shipping Information</b>
-              </label>
-              <div>
-                <select className="single_unit_input">
-                  <option value="0">Shipping Information</option>
-                  <option value="1">Shipping Information</option>
-                  <option value="2">Shipping Information</option>
-                </select>
-              </div>
-            </div>
+
             <div className="inline_select_unit">
               <div className="form-group">
                 <div>
@@ -57,6 +48,8 @@ const CheckOut = () => {
                     type="text"
                     className="single_unit_input"
                     placeholder="First Name"
+                    value={user?.firstName}
+                    disabled
                   />
                 </div>
               </div>
@@ -66,8 +59,23 @@ const CheckOut = () => {
                     type="text"
                     className="single_unit_input"
                     placeholder="Last Name"
+                    value={user?.lastName}
+                    disabled
                   />
                 </div>
+              </div>
+            </div>
+            <div className="form-group">
+              <label>
+                <b>Country</b>
+              </label>
+              <div>
+                <select className="single_unit_input" value={user?.country} disabled>
+                  <option value="">Select</option>
+                  <option value="pk">Pakistan</option>
+                  <option value="ind">India</option>
+                  <option value="eng">England</option>
+                </select>
               </div>
             </div>
             <div className="form-group">
@@ -76,6 +84,8 @@ const CheckOut = () => {
                   type="text"
                   className="single_unit_input"
                   placeholder="Address"
+                  value={user?.address}
+                  disabled
                 />
               </div>
             </div>
@@ -85,6 +95,8 @@ const CheckOut = () => {
                   type="text"
                   className="single_unit_input"
                   placeholder="Apartment, Suite, Etc. (Optional)"
+                  value={user?.addressMain}
+                  disabled
                 />
               </div>
             </div>
@@ -95,16 +107,19 @@ const CheckOut = () => {
                     type="text"
                     className="single_unit_input"
                     placeholder="City"
+                    value={user?.city}
+                    disabled
                   />
                 </div>
               </div>
 
               <div className="form-group">
                 <div>
-                  <select className="single_unit_input">
-                    <option value="0">State</option>
-                    <option value="1">State 1</option>
-                    <option value="2">State 2</option>
+                  <select className="single_unit_input" value={user?.state} disabled>
+                    <option value="">Select</option>
+                    <option value="pj">Punjab</option>
+                    <option value="si">Sindh</option>
+                    <option value="kpk">Kpk</option>
                   </select>
                 </div>
               </div>
@@ -114,6 +129,8 @@ const CheckOut = () => {
                     type="text"
                     className="single_unit_input"
                     placeholder="ZIP Code"
+                    value={user?.zip}
+                    disabled
                   />
                 </div>
               </div>
@@ -124,6 +141,8 @@ const CheckOut = () => {
                   type="number"
                   className="single_unit_input"
                   placeholder="Phone"
+                  value={user?.phoneNo}
+                  disabled
                 />
               </div>
             </div>
@@ -167,23 +186,22 @@ const CheckOut = () => {
 
               <div className="pt-3 checkout_p_padding check_out_ul">
                 <p>
-                  There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form, by injected humour, or randomised words which don't look
-                  even slightly believable.
+                  There are many variations of passages of Lorem Ipsum available, but the majority
+                  have suffered alteration in some form, by injected humour, or randomised words
+                  which don't look even slightly believable.
                 </p>
                 <ul>
                   <li>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore
                   </li>
                   <li>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore
                   </li>
                   <li>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore
                   </li>
                 </ul>
               </div>
