@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
+import CustomInput from "../../../../ui-components/custominput";
 
 const RecentSpecial = () => {
   // Redux
@@ -24,15 +25,16 @@ const RecentSpecial = () => {
           <div className="form-group">
             <div className="form-group">
               <label>
-                <b>Rest Special Tilte</b>
+                <b>Rent Special Tilte</b>
               </label>
               <div>
-                <input
+                <CustomInput
                   type="text"
                   name="rentTitle"
                   onChange={inputHandler}
                   className="condominium_input"
                   placeholder=""
+                  maxLength={45}
                 />
               </div>
             </div>
@@ -42,10 +44,10 @@ const RecentSpecial = () => {
           <div className="form-group">
             <div className="form-group">
               <label>
-                <b>Rest Special Start</b>
+                <b>Rent Special Start</b>
               </label>
               <div>
-                <input
+                <CustomInput
                   type="date"
                   name="rentStartDate"
                   onChange={inputHandler}
@@ -60,10 +62,10 @@ const RecentSpecial = () => {
           <div className="form-group">
             <div className="form-group">
               <label>
-                <b>Rest Special End</b>
+                <b>Rent Special End</b>
               </label>
               <div>
-                <input
+                <CustomInput
                   type="date"
                   name="rentEndDate"
                   onChange={inputHandler}
@@ -77,7 +79,7 @@ const RecentSpecial = () => {
         <div className="col-12">
           <div className="form-group">
             <label>
-              <b>Rest Special Description(Optional)</b>
+              <b>Rent Special Description(Optional)</b>
             </label>
             <textarea
               className="text_area"
@@ -85,6 +87,7 @@ const RecentSpecial = () => {
               onChange={inputHandler}
               rows="5"
               placeholder=""
+              maxLength={700}
             ></textarea>
           </div>
         </div>

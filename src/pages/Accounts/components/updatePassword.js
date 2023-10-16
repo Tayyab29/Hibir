@@ -4,6 +4,7 @@ import { Modal } from "react-bootstrap";
 import { loginState, setUser } from "../../../redux/login";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../../services/users";
+import CustomInput from "../../../ui-components/custominput";
 
 const UpdatePassword = (props) => {
   const { onHide } = props;
@@ -63,20 +64,22 @@ const UpdatePassword = (props) => {
 
           <div className="pt-3">
             <div className="form-group">
-              <input
+              <CustomInput
                 type="password"
                 name="password"
                 placeholder="Enter Password"
                 className="input_text_login"
                 onChange={inputHandler}
+                maxLength={20}
               />
 
-              <input
-                type="confirm_password"
+              <CustomInput
+                type="password"
                 name="confirm_password"
                 placeholder="Enter Confirm Password"
                 className="input_text_login"
                 onChange={inputHandler}
+                maxLength={20}
               />
             </div>
             <div className="pt-3">

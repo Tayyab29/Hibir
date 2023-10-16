@@ -4,6 +4,7 @@ import { Modal } from "react-bootstrap";
 import { updateUser } from "../../../services/users";
 import { useDispatch, useSelector } from "react-redux";
 import { loginState, setUser } from "../../../redux/login";
+import CustomInput from "../../../ui-components/custominput";
 
 const UpdateEmail = (props) => {
   const { onHide } = props;
@@ -51,13 +52,14 @@ const UpdateEmail = (props) => {
 
           <div className="pt-3">
             <div className="form-group">
-              <input
+              <CustomInput
                 type="email"
                 name="email"
                 placeholder="Enter email"
                 className="input_text_login"
                 value={userData.email}
                 onChange={inputHandler}
+                maxLength={40}
               />
 
               {/* <input
