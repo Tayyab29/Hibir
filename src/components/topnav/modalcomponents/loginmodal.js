@@ -99,7 +99,7 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
               placeholder="Email Address"
               className="input_text_login"
               onChange={inputHandler}
-              max="40"
+              // max="40"
             />
 
             <input
