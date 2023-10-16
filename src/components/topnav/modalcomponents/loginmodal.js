@@ -116,7 +116,7 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
               onChange={inputHandler}
               maxLength={20}
             /> */}
-              <div className="custom_position">
+            <div className="custom_position">
               <CustomInput
                 type={showPassword ? 'text' : 'password'}
                 name="password"
