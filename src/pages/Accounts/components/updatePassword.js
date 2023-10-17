@@ -5,13 +5,16 @@ import { loginState, setUser } from "../../../redux/login";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../../services/users";
 import { ToastContext } from "../../../context/toast";
-
+import CustomInput from "../../../ui-components/custominput";
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 const UpdatePassword = (props) => {
   // Context
   const toast = useContext(ToastContext);
 
   const { onHide } = props;
   const { user } = useSelector(loginState);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [userData, setUserData] = useState({
     _id: "",
@@ -65,6 +68,13 @@ const UpdatePassword = (props) => {
     });
   }, [user]);
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
+
   return (
     <>
       <div>
@@ -79,21 +89,47 @@ const UpdatePassword = (props) => {
 
           <div className="pt-3">
             <div className="form-group">
-              <input
+              {/* <CustomInput
                 type="password"
                 name="password"
                 placeholder="Enter Password"
                 className="input_text_login"
                 onChange={inputHandler}
-              />
-
-              <input
-                type="confirm_password"
+                maxLength={20}
+              /> */}
+              <div className="custom_position">
+                <CustomInput
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Enter New Password"
+                  className="input_text_login"
+                  maxLength={20}
+                  onChange={inputHandler}
+                />
+                <button onClick={togglePasswordVisibility} className="new_pass">
+                  {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
+                </button>
+              </div>
+              {/* <CustomInput
+                type="password"
                 name="confirm_password"
                 placeholder="Enter Confirm Password"
                 className="input_text_login"
                 onChange={inputHandler}
-              />
+                maxLength={20}
+              /> */}
+              <div className="confirm_pos">
+                <CustomInput
+                  type={showConfirmPassword ? "text" : "password"}
+                  name="confirm_password"
+                  placeholder="Enter Confirm New Password"
+                  className="input_text_login"
+                  maxLength={20}
+                />
+                <button onClick={toggleConfirmPasswordVisibility} className="confirm_pass">
+                  {showConfirmPassword ? <IoIosEyeOff /> : <IoIosEye />}
+                </button>
+              </div>
             </div>
             <div className="pt-3">
               <button className="sign_button" type="button" onClick={() => saveHandler()}>

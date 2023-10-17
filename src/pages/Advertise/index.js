@@ -12,9 +12,9 @@ const Advertise = () => {
 
   const [activeCard, setActiveCard] = useState(screens.advertise.activeScreen);
 
-  const handleCardClick = (index) => {
-    setActiveCard(index);
-  };
+  // const handleCardClick = (index) => {
+  //   setActiveCard(index);
+  // };
 
   const renderCardComponent = () => {
     if (activeCard === 0) {

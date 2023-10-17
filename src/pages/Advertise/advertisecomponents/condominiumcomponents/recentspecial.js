@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
+import CustomInput from "../../../../ui-components/custominput";
 
 const RecentSpecial = () => {
   // Redux
@@ -27,12 +28,13 @@ const RecentSpecial = () => {
                 <b>Rent Special Tilte</b>
               </label>
               <div>
-                <input
+                <CustomInput
                   type="text"
                   name="rentTitle"
                   onChange={inputHandler}
                   className="condominium_input"
                   placeholder=""
+                  maxLength={45}
                 />
               </div>
             </div>
@@ -45,7 +47,7 @@ const RecentSpecial = () => {
                 <b>Rent Special Start</b>
               </label>
               <div>
-                <input
+                <CustomInput
                   type="date"
                   name="rentStartDate"
                   onChange={inputHandler}
@@ -63,7 +65,7 @@ const RecentSpecial = () => {
                 <b>Rent Special End</b>
               </label>
               <div>
-                <input
+                <CustomInput
                   type="date"
                   name="rentEndDate"
                   onChange={inputHandler}
@@ -85,6 +87,7 @@ const RecentSpecial = () => {
               onChange={inputHandler}
               rows="5"
               placeholder=""
+              maxLength={700}
             ></textarea>
           </div>
         </div>

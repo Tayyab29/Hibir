@@ -1,18 +1,21 @@
 import React from "react";
-
+import { InputText } from 'primereact/inputtext';
 const CustomInput = (props) => {
-  const { type, placeholder, id, name, className, disabled, ...remainingprops } = props;
+  const { type, placeholder, id, name, className, disabled,onChange,value,maxLength, ...remainingprops } = props;
   return (
     <>
-      <input
+      <InputText
         type={type}
         className={className}
         placeholder={placeholder}
         id={id}
         name={name}
         disabled={disabled}
+        onChange={onChange}
+        value={value}
+        maxLength={maxLength}
         {...remainingprops}
-      ></input>
+      ></InputText>
     </>
   );
 };

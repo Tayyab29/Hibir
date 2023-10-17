@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BsPlusCircle, BsXCircle } from "react-icons/bs";
+import CustomInput from "../../../../ui-components/custominput";
 
 const MultiUnit = () => {
   const [unitFields, setUnitFields] = useState([{ id: 1 }]);
@@ -25,7 +26,7 @@ const MultiUnit = () => {
               <b>Address</b>
             </label>
             <div>
-              <input type="text" className="single_unit_input" placeholder="Enter Address" />
+              <CustomInput type="text" className="single_unit_input" placeholder="Enter Address" maxLength={150} />
             </div>
           </div>
           <div className="form-group">

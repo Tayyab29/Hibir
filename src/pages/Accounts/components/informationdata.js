@@ -4,6 +4,7 @@ import { loginState } from "../../../redux/login";
 import { logout, updateUser } from "../../../services/users";
 import { ToastContext } from "../../../context/toast";
 import CustomDropdown from "../../../ui-components/customdropdown";
+import CustomInput from "../../../ui-components/custominput";
 // import "../accounts.css"
 
 const InformationData = (props) => {
@@ -92,13 +93,14 @@ const InformationData = (props) => {
                       <b>First Name </b>
                     </label>
                     <div>
-                      <input
+                      <CustomInput
                         className="myaccount_input"
                         placeholder="Enter first name"
                         type="text"
                         name="firstName"
                         value={userDetails.firstName}
                         onChange={inputHandler}
+                        maxLength={25}
                       />
                     </div>
                   </div>
@@ -109,13 +111,14 @@ const InformationData = (props) => {
                       <b>Last Name </b>
                     </label>
                     <div>
-                      <input
+                      <CustomInput
                         className="myaccount_input"
                         placeholder="Smith"
                         type="text"
                         name="lastName"
                         value={userDetails.lastName}
                         onChange={inputHandler}
+                        maxLength={25}
                       />
                     </div>
                   </div>
@@ -126,13 +129,14 @@ const InformationData = (props) => {
                       <b>Mobile Phone Number (Optional)</b>
                     </label>
                     <div>
-                      <input
+                      <CustomInput
                         className="myaccount_input"
                         type="number"
                         placeholder="(123) 456 7890"
                         name="phoneNo"
                         value={userDetails.phoneNo}
                         onChange={inputHandler}
+                        maxLength={14}
                       />
                     </div>
                   </div>
@@ -156,23 +160,25 @@ const InformationData = (props) => {
                       </select>
                     </div>
                     <div>
-                      <input
+                      <CustomInput
                         className="myaccount_input"
                         placeholder="Street Address Or P.O Box"
                         type="text"
                         name="addressMain"
                         value={userDetails.addressMain}
                         onChange={inputHandler}
+                        maxLength={150}
                       />
                     </div>
                     <div>
-                      <input
+                      <CustomInput
                         className="myaccount_input"
                         placeholder="Apt, Suite, Unit, Building, Floor, Etc."
                         type="text"
                         name="address"
                         value={userDetails.address}
                         onChange={inputHandler}
+                        maxLength={150}
                       />
                     </div>
                   </div>
@@ -183,7 +189,7 @@ const InformationData = (props) => {
                       <b>Zip</b>
                     </label>
                     <div>
-                      <input
+                      <CustomInput
                         className="myaccount_input"
                         type="text"
                         placeholder="Enter"
@@ -228,13 +234,14 @@ const InformationData = (props) => {
                       <b>City</b>
                     </label>
                     <div>
-                      <input
+                      <CustomInput
                         className="myaccount_input"
                         type="text"
                         placeholder="City"
                         name="city"
                         value={userDetails.city}
                         onChange={inputHandler}
+                        maxLength={5}
                       />
                     </div>
                   </div>
@@ -325,7 +332,7 @@ const InformationData = (props) => {
                     <b>Update Email</b>
                   </label>
                   <div className="myaccount_loginsecurity">
-                    <input
+                    <CustomInput
                       type="email"
                       className="accountpassupdate_input"
                       placeholder="johnsmith@gmail.com"
@@ -345,7 +352,7 @@ const InformationData = (props) => {
                     <b>Update Your Password</b>
                   </label>
                   <div className="myaccount_loginsecurity">
-                    <input
+                    <CustomInput
                       type="password"
                       className="accountpassupdate_input"
                       placeholder="********"
