@@ -160,7 +160,7 @@ const ContactInfo = () => {
               <input
                 className="condominium_input"
                 type="number"
-                placeholder="Phone No"
+                placeholder="(123) 456 7890"
                 value={userDetails?.phone}
                 disabled={true}
               />

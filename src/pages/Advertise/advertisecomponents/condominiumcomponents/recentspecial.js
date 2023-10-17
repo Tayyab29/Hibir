@@ -24,7 +24,7 @@ const RecentSpecial = () => {
           <div className="form-group">
             <div className="form-group">
               <label>
-                <b>Rest Special Tilte</b>
+                <b>Rent Special Tilte</b>
               </label>
               <div>
                 <input
@@ -42,7 +42,7 @@ const RecentSpecial = () => {
           <div className="form-group">
             <div className="form-group">
               <label>
-                <b>Rest Special Start</b>
+                <b>Rent Special Start</b>
               </label>
               <div>
                 <input
@@ -60,7 +60,7 @@ const RecentSpecial = () => {
           <div className="form-group">
             <div className="form-group">
               <label>
-                <b>Rest Special End</b>
+                <b>Rent Special End</b>
               </label>
               <div>
                 <input
@@ -77,7 +77,7 @@ const RecentSpecial = () => {
         <div className="col-12">
           <div className="form-group">
             <label>
-              <b>Rest Special Description(Optional)</b>
+              <b>Rent Special Description(Optional)</b>
             </label>
             <textarea
               className="text_area"

@@ -19,7 +19,7 @@ const DescriptionGeneral = () => {
           <div className="col-12">
             <div className="form-group">
               <label>
-                <b>Description(Optional)</b>
+                <b>Description (Optional)</b>
               </label>
               <textarea
                 rows="5"

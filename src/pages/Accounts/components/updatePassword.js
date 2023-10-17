@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { loginState, setUser } from "../../../redux/login";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../../services/users";
+import { ToastContext } from "../../../context/toast";
 
 const UpdatePassword = (props) => {
+  // Context
+  const toast = useContext(ToastContext);
+
   const { onHide } = props;
   const { user } = useSelector(loginState);
 
@@ -36,9 +40,21 @@ const UpdatePassword = (props) => {
       if (resp.data.status) {
         dispatch(setUser(resp?.data.user));
         onHide();
+        toast.showMessage("Success", "Password has been updated successfully!.", "success");
+      } else {
+        toast.showMessage(
+          "Error",
+          "Sorry, we are unable to process your request at this time.",
+          "error"
+        );
       }
     } catch (error) {
       console.log(error);
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
     }
   };
 
