@@ -4,6 +4,7 @@ import Property from "./homecomponents/propert";
 import AboutUs from "./homecomponents/aboutUs";
 import GooglePlay from "./homecomponents/playStore";
 import Footer from "../../components/Footer/footer";
+import AutocompleteComponent from "./autoComplete";
 //useHistory
 // import { useHistory } from "react-router-dom";
 
@@ -15,11 +16,13 @@ const Home = () => {
         <div className="overlay_img"></div>
         <div className="container-fluid">
           <div className="pos_absolute">
-            <div className="text_overlay">
+            {/* <div className="text_overlay"> 
               <h1>
                 There Are Many Variations <br></br> Of Lorem Ipsum
               </h1>
             </div>
+            <h1>Google Maps Autocomplete Example</h1>
+            <AutocompleteComponent apiKey={process.env.REACT_APP_GOOGLE_API_KEY} /> */}
             <div className="wdth_55">
               <div className="flex_div">
                 <select className="select_style">
@@ -29,11 +32,7 @@ const Home = () => {
                   <option value="1">property 1</option>
                   <option value="2">property 2</option>
                 </select>
-                <input
-                  type="text"
-                  placeholder="Enter A Location"
-                  className="input_style"
-                />
+                <input type="text" placeholder="Enter A Location" className="input_style" />
                 <button
                   className="search_btn"
                   // onClick={() => {
