@@ -23,7 +23,7 @@ const ManagePropertyIndex = () => {
                   className="condominium_publish"
                   type="button"
                   onClick={() => {
-                    history.push("./condominiumdetails");
+                    history.push("./advertise");
                   }}
                 >
                   Add A Property
@@ -44,11 +44,7 @@ const ManagePropertyIndex = () => {
               </select>
             </div>
             <div className="col-md-6 col-12">
-              <input
-                className="manage_input"
-                placeholder="Search Here"
-                type="text"
-              />
+              <input className="manage_input" placeholder="Search Here" type="text" />
             </div>
             <div className="col-md-2 col-12">
               <select className="manage_input">

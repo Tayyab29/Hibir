@@ -36,7 +36,16 @@ const AccountsIndex = () => {
     city: user ? user?.city ?? "" : "",
     zip: user ? user?.zip ?? "" : "",
     email: user ? user?.email ?? "" : "",
+    language: user ? user?.language ?? "eng" : "eng",
   });
+
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    setUserDetails({
+      ...userDetails,
+      [name]: value,
+    });
+  };
 
   const saveHandler = async () => {
     try {
@@ -44,7 +53,7 @@ const AccountsIndex = () => {
       const resp = await updateUser(rest);
       if (resp.data.status) {
         dispatch(setUser(resp?.data.user));
-        toast.updateToast("User");
+        toast.updateToast("Account");
       } else {
         toast.showMessage("Error", "Sorry, User could not be updated.", "error");
       }
@@ -70,8 +79,11 @@ const AccountsIndex = () => {
       city: user ? user?.city ?? "" : "",
       zip: user ? user?.zip ?? "" : "",
       email: user ? user?.email ?? "" : "",
+      language: user ? user?.language ?? "eng" : "eng",
     });
   }, [user]);
+
+  console.log({ userDetails });
 
   return (
     <>
@@ -116,12 +128,26 @@ const AccountsIndex = () => {
               <div className="checkbox_class">
                 <label className="container_radio">
                   English
-                  <input type="radio" checked="checked" name="radio" value="english" />
+                  {/* <input type="radio" checked="checked" name="radio" value="english" /> */}
+                  <input
+                    type="radio"
+                    checked={userDetails.language === "eng"}
+                    name="language"
+                    value="eng"
+                    onChange={inputHandler}
+                  />
                   <span className="checkmark"></span>
                 </label>
                 <label className="container_radio">
                   Espanol
-                  <input type="radio" name="radio" value="espanol" />
+                  {/* <input type="radio" name="radio" value="espanol" /> */}
+                  <input
+                    type="radio"
+                    checked={userDetails.language === "esp"}
+                    name="language"
+                    value="esp"
+                    onChange={inputHandler}
+                  />
                   <span className="checkmark"></span>
                 </label>
               </div>

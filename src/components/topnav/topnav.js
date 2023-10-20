@@ -38,7 +38,7 @@ const TopNav = () => {
   // Local Storage
   const token = localStorage.getItem("accessToken");
   const { user } = useSelector(loginState);
-  const userName = user ? user.firstName ?? "" + " " + user.lastName ?? "" : "UserName";
+  const userName = user ? user.firstName ?? "" + " " + user.lastName ?? "" : "";
 
   // View State
   const [show, setShow] = useState(false);
@@ -151,12 +151,12 @@ const TopNav = () => {
                 <DropdownButton id="dropdown-basic-button" title={userName}>
                   <Dropdown.Item onClick={() => history.push("/accounts")}>
                     <div className="link_deco signUp_clrd">
-                      <div>User Profile</div>
+                      <div>My Account</div>
                     </div>
                   </Dropdown.Item>
                   <Dropdown.Item onClick={logoutHandler}>
                     <div className="link_deco signUp_clrd">
-                      <div>Log out</div>
+                      <div>Log Out</div>
                     </div>
                   </Dropdown.Item>
                 </DropdownButton>

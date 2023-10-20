@@ -12,8 +12,8 @@ export const UNPROTECTED_PAGE = [
 
     subMenu: [
       {
-        title: "Property",
-        path: "/",
+        title: "Properties",
+        path: "/managepropertyindex",
       },
 
       {
@@ -27,7 +27,7 @@ export const UNPROTECTED_PAGE = [
       },
 
       {
-        title: "Reactive Property",
+        title: "Reactivate Property",
         path: "/",
       },
     ],
@@ -84,10 +84,9 @@ export const PROTECTED_PAGE = [
 
     subMenu: [
       {
-        title: "Property",
-        path: "/",
+        title: "Properties",
+        path: "/managepropertyindex",
       },
-
       {
         title: "Add Another Property",
         path: "/advertise",
@@ -99,7 +98,7 @@ export const PROTECTED_PAGE = [
       },
 
       {
-        title: "Reactive Property",
+        title: "Reactivate Property",
         path: "/",
       },
     ],
@@ -155,6 +154,14 @@ export const PROTECTED_PAGE = [
         title: "My Account",
         path: "/accounts",
       },
+      {
+        title: "Billing History",
+        path: "/billinghistory",
+      },
+      // {
+      //   title: "Bank & Card",
+      //   path: "/accounts",
+      // },
     ],
   },
   {

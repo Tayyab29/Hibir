@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { loginState } from "../../../redux/login";
+import { logout, updateUser } from "../../../services/users";
+import { ToastContext } from "../../../context/toast";
+import CustomDropdown from "../../../ui-components/customdropdown";
 import CustomInput from "../../../ui-components/custominput";
 // import "../accounts.css"
 
@@ -14,6 +17,9 @@ const InformationData = (props) => {
     setShowPopup,
   } = props;
 
+  // Context
+  const toast = useContext(ToastContext);
+
   const { user } = useSelector(loginState);
 
   const inputHandler = (e) => {
@@ -23,6 +29,39 @@ const InformationData = (props) => {
       [name]: value,
     });
   };
+
+  const deactivateHandler = async () => {
+    try {
+      let payload = {
+        isActive: false,
+      };
+      const resp = await updateUser(payload);
+      if (resp.data.status) {
+        toast.updateToast("User");
+        logout();
+        toast.showMessage("Success", "Your account has been deactivated successfully!", "success");
+      } else {
+        toast.showMessage("Error", "Sorry, User could not be updated.", "error");
+      }
+    } catch (error) {
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
+    }
+  };
+
+  useEffect(() => {}, []);
+
+  const data = [
+    {
+      value: "pakistan",
+      label: "Pakistan",
+      value: "india",
+      label: "India",
+    },
+  ];
 
   return (
     <>
@@ -87,16 +126,16 @@ const InformationData = (props) => {
                 <div className="col-12 col-md-4 ">
                   <div className="form-group">
                     <label>
-                      <b>Phone</b>
+                      <b>Mobile Phone Number (Optional)</b>
                     </label>
                     <div>
                       <CustomInput
                         className="myaccount_input"
                         type="number"
-                        placeholder="Phone No"
+                        placeholder="(123) 456 7890"
                         name="phoneNo"
                         value={userDetails.phoneNo}
-                        onChange={inputHandler} 
+                        onChange={inputHandler}
                         maxLength={14}
                       />
                     </div>
@@ -123,7 +162,7 @@ const InformationData = (props) => {
                     <div>
                       <CustomInput
                         className="myaccount_input"
-                        placeholder="Enter"
+                        placeholder="Street Address Or P.O Box"
                         type="text"
                         name="addressMain"
                         value={userDetails.addressMain}
@@ -134,51 +173,13 @@ const InformationData = (props) => {
                     <div>
                       <CustomInput
                         className="myaccount_input"
-                        placeholder="Smith"
+                        placeholder="Apt, Suite, Unit, Building, Floor, Etc."
                         type="text"
                         name="address"
                         value={userDetails.address}
                         onChange={inputHandler}
                         maxLength={150}
                       />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-12 col-md-4 ">
-                  <div className="form-group">
-                    <label>
-                      <b>City</b>
-                    </label>
-                    <div>
-                      <CustomInput
-                        className="myaccount_input"
-                        type="text"
-                        placeholder="Enter"
-                        name="city"
-                        value={userDetails.city}
-                        onChange={inputHandler}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-12 col-md-4">
-                  <div className="form-group">
-                    <label>
-                      <b>State</b>
-                    </label>
-                    <div>
-                      <select
-                        className="myaccount_input"
-                        name="state"
-                        value={userDetails.state}
-                        onChange={inputHandler}
-                      >
-                        <option value="">Select</option>
-                        <option value="pj">Punjab</option>
-                        <option value="si">Sindh</option>
-                        <option value="kpk">Kpk</option>
-                      </select>
                     </div>
                   </div>
                 </div>
@@ -194,6 +195,51 @@ const InformationData = (props) => {
                         placeholder="Enter"
                         name="zip"
                         value={userDetails.zip}
+                        onChange={inputHandler}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-12 col-md-4">
+                  <div className="form-group">
+                    <label>
+                      <b>State</b>
+                    </label>
+                    <div>
+                      {/* <select
+                        className="myaccount_input"
+                        name="state"
+                        value={userDetails.state}
+                        onChange={inputHandler}
+                      >
+                        <option value="">Select</option>
+                        <option value="pj">Punjab</option>
+                        <option value="si">Sindh</option>
+                        <option value="kpk">Kpk</option>
+                      </select> */}
+                      <input
+                        className="myaccount_input"
+                        type="text"
+                        placeholder="State"
+                        name="state"
+                        value={userDetails.state}
+                        onChange={inputHandler}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-12 col-md-4 ">
+                  <div className="form-group">
+                    <label>
+                      <b>City</b>
+                    </label>
+                    <div>
+                      <CustomInput
+                        className="myaccount_input"
+                        type="text"
+                        placeholder="City"
+                        name="city"
+                        value={userDetails.city}
                         onChange={inputHandler}
                         maxLength={5}
                       />
@@ -353,7 +399,7 @@ const InformationData = (props) => {
                     sign in to Hibir.com{" "}
                   </p>
                 </div>
-                <div className="col-12">
+                <div className="col-12" onClick={() => deactivateHandler()}>
                   <button className="deactive_account_btn" type="button">
                     Deactivate Account
                   </button>

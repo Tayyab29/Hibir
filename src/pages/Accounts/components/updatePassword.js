@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { loginState, setUser } from "../../../redux/login";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../../services/users";
+import { ToastContext } from "../../../context/toast";
 import CustomInput from "../../../ui-components/custominput";
-import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 const UpdatePassword = (props) => {
+  // Context
+  const toast = useContext(ToastContext);
+
   const { onHide } = props;
   const { user } = useSelector(loginState);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
 
   const [userData, setUserData] = useState({
     _id: "",
@@ -40,9 +43,21 @@ const UpdatePassword = (props) => {
       if (resp.data.status) {
         dispatch(setUser(resp?.data.user));
         onHide();
+        toast.showMessage("Success", "Password has been updated successfully!.", "success");
+      } else {
+        toast.showMessage(
+          "Error",
+          "Sorry, we are unable to process your request at this time.",
+          "error"
+        );
       }
     } catch (error) {
       console.log(error);
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
     }
   };
 
@@ -84,17 +99,14 @@ const UpdatePassword = (props) => {
               /> */}
               <div className="custom_position">
                 <CustomInput
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="Enter New Password"
                   className="input_text_login"
                   maxLength={20}
                   onChange={inputHandler}
                 />
-                <button
-                  onClick={togglePasswordVisibility}
-                  className="new_pass"
-                >
+                <button onClick={togglePasswordVisibility} className="new_pass">
                   {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
                 </button>
               </div>
@@ -112,20 +124,12 @@ const UpdatePassword = (props) => {
                   name="confirm_password"
                   placeholder="Enter Confirm New Password"
                   className="input_text_login"
-
                   maxLength={20}
                 />
-                <button
-                  onClick={toggleConfirmPasswordVisibility}
-                  className="confirm_pass"
-                >
+                <button onClick={toggleConfirmPasswordVisibility} className="confirm_pass">
                   {showConfirmPassword ? <IoIosEyeOff /> : <IoIosEye />}
                 </button>
               </div>
-
-
-
-
             </div>
             <div className="pt-3">
               <button className="sign_button" type="button" onClick={() => saveHandler()}>

@@ -1,12 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { updateUser } from "../../../services/users";
 import { useDispatch, useSelector } from "react-redux";
 import { loginState, setUser } from "../../../redux/login";
+import { ToastContext } from "../../../context/toast";
 import CustomInput from "../../../ui-components/custominput";
 
 const UpdateEmail = (props) => {
+  // Context
+  const toast = useContext(ToastContext);
   const { onHide } = props;
   const { user } = useSelector(loginState);
 
@@ -26,10 +29,25 @@ const UpdateEmail = (props) => {
   };
 
   const saveHandler = async () => {
-    const resp = await updateUser(userData);
-    if (resp.data.status) {
-      dispatch(setUser(resp?.data.user));
-      onHide();
+    try {
+      const resp = await updateUser(userData);
+      if (resp.data.status) {
+        dispatch(setUser(resp?.data.user));
+        onHide();
+        toast.showMessage("Success", "Email has been updated successfully!.", "success");
+      } else {
+        toast.showMessage(
+          "Error",
+          "Sorry, we are unable to process your request at this time.",
+          "error"
+        );
+      }
+    } catch (error) {
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
     }
   };
 
