@@ -80,3 +80,6 @@ input[type="number"] {
 .p-toast-message.p-toast-message-error .p-toast-icon-close {
   color: #ff5757;
 }
+.p-error{
+  color: #ff5757;
+}
