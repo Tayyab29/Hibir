@@ -1,5 +1,5 @@
 import React from "react";
-import { BsInfoCircle, BsPlus } from "react-icons/bs";
+import { BsImages, BsInfoCircle, BsPlus } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
 import CustomInput from "../../../../ui-components/custominput";
@@ -26,7 +26,7 @@ const UnitComponent = () => {
           <table className="table table-bordered condominium_table_head">
             <thead>
               <tr>
-                {/* <th>Photo</th> */}
+                <th>Photo</th>
                 <th>
                   Unit <BsInfoCircle className="info_hov" />
                 </th>
@@ -41,9 +41,9 @@ const UnitComponent = () => {
             </thead>
             <tbody>
               <tr>
-                {/* <td>
-                  <span>No Image</span>
-                </td> */}
+                <td>
+                  <span><BsImages/> &nbsp; &nbsp; 1+</span>
+                </td>
                 <td>
                   <CustomInput
                     type="text"

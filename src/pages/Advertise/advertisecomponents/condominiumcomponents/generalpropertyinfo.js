@@ -39,13 +39,13 @@ const GeneralPropertyInfo = () => {
               in size
             </p>
           </div>
-          {selectedImage && (
+          {/* {selectedImage && (
             <>
               <div className="preview">
                 <img src={selectedImage} alt="Uploaded" />
               </div>
             </>
-          )}
+          )} */}
         </div>
       </div>
     </div>
