@@ -559,6 +559,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding-right: 0.71rem;
 }
 /* Manage Property Section */
-.add_more,.remove_unit{
+.add_more,
+.remove_unit {
   cursor: pointer;
+}
+.none_icon {
+  padding-left: 22px;
+}
+.picture_btn {
+  margin-top: 8px;
+  margin-bottom: -6px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.picture_btn:hover {
+  text-decoration: none;
 }

@@ -1,18 +1,175 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BsImages, BsInfoCircle, BsPlus } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
 import CustomInput from "../../../../ui-components/custominput";
+import { ToastContext } from "../../../../context/toast";
+import axios from "axios";
 
 const UnitComponent = () => {
   // Redux
   const { screens } = useSelector(mainViewState);
   const dispatch = useDispatch();
 
-  const inputHandler = (e) => {
+  const [formArray, setFormArray] = useState([
+    {
+      sizeSqft: "",
+      rent: "",
+      deposit: "",
+      leaseLength: "",
+      availableDate: "",
+    },
+  ]);
+
+  const [formAttachment, setFormAttachment] = useState([]);
+  const [uploadngAttachment, setUploadingAttachment] = useState(false);
+
+  // Context
+  const toast = useContext(ToastContext);
+
+  const inputHandler = (e, index) => {
     const { name, value } = e.target;
-    dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: [value] }));
+    const updatedFormArray = [...formArray];
+    updatedFormArray[index][name] = value;
+    setFormArray(updatedFormArray);
+    const dummysizeSqft = [];
+    const dummyrent = [];
+    const dummydeposit = [];
+    const dummyleaseLength = [];
+    const dummyavailableDate = [];
+    updatedFormArray.forEach((item) => {
+      const { sizeSqft, rent, deposit, leaseLength, availableDate } = item;
+      dummysizeSqft.push(sizeSqft);
+      dummyrent.push(rent);
+      dummydeposit.push(deposit);
+      dummyleaseLength.push(leaseLength);
+      dummyavailableDate.push(availableDate);
+    });
+
+    dispatch(
+      onFormAdvertiseDataChange({
+        ...screens.advertise.data,
+        sizeSqft: dummysizeSqft,
+        rent: dummyrent,
+        deposit: dummydeposit,
+        leaseLength: dummyleaseLength,
+        availableDate: dummyavailableDate,
+      })
+    );
   };
+
+  useEffect(() => {
+    const object = {
+      sizeSqft: "",
+      rent: "",
+      deposit: "",
+      leaseLength: "",
+      availableDate: "",
+    };
+    const temp = [...formArray];
+    for (let i = 1; i < screens?.advertise?.data?.propertyBeds.length; i++) {
+      temp.push({ ...object });
+    }
+    setFormArray(temp);
+  }, [screens?.advertise?.data?.propertyBeds]);
+
+  const onFileChange = async (e, index) => {
+    try {
+      // setIsFormNotEmpty(true);
+      setUploadingAttachment(true);
+
+      const url = process.env.REACT_APP_BASE_URL;
+      const advertiseId = screens.advertise?.data?._id;
+
+      let _attachments = [...formAttachment];
+      let files = [...e.target.files];
+
+      const totalFiles = _attachments[index].images.length + files.length;
+      if (totalFiles > 4) {
+        toast.showMessage("Error", "Maximum Four(4) Files allowed", "error");
+        files = null;
+        setUploadingAttachment(false);
+
+        return;
+      }
+
+      // CHECKING FILES TYPES && It's File Size
+      for (let file of files) {
+        if (file.size > 3145728) {
+          toast.showMessage("Error", "Maximum 3 MB per file allowed", "error");
+          files = null;
+          e.target.value = null;
+          setUploadingAttachment(false);
+
+          return;
+        }
+        if (
+          !file.name.endsWith(".jpg") &&
+          !file.name.endsWith(".png") &&
+          !file.name.endsWith(".jpeg") &&
+          !file.name.endsWith(".gif")
+        ) {
+          toast.showMessage("Error", "Invalid File - Please import an Image file", "error");
+
+          setUploadingAttachment(false);
+          e.target.value = null;
+          files = null;
+          return;
+        }
+      }
+      // CHECKING SAME FILE
+      if (_attachments[index].images.length > 0) {
+        const namesArray = _attachments[index].images.map((item) => item.fileName);
+        const filtered = files.filter((item) => !namesArray.includes(item.name));
+        if (filtered.length === 0) {
+          toast.showMessage("Error", "File(s) already exists.", "error");
+          files = null;
+          e.target.value = null;
+          setUploadingAttachment(false);
+          return;
+        }
+        files = filtered;
+      }
+
+      // UPLOADING FILES
+      const formData = new FormData();
+      formData.append(`_id`, advertiseId);
+      // formData.append(`_id`, "65396068100d696567559a27");
+      formData.append(`index`, index);
+      for (let file of files) {
+        formData.append(`attachments`, file);
+      }
+      const res = await axios.post(`${url}advertise/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data", // Ensure the correct content type
+        },
+      });
+      if (res.data.status) {
+        _attachments[index].images = res.data.upload;
+        setFormAttachment(_attachments);
+        // setFormAttachment(res.data.upload);
+        toast.showMessage("Success", "File(s) uploaded succesfully.", "success");
+      } else {
+        toast.showMessage("Error", "File(s) uploading failed.", "error");
+      }
+      setUploadingAttachment(false);
+      e.target.value = null;
+      files = null;
+    } catch (error) {
+      setUploadingAttachment(false);
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
+    }
+  };
+
+  useEffect(() => {
+    for (let i = 0; i < screens?.advertise?.data?.propertyBeds.length; i++) {
+      formAttachment.push({ images: [] });
+    }
+  }, [screens?.advertise?.data?.propertyBeds]);
 
   return (
     <div className="container">
@@ -27,9 +184,13 @@ const UnitComponent = () => {
             <thead>
               <tr>
                 <th>Photo</th>
-                <th>
-                  Unit <BsInfoCircle className="info_hov" />
-                </th>
+                {screens.advertise.data.propertyNames.length === 0 ? (
+                  <></>
+                ) : (
+                  <th>
+                    Name <BsInfoCircle className="info_hov" />
+                  </th>
+                )}
                 <th>Beds</th>
                 <th>Baths</th>
                 <th>Sq.Ft.</th>
@@ -39,107 +200,133 @@ const UnitComponent = () => {
                 <th>Available On</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <span><BsImages/> &nbsp; &nbsp; 1+</span>
-                </td>
-                <td>
-                  <CustomInput
-                    type="text"
-                    className="input_tbl"
-                    placeholder="Unit"
-                    value={screens.advertise.data.propertyUnit}
-                    disabled={true}
-                    
-                  />
-                </td>
-                <td>
-                  <select
-                    className="select_tbl"
-                    value={screens.advertise.data.propertyBeds}
-                    disabled={true}
-                  >
-                    <option value="">Select</option>
-                    <option value="0">1.0</option>
-                    <option value="1">2.0</option>
-                  </select>
-                </td>
-                <td>
-                  <select
-                    className="select_tbl"
-                    value={screens.advertise.data.propertyBaths}
-                    disabled={true}
-                  >
-                    <option value="">Select</option>
-                    <option value="0">1.0</option>
-                    <option value="1">2.0</option>
-                  </select>
-                </td>
-                <td>
-                  <CustomInput
-                    type="text"
-                    name="sizeSqft"
-                    className="input_tbl"
-                    placeholder="Enter"
-                    value={screens.advertise.data.sizeSqft}
-                    onChange={inputHandler}
-                    maxLength={6}
-                  />
-                </td>
-                <td>
-                  <CustomInput
-                    type="text"
-                    name="rent"
-                    className="input_tbl"
-                    placeholder="Enter"
-                    value={screens.advertise.data.rent}
-                    onChange={inputHandler}
-                    maxLength={6}
-                  />
-                </td>
-                <td>
-                  <CustomInput
-                    type="text"
-                    name="deposit"
-                    className="input_tbl"
-                    placeholder="Enter"
-                    value={screens.advertise.data.deposit}
-                    onChange={inputHandler}
-                    maxLength={6}
-                  />
-                </td>
-                <td>
-                  <CustomInput
-                    type="text"
-                    name="leaseLength"
-                    className="input_tbl"
-                    placeholder="Enter"
-                    value={screens.advertise.data.leaseLength}
-                    onChange={inputHandler}
-                    maxLength={30}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="date"
-                    name="availableDate"
-                    className="input_tbl"
-                    placeholder="mm/dd/yyyy"
-                    value={screens.advertise.data.availableDate}
-                    onChange={inputHandler}
-                    // value={selectedDate}
-                    // onChange={handleDateChange}
-                    // max={new Date().toISOString().split("T")[0]}
-                  />
-                </td>
-              </tr>
-            </tbody>
+            {screens.advertise.data.propertyBeds.map((item, index) => {
+              return (
+                <tbody key={index}>
+                  <tr>
+                    <td>
+                      <span>
+                        <BsImages /> &nbsp;{" "}
+                        {formAttachment[index]?.images.length === 0
+                          ? "jpg,png,jpeg"
+                          : formAttachment[index]?.images.length + " " + "Files"}
+                      </span>
+                      <input
+                        type="file"
+                        multiple
+                        id={`file-upload-${index}`}
+                        name={index}
+                        accept={" .png, .jpg, .jpeg"}
+                        style={{ display: "none" }}
+                        onChange={(e) => onFileChange(e, index)}
+                      />
+
+                      {uploadngAttachment ? (
+                        <p className="picture_btn">Uploading</p>
+                      ) : (
+                        <label className="picture_btn" htmlFor={`file-upload-${index}`}>
+                          Upload Picture
+                        </label>
+                      )}
+                    </td>
+                    {screens.advertise.data.propertyNames.length === 0 ? (
+                      <></>
+                    ) : (
+                      <td>
+                        <CustomInput
+                          type="text"
+                          className="input_tbl"
+                          placeholder="Unit Name"
+                          value={screens.advertise.data.propertyNames[index]}
+                          disabled={true}
+                        />
+                      </td>
+                    )}
+
+                    <td>
+                      <CustomInput
+                        type="text"
+                        className="input_tbl"
+                        placeholder="Beds"
+                        value={screens.advertise.data.propertyBeds[index]}
+                        disabled={true}
+                      />
+                    </td>
+                    <td>
+                      <CustomInput
+                        type="text"
+                        className="input_tbl"
+                        placeholder="Baths"
+                        value={screens.advertise.data.propertyBaths[index]}
+                        disabled={true}
+                      />
+                    </td>
+                    <td>
+                      <CustomInput
+                        type="text"
+                        name="sizeSqft"
+                        className="input_tbl"
+                        placeholder="Enter"
+                        value={screens.advertise.data.sizeSqft[index]}
+                        onChange={(e) => inputHandler(e, index)}
+                        maxLength={6}
+                      />
+                    </td>
+                    <td>
+                      <CustomInput
+                        type="text"
+                        name="rent"
+                        className="input_tbl"
+                        placeholder="Enter"
+                        value={screens.advertise.data.rent[index]}
+                        onChange={(e) => inputHandler(e, index)}
+                        maxLength={6}
+                      />
+                    </td>
+                    <td>
+                      <CustomInput
+                        type="text"
+                        name="deposit"
+                        className="input_tbl"
+                        placeholder="Enter"
+                        value={screens.advertise.data.deposit[index]}
+                        onChange={(e) => inputHandler(e, index)}
+                        maxLength={6}
+                      />
+                    </td>
+                    <td>
+                      <CustomInput
+                        type="text"
+                        name="leaseLength"
+                        className="input_tbl"
+                        placeholder="Enter"
+                        value={screens.advertise.data.leaseLength[index]}
+                        onChange={(e) => inputHandler(e, index)}
+                        maxLength={30}
+                      />
+                    </td>
+                    <td>
+                      <input
+                        type="date"
+                        name="availableDate"
+                        className="input_tbl"
+                        placeholder="mm/dd/yyyy"
+                        value={screens.advertise.data.availableDate[index]}
+                        onChange={(e) => inputHandler(e, index)}
+                        // value={selectedDate}
+                        // onChange={handleDateChange}
+                        min={new Date().toISOString().split("T")[0]}
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              );
+            })}
           </table>
         </div>
-        <div className="pt-2 add_another_style">
+        {/* <div className="pt-2 add_another_style">
           <BsPlus className="plus_icon" /> <span>Add Another Units</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

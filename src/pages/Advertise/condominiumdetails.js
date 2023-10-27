@@ -28,7 +28,7 @@ import ContactInfo from "./advertisecomponents/condominiumcomponents/contactinfo
 import { ADVERTISE_INTIAL_STATE } from "../../utils/Constants/global";
 
 // Api's
-import { advertiseCreate } from "../../services/advertise";
+import { advertiseCreate, advertiseUpdation } from "../../services/advertise";
 
 const CondominiumDetails = () => {
   // Redux
@@ -41,7 +41,7 @@ const CondominiumDetails = () => {
 
   const saveHandler = async () => {
     try {
-      const res = await advertiseCreate(screens.advertise.data);
+      const res = await advertiseUpdation({ ...screens.advertise.data, isFullfilled: true });
       if (res.data.status) {
         toast.createdToast("Advertisement");
         dispatch(onFormAdvertiseDataChange(ADVERTISE_INTIAL_STATE));
@@ -106,9 +106,9 @@ const CondominiumDetails = () => {
       <section className="pt-3">
         <UnitComponent />
       </section>
-      <section className="pt-3">
+      {/* <section className="pt-3">
         <GeneralPropertyInfo />
-      </section>
+      </section> */}
       <section className="pt-3">
         <DescriptionGeneral />
       </section>

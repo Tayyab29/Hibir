@@ -83,8 +83,6 @@ const AccountsIndex = () => {
     });
   }, [user]);
 
-  console.log({ userDetails });
-
   return (
     <>
       <Modal show={show} onHide={() => setShow(false)}>
