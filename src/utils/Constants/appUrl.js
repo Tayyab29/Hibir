@@ -14,6 +14,8 @@ const appUrl = {
   },
   advertise: {
     create: "advertise/create",
+    edit: "advertise/editAdvertise",
+    fileUpload: "advertise/upload",
   },
 };
 export default appUrl;

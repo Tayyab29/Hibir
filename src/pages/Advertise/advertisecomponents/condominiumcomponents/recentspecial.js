@@ -33,7 +33,7 @@ const RecentSpecial = () => {
                   name="rentTitle"
                   onChange={inputHandler}
                   className="condominium_input"
-                  placeholder=""
+                  placeholder="Enter title"
                   maxLength={45}
                 />
               </div>

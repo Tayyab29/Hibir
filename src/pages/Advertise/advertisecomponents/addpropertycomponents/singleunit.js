@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom"; // version 5.2.0
 import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
 import CustomInput from "../../../../ui-components/custominput";
 import CustomDropdown from "../../../../ui-components/customdropdown";
+import {
+  ADVERTISE_BATHS,
+  ADVERTISE_BEDS,
+  ADVERTISE_PROPERTY_TYPE,
+} from "../../../../utils/Constants/global";
+import { advertiseCreate } from "../../../../services/advertise";
+import { loginState } from "../../../../redux/login";
+import { ToastContext } from "../../../../context/toast";
 const SingleUnit = () => {
   const history = useHistory();
 
   // Redux
+  const { user } = useSelector(loginState);
   const { screens } = useSelector(mainViewState);
   const dispatch = useDispatch();
 
+  const toast = useContext(ToastContext);
+
   const [localForm, setLocalForm] = useState({
     ...screens.advertise.data,
-    propertyUnit: "Single Unit",
+    propertyUnit: "su",
   });
 
   const inputHandler = (e) => {
@@ -31,26 +42,33 @@ const SingleUnit = () => {
     }
   };
 
-  const saveHandler = () => {
-    dispatch(onFormAdvertiseDataChange(localForm));
-    history.push("./condominiumdetails");
+  const saveHandler = async () => {
+    try {
+      const res = await advertiseCreate({ ...localForm, user: user?._id });
+      if (res.data.status) {
+        dispatch(
+          onFormAdvertiseDataChange({
+            ...localForm,
+            _id: res.data.advertise,
+            user: user?._id,
+          })
+        );
+        toast.createdToast("Advertisement");
+        history.push("./condominiumdetails");
+      } else {
+        toast.showMessage("Error", "Incorrect Data", "error");
+      }
+    } catch (error) {
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
+    }
+    // dispatch(onFormAdvertiseDataChange(localForm));
+    // history.push("./condominiumdetails");
   };
-  const [dropdownOptions, setDropdownOptions] = useState([
-    { value: 'option0', label: 'Select a number of beds' },
-    { value: 'option1', label: '0.5' },
-    { value: 'option2', label: '1' },
-    { value: 'option3', label: '1.5' },
-    { value: 'option4', label: '2' },
-    { value: 'option5', label: '2.5' },
-    { value: 'option6', label: '3' },
-    { value: 'option7', label: '3.5' },
-    { value: 'option8', label: '4' },
-    { value: 'option9', label: '4.5' },
-    { value: 'option10', label: '5' },
-    { value: 'option11', label: '5.5' },
-    { value: 'option12', label: '6' },
-    { value: 'option13', label: '6.5' },
-  ]);
+
   return (
     <>
       <div className="row mt-4">
@@ -78,19 +96,26 @@ const SingleUnit = () => {
               <b>Property Type</b>
             </label>
             <div>
-              <select
+              {/* <select
                 className="single_unit_input"
                 id="propertyType"
                 name="propertyType"
                 onChange={inputHandler}
               >
-                <option value="">Select a Property Type</option> {/* Placeholder */}
+                <option value="">Select a Property Type</option> 
                 <option value="Apartment">Apartment</option>
                 <option value="Single Family House">Single Family House</option>
                 <option value="Condominium">Condominium</option>
                 <option value="TownHouse">TownHouse</option>
                 <option value="Mobile Home/Manufactured Home">Mobile Home/Manufactured Home</option>
-              </select>
+              </select> */}
+              <CustomDropdown
+                className="single_unit_input"
+                id="propertyType"
+                name="propertyType"
+                onChange={inputHandler}
+                options={ADVERTISE_PROPERTY_TYPE}
+              />
             </div>
           </div>
           <div className="inline_select_unit">
@@ -99,13 +124,13 @@ const SingleUnit = () => {
                 <b>Beds</b>
               </label>
               <div>
-                <select
+                {/* <select
                   className="single_unit_input"
                   id="propertyBeds"
                   name="propertyBeds"
                   onChange={inputHandler}
                 >
-                  <option value="">Select a number of beds</option> {/* Placeholder */}
+                  <option value="">Select a number of beds</option> 
                   <option value="Studio">Studio</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -113,7 +138,14 @@ const SingleUnit = () => {
                   <option value="4">4</option>
                   <option value="5">5</option>
                   <option value="6">6</option>
-                </select>
+                </select> */}
+                <CustomDropdown
+                  className="single_unit_input"
+                  id="propertyBeds"
+                  name="propertyBeds"
+                  onChange={inputHandler}
+                  options={ADVERTISE_BEDS}
+                />
               </div>
             </div>
             <div className="form-group">
@@ -126,7 +158,7 @@ const SingleUnit = () => {
                   id="propertyBaths"
                   name="propertyBaths"
                   onChange={inputHandler}
-                  options={dropdownOptions}
+                  options={ADVERTISE_BATHS}
                 />
                 {/* <select
                   className="single_unit_input"

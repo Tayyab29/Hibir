@@ -198,12 +198,14 @@ export const PROTECTED_PAGE = [
 
 // Advertise
 export const ADVERTISE_INTIAL_STATE = {
+  _id: "",
   isPackage: "",
   propertyUnit: "",
   propertyAdress: "",
   propertyType: "",
-  propertyBeds: "",
-  propertyBaths: "",
+  propertyNames: [],
+  propertyBeds: [],
+  propertyBaths: [],
   sizeSqft: [],
   rent: [],
   deposit: [],
@@ -250,4 +252,41 @@ export const ADVERTISE_EMENTITIES = [
   { id: "10", label: "Gated Entry " },
   { id: "11", label: "Dishwasher " },
   { id: "12", label: "Swimming Pool" },
+];
+
+export const ADVERTISE_BATHS = [
+  { value: "", label: "Select a number of baths" },
+  { value: "0.5", label: "0.5" },
+  { value: "1", label: "1" },
+  { value: "1.5", label: "1.5" },
+  { value: "2", label: "2" },
+  { value: "2.5", label: "2.5" },
+  { value: "3", label: "3" },
+  { value: "3.5", label: "3.5" },
+  { value: "4", label: "4" },
+  { value: "4.5", label: "4.5" },
+  { value: "5", label: "5" },
+  { value: "5.5", label: "5.5" },
+  { value: "6", label: "6" },
+  { value: "6.5", label: "6.5" },
+];
+
+export const ADVERTISE_BEDS = [
+  { value: "", label: "Select a number of beds" },
+  { value: "Studio", label: "Studio" },
+  { value: "1", label: "1" },
+  { value: "2", label: "2" },
+  { value: "3", label: "3" },
+  { value: "4", label: "4" },
+  { value: "5", label: "5" },
+  { value: "6", label: "6" },
+];
+
+export const ADVERTISE_PROPERTY_TYPE = [
+  { value: "", label: "Select a Property Type" },
+  { value: "ap", label: "Apartment" },
+  { value: "sh", label: "Single Family House" },
+  { value: "con", label: "Condominium" },
+  { value: "th", label: "TownHouse" },
+  { value: "mh", label: "Mobile Home/Manufactured Home" },
 ];
