@@ -68,13 +68,13 @@ const SignupModal = (props) => {
     validate: (data) => {
       let errors = {};
       if (!data.firstName) {
-        errors.firstName = 'First Name is required.';
+        errors.firstName = 'First Name is required';
       }
       if (!data.lastName) {
-        errors.lastName = 'Last Name is required.';
+        errors.lastName = 'Last Name is required';
       }
-      if (!data.email) {
-        errors.email = 'Email is required.';
+      if (!data.email) {  
+        errors.email = 'Email is required';
       }
       else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
         errors.email = 'Invalid email address. E.g. example@email.com';
@@ -82,7 +82,10 @@ const SignupModal = (props) => {
 
       return errors;
     },
-    onSubmit: async (data) => { }
+    onSubmit: async (data) => {
+      setShowPassword(true);
+      onHide();
+     }
   })
   const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
   const getFormErrorMessage = (name) => {
