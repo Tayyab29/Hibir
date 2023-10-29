@@ -5,6 +5,7 @@ import { googleSignup } from "../../../services/users";
 import { useGoogleLogin } from "@react-oauth/google";
 import { ToastContext } from "../../../context/toast";
 import CustomInput from "../../../ui-components/custominput";
+import { useFormik } from 'formik';
 // import { Link } from "react-router-dom";
 
 const SignupModal = (props) => {
@@ -58,7 +59,35 @@ const SignupModal = (props) => {
       }
     }
   };
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+    },
+    validate: (data) => {
+      let errors = {};
+      if (!data.firstName) {
+        errors.firstName = 'First Name is required.';
+      }
+      if (!data.lastName) {
+        errors.lastName = 'Last Name is required.';
+      }
+      if (!data.email) {
+        errors.email = 'Email is required.';
+      }
+      else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
+        errors.email = 'Invalid email address. E.g. example@email.com';
+      }
 
+      return errors;
+    },
+    onSubmit: async (data) => { }
+  })
+  const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+  const getFormErrorMessage = (name) => {
+    return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+  };
   return (
     <>
       <div>
@@ -80,73 +109,95 @@ const SignupModal = (props) => {
               </span>
             </p>
           </div>
+          <form onSubmit={formik.handleSubmit}>
+            <div className="pt-3">
+              <div className="form-group">
+                <div className="signle_line_input">
+                  <div style={{ width: "100%" }}>
+                    <CustomInput
+                      type="text"
+                      name="firstName"
+                      id="firstName"
+                      placeholder="First Name"
+                      className="input_text_signup_first"
+                      // onChange={inputHandler}
+                      maxLength={25}
+                      onChange={formik.handleChange}
 
-          <div className="pt-3">
-            <div className="form-group">
-              <div className="signle_line_input">
-                <CustomInput
-                  type="text"
-                  name="firstName"
-                  placeholder="First Name"
-                  className="input_text_signup_first"
-                  onChange={inputHandler}
-                  maxLength={25}
-                />
-                <CustomInput
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
-                  className="input_text_signup"
-                  onChange={inputHandler}
-                  maxLength={25}
-                />
+                    />
+                    {getFormErrorMessage('firstName')}
+                  </div>
+                  <div style={{ width: "100%" }}>
+                    <CustomInput
+                      type="text"
+                      name="lastName"
+                      id="lastName"
+                      placeholder="Last Name"
+                      className="input_text_signup"
+                      // onChange={inputHandler}
+                      maxLength={25}
+                      onChange={formik.handleChange}
+                    />
+                    {getFormErrorMessage('lastName')}
+                  </div>
+                </div>
+
+                <div>
+                  <CustomInput
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="Email Address"
+                    className="input_text_login"
+                    // onChange={inputHandler}
+                    maxLength={40}
+                    onChange={formik.handleChange}
+                  />
+                  {getFormErrorMessage('email')}
+                </div>
+
+                <div className="pt-2">
+                  <input type="checkbox" />
+                  <span>Agree to Terms & Condition</span>
+                </div>
               </div>
 
-              <CustomInput
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                className="input_text_login"
-                onChange={inputHandler}
-                maxLength={40}
-              />
+              <div className="pt-3">
+                <button className="sign_button" type="submit"
+                // onClick={saveHandler}
+                >
+                  Sign Up
+                </button>
+              </div>
 
-              <div className="pt-2">
-                <input type="checkbox" />
-                <span>Agree to Terms & Condition</span>
+
+              <div className="pt-2 pb-2">
+                <hr className="hr_clas"></hr>
+                <span className="or_clas">Or</span>
+                <hr className="hr_clas"></hr>
+              </div>
+              <div className="pt-3">
+                <button className="google_social_button" type="button" onClick={googleHandler}>
+                  Continue With Google
+                </button>
+              </div>
+              <div className="pt-3">
+                <button className="fb_social_button" type="button">
+                  Continue With Facebook
+                </button>
+              </div>
+              <div className="pt-3">
+                <button className="apple_social_button" type="button">
+                  Continue With Apple
+                </button>
+              </div>
+              <div className="text-center pt-3">
+                <p style={{ color: "#757575" }}>
+                  By registring, I accept the Hibir.com Terms of Use.
+                </p>
               </div>
             </div>
-            <div className="pt-3">
-              <button className="sign_button" type="button" onClick={saveHandler}>
-                Sign Up
-              </button>
-            </div>
-            <div className="pt-2 pb-2">
-              <hr className="hr_clas"></hr>
-              <span className="or_clas">Or</span>
-              <hr className="hr_clas"></hr>
-            </div>
-            <div className="pt-3">
-              <button className="google_social_button" type="button" onClick={googleHandler}>
-                Continue With Google
-              </button>
-            </div>
-            <div className="pt-3">
-              <button className="fb_social_button" type="button">
-                Continue With Facebook
-              </button>
-            </div>
-            <div className="pt-3">
-              <button className="apple_social_button" type="button">
-                Continue With Apple
-              </button>
-            </div>
-            <div className="text-center pt-3">
-              <p style={{ color: "#757575" }}>
-                By registring, I accept the Hibir.com Terms of Use.
-              </p>
-            </div>
-          </div>
+          </form>
         </Modal.Body>
       </div>
     </>

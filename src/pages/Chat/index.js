@@ -1,26 +1,23 @@
 import React from 'react'
 import "./chatindex.scss"
+import ChatSidebar from './chatsidebar'
+import ChatMainArea from './chatmainarea'
 const ChatIndex = () => {
     return (
         <>
-            <div class="container_chat">
-                <p>Hello. How are you today?</p>
-                <span class="time-right">11:00</span>
-            </div>
+            <div className="chat_sidebar">
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col-12 col-md-3'  style={{paddingRight:"0"}}>
 
-            <div class="container_chat darker">
-                <p>Hey! I'm fine. Thanks for asking!</p>
-                <span class="time-left">11:01</span>
-            </div>
+                            <ChatSidebar />
+                        </div>
+                        <div className='col-12 col-md-9' style={{paddingLeft:"0"}}>
 
-            <div class="container_chat">
-                <p>Sweet! So, what do you wanna do today?</p>
-                <span class="time-right">11:02</span>
-            </div>
-
-            <div class="container_chat darker">
-                <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
-                <span class="time-left">11:05</span>
+                            <ChatMainArea />
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )
