@@ -26,6 +26,7 @@ import { getUserDetails } from "./services/users";
 
 // Styles
 import "./App.css";
+import ChatIndex from "./pages/Chat";
 
 function App() {
   const dispatch = useDispatch();
@@ -80,6 +81,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/searchbypropertyindex" exact>
           <SearchByPropertyIndex />
+        </ProtectedRoute>
+        <ProtectedRoute path="/chatindex" exact>
+          <ChatIndex />
         </ProtectedRoute>
 
         {/* <Route path="/advertise" exact component={Advertise} /> */}
