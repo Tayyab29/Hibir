@@ -1,4 +1,8 @@
 const appUrl = {
+  genral: {
+    countries: "genral/fetchCountry",
+    zipCode: "genral/searchZipcode",
+  },
   users: {
     login: "users/login",
     signup: "users/signup",
@@ -16,6 +20,8 @@ const appUrl = {
     create: "advertise/create",
     edit: "advertise/editAdvertise",
     fileUpload: "advertise/upload",
+    getAdvertise: "advertise/getAdvertisement",
+    getAdvertiseById: "advertise/getAdvertiseById",
   },
 };
 export default appUrl;

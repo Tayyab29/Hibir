@@ -28,6 +28,13 @@ import { getUserDetails } from "./services/users";
 import "./App.css";
 import ChatIndex from "./pages/Chat";
 
+// import "primereact/resources/themes/saga-blue/theme.css";
+
+//theme
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -76,7 +83,10 @@ function App() {
         <ProtectedRoute path="/billinghistory" exact>
           <BillingHistory />
         </ProtectedRoute>
-        <ProtectedRoute path="/managepropertyindex" exact>
+        <ProtectedRoute path="/manageproperty" exact>
+          <ManagePropertyIndex />
+        </ProtectedRoute>
+        <ProtectedRoute path="/savedproperties" exact>
           <ManagePropertyIndex />
         </ProtectedRoute>
         <ProtectedRoute path="/searchbypropertyindex" exact>

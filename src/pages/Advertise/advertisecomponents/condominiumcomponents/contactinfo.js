@@ -129,6 +129,7 @@ const ContactInfo = () => {
                 className="condominium_input"
                 name="contactPreference"
                 onChange={inputHandler}
+                value={screens.advertise.data.contactPreference}
               >
                 <option value="">Select</option>
                 <option value="1">Phone & Email Only</option>
@@ -175,9 +176,10 @@ const ContactInfo = () => {
       </div>
       <div className="col-12 pb-2">
         <div className="checkbox_hide_span">
-          <CustomInput
+          <input
             type="checkbox"
             checked={screens.advertise.data.isHideName}
+            value={screens.advertise.data.isHideName}
             name="isHideName"
             onChange={inputHandler}
           />

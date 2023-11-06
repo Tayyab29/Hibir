@@ -8,7 +8,6 @@ import CustomInput from "../../../ui-components/custominput";
 import { useFormik } from "formik";
 // import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { useFormik } from "formik";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("First Name is required"),

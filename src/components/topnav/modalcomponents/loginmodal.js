@@ -41,10 +41,9 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
           window.location.reload();
         } else {
           // Handle login failure
-          toast.showMessage("Error", "Invalid email & password", "error");
+          toast.showMessage("Error", "Invalid user credentials", "error");
         }
       } catch (error) {
-        console.log(error);
         toast.showMessage(
           "Error",
           "Sorry, we are unable to process your request at this time.",

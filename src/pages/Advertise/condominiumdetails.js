@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 // Icons
@@ -28,9 +28,18 @@ import ContactInfo from "./advertisecomponents/condominiumcomponents/contactinfo
 import { ADVERTISE_INTIAL_STATE } from "../../utils/Constants/global";
 
 // Api's
-import { advertiseCreate, advertiseUpdation } from "../../services/advertise";
+import {
+  advertiseCreate,
+  advertiseUpdation,
+  fetchAdvertisementById,
+} from "../../services/advertise";
+import { useQuery } from "../../utils/HelperFunction/useQuery";
 
 const CondominiumDetails = () => {
+  // Editing Scenario Condimun Id
+  let query = useQuery();
+  let id = query.get("id");
+
   // Redux
   const { screens } = useSelector(mainViewState);
   const dispatch = useDispatch();
@@ -38,10 +47,16 @@ const CondominiumDetails = () => {
 
   // Context
   const toast = useContext(ToastContext);
+  const [uploadedImages, setUploadedImages] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   const saveHandler = async () => {
     try {
-      const res = await advertiseUpdation({ ...screens.advertise.data, isFullfilled: true });
+      const res = await advertiseUpdation({
+        ...screens.advertise.data,
+        isFullfilled: true,
+        isSaved: true,
+      });
       if (res.data.status) {
         toast.createdToast("Advertisement");
         dispatch(onFormAdvertiseDataChange(ADVERTISE_INTIAL_STATE));
@@ -58,6 +73,38 @@ const CondominiumDetails = () => {
     }
   };
 
+  const PublishHandler = () => {
+    history.push("/advertise");
+    dispatch(onAdvertiseCurrentScreen(2));
+  };
+
+  const getAdvertisementById = async () => {
+    try {
+      let payload = {
+        id: id,
+      };
+      const res = await fetchAdvertisementById(payload);
+      if (res.data.status) {
+        setUploadedImages(res.data.totalImages);
+        setIsEditing(true);
+        dispatch(onFormAdvertiseDataChange(res.data.details));
+      } else {
+      }
+    } catch (error) {
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      getAdvertisementById();
+    }
+  }, [id]);
+
   return (
     <>
       <section className="pt-3">
@@ -70,10 +117,42 @@ const CondominiumDetails = () => {
             </div>
             <div className="col-md-4 col-12">
               <div className="save_publish">
-                <button className="condominium_save" type="button">
+                <button
+                  type="button"
+                  className={
+                    isEditing
+                      ? screens.advertise.data.isSaved
+                        ? "condominium_save"
+                        : "condominium_save_not"
+                      : "condominium_save"
+                  }
+                  onClick={
+                    isEditing
+                      ? screens.advertise.data.isSaved
+                        ? () => saveHandler()
+                        : null
+                      : () => saveHandler()
+                  }
+                >
                   Save
                 </button>
-                <button className="condominium_publish" type="button">
+                <button
+                  className={
+                    isEditing
+                      ? screens.advertise.data.isPublished
+                        ? "condominium_publish"
+                        : "condominium_publish_not"
+                      : "condominium_publish"
+                  }
+                  type="button"
+                  onClick={
+                    isEditing
+                      ? screens.advertise.data.isPublished
+                        ? () => PublishHandler()
+                        : null
+                      : () => PublishHandler()
+                  }
+                >
                   Publish
                 </button>
               </div>
@@ -104,7 +183,7 @@ const CondominiumDetails = () => {
         <MapComponent />
       </section>
       <section className="pt-3">
-        <UnitComponent />
+        <UnitComponent uploadedImages={uploadedImages} />
       </section>
       {/* <section className="pt-3">
         <GeneralPropertyInfo />
@@ -148,16 +227,41 @@ const CondominiumDetails = () => {
             <div className="col-md-8 col-12"></div>
             <div className="col-md-4 col-12">
               <div className="save_publish">
-                <button className="condominium_save" type="button" onClick={saveHandler}>
+                <button
+                  className={
+                    isEditing
+                      ? screens.advertise.data.isSaved
+                        ? "condominium_save"
+                        : "condominium_save_not"
+                      : "condominium_save"
+                  }
+                  type="button"
+                  onClick={
+                    isEditing
+                      ? screens.advertise.data.isSaved
+                        ? () => saveHandler()
+                        : null
+                      : () => saveHandler()
+                  }
+                >
                   Save
                 </button>
                 <button
-                  className="condominium_publish"
+                  className={
+                    isEditing
+                      ? screens.advertise.data.isPublished
+                        ? "condominium_publish"
+                        : "condominium_publish_not"
+                      : "condominium_publish"
+                  }
                   type="button"
-                  onClick={() => {
-                    history.push("/advertise");
-                    dispatch(onAdvertiseCurrentScreen(2));
-                  }}
+                  onClick={
+                    isEditing
+                      ? screens.advertise.data.isPublished
+                        ? () => PublishHandler()
+                        : null
+                      : () => PublishHandler()
+                  }
                 >
                   Publish
                 </button>

@@ -10,3 +10,9 @@ export async function advertiseUpdation(data) {
 export async function advertiseFileUpload(data) {
   return postData(appUrl["advertise"].fileUpload, data);
 }
+export async function fetchAdvertisement(data) {
+  return postData(appUrl["advertise"].getAdvertise, data);
+}
+export async function fetchAdvertisementById(data) {
+  return postData(appUrl["advertise"].getAdvertiseById, data);
+}
