@@ -1,10 +1,49 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { loginState } from "../../../redux/login";
+import { mainViewState, onFormAdvertiseDataChange } from "../../../redux/main-view";
+import { ToastContext } from "../../../context/toast";
+import { advertiseUpdation } from "../../../services/advertise";
+import { ADVERTISE_INTIAL_STATE } from "../../../utils/Constants/global";
+import CustomInput from "../../../ui-components/custominput";
+import { fetchCountries, fetchZipCode } from "../../../services/genral-apis";
+
 const CheckOut = () => {
   const history = useHistory();
   const { user } = useSelector(loginState);
+
+  // Redux
+  const { screens } = useSelector(mainViewState);
+  const dispatch = useDispatch();
+
+  // Context
+  const toast = useContext(ToastContext);
+
+  const saveHandler = async () => {
+    try {
+      const res = await advertiseUpdation({
+        ...screens.advertise.data,
+        isFullfilled: true,
+        isPublished: true,
+        isSaved: false,
+      });
+      if (res.data.status) {
+        toast.createdToast("Advertisement");
+        dispatch(onFormAdvertiseDataChange(ADVERTISE_INTIAL_STATE));
+        history.push("./checkoutmodal");
+        // history.replace("/");
+      } else {
+        toast.showMessage("Error", "Incorrect Data", "error");
+      }
+    } catch (error) {
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
+    }
+  };
 
   return (
     <>
@@ -18,16 +57,16 @@ const CheckOut = () => {
               </h1>
             </div>
 
-            {/*  */}
             <div className="form-group">
               <label>
                 <b>Contact Information</b>
               </label>
               <div>
-                <input
+                <CustomInput
                   type="text"
-                  className="single_unit_input"
+                  name="email"
                   placeholder="Email Address"
+                  className="single_unit_input"
                   value={user?.email}
                   disabled
                 />
@@ -36,7 +75,13 @@ const CheckOut = () => {
             {/* radio Button */}
             <div className="form-group">
               <div className="text-left">
-                <input type="radio" className="radio_button" />
+                <input
+                  type="radio"
+                  checked={screens.advertise.data.newsOffer === "yes"}
+                  name="userType"
+                  value="yes"
+                  className="radio_button"
+                />
                 <span className="radio_span">Email me with news and offers</span>
               </div>
             </div>
@@ -44,10 +89,11 @@ const CheckOut = () => {
             <div className="inline_select_unit">
               <div className="form-group">
                 <div>
-                  <input
+                  <CustomInput
                     type="text"
-                    className="single_unit_input"
+                    name="firstName"
                     placeholder="First Name"
+                    className="single_unit_input"
                     value={user?.firstName}
                     disabled
                   />
@@ -55,10 +101,11 @@ const CheckOut = () => {
               </div>
               <div className="form-group">
                 <div>
-                  <input
+                  <CustomInput
                     type="text"
-                    className="single_unit_input"
+                    name="lastName"
                     placeholder="Last Name"
+                    className="single_unit_input"
                     value={user?.lastName}
                     disabled
                   />
@@ -69,21 +116,24 @@ const CheckOut = () => {
               <label>
                 <b>Country</b>
               </label>
-              <div>
-                <select className="single_unit_input" value={user?.country} disabled>
-                  <option value="">Select</option>
-                  <option value="pk">Pakistan</option>
-                  <option value="ind">India</option>
-                  <option value="eng">England</option>
-                </select>
-              </div>
+
+              <CustomInput
+                type="text"
+                id="country"
+                name="country"
+                placeholder="Country"
+                className="single_unit_input"
+                value={user?.country}
+                disabled
+              />
             </div>
             <div className="form-group">
               <div>
-                <input
+                <CustomInput
                   type="text"
-                  className="single_unit_input"
+                  name="address"
                   placeholder="Address"
+                  className="single_unit_input"
                   value={user?.address}
                   disabled
                 />
@@ -91,10 +141,11 @@ const CheckOut = () => {
             </div>
             <div className="form-group">
               <div>
-                <input
+                <CustomInput
                   type="text"
-                  className="single_unit_input"
+                  name="addressMain"
                   placeholder="Apartment, Suite, Etc. (Optional)"
+                  className="single_unit_input"
                   value={user?.addressMain}
                   disabled
                 />
@@ -103,10 +154,23 @@ const CheckOut = () => {
             <div className="inline_select_unit">
               <div className="form-group">
                 <div>
-                  <input
+                  <CustomInput
                     type="text"
+                    name="zip"
+                    placeholder="Search zip..."
                     className="single_unit_input"
+                    value={user?.zip}
+                    disabled
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <div>
+                  <CustomInput
+                    type="text"
+                    name="city"
                     placeholder="City"
+                    className="single_unit_input"
                     value={user?.city}
                     disabled
                   />
@@ -115,21 +179,12 @@ const CheckOut = () => {
 
               <div className="form-group">
                 <div>
-                  <select className="single_unit_input" value={user?.state} disabled>
-                    <option value="">Select</option>
-                    <option value="pj">Punjab</option>
-                    <option value="si">Sindh</option>
-                    <option value="kpk">Kpk</option>
-                  </select>
-                </div>
-              </div>
-              <div className="form-group">
-                <div>
-                  <input
+                  <CustomInput
                     type="text"
+                    name="state"
+                    placeholder="State"
                     className="single_unit_input"
-                    placeholder="ZIP Code"
-                    value={user?.zip}
+                    value={user?.state}
                     disabled
                   />
                 </div>
@@ -137,10 +192,11 @@ const CheckOut = () => {
             </div>
             <div className="form-group">
               <div>
-                <input
+                <CustomInput
                   type="number"
+                  name="phoneNo"
+                  placeholder="021 324 32"
                   className="single_unit_input"
-                  placeholder="Phone"
                   value={user?.phoneNo}
                   disabled
                 />
@@ -150,15 +206,16 @@ const CheckOut = () => {
               <button
                 className="addprop_btn"
                 type="button"
-                onClick={() => history.push("./checkoutmodal")}
+                onClick={() => saveHandler()}
+                // onClick={() => history.push("./checkoutmodal")}
               >
                 Checkout Now
               </button>
             </div>
             <div className="pt-2 pb-2">
-              <hr className="hr_class"></hr>
+              {/* <hr className="hr_class"></hr>
               <span className="or_class">OR</span>
-              <hr className="hr_class"></hr>
+              <hr className="hr_class"></hr> */}
             </div>
           </div>
           {/*  */}
@@ -170,13 +227,17 @@ const CheckOut = () => {
               <div className="header_display checkout_header_displ">
                 <div>
                   <h3>
-                    <b>Diamond</b>
+                    <b>
+                      {" "}
+                      {screens.advertise.data.newsOffer === "diamond" ? "Diamond" : "Platinum"}
+                    </b>
                   </h3>
-                  {/* <p>Starting at</p> */}
                 </div>
                 <div>
                   <h3>
-                    <b>£820/Month</b>
+                    <b>
+                      {screens.advertise.data.newsOffer === "diamond" ? "£820/Month" : "£420/Month"}
+                    </b>
                   </h3>
                 </div>
               </div>

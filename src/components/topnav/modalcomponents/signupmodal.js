@@ -5,8 +5,15 @@ import { googleSignup } from "../../../services/users";
 import { useGoogleLogin } from "@react-oauth/google";
 import { ToastContext } from "../../../context/toast";
 import CustomInput from "../../../ui-components/custominput";
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 // import { Link } from "react-router-dom";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object().shape({
+  firstName: Yup.string().required("First Name is required"),
+  lastName: Yup.string().required("Last Name is required"),
+  email: Yup.string().required("Email is required").email("Invalid email address"),
+});
 
 const SignupModal = (props) => {
   const { setUserData, userData, setShowPassword, onHide, setShow } = props;
@@ -22,6 +29,41 @@ const SignupModal = (props) => {
       [name]: value,
     });
   };
+
+  const formik = useFormik({
+    validationSchema: validationSchema,
+    initialValues: { email: "", firstName: "", lastName: "" },
+    onSubmit: async (data) => {
+      setUserData({
+        ...userData,
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+      });
+      setShowPassword(true);
+      onHide();
+      // try {
+      //   let resp = await login(data);
+      //   if (resp.data.status) {
+      //     toast.showMessage("Success", "User has been login successfully.", "success");
+      //     localStorage.setItem("accessToken", resp.data.access_token);
+      //     localStorage.setItem("Id", resp.data.user._id);
+      //     onHide();
+      //     window.location.reload();
+      //   } else {
+      //     // Handle login failure
+      //     toast.showMessage("Error", "Invalid email & password", "error");
+      //   }
+      // } catch (error) {
+      //   console.log(error);
+      //   toast.showMessage(
+      //     "Error",
+      //     "Sorry, we are unable to process your request at this time.",
+      //     "error"
+      //   );
+      // }
+    },
+  });
 
   const saveHandler = async () => {
     setShowPassword(true);
@@ -59,121 +101,89 @@ const SignupModal = (props) => {
       }
     }
   };
-  const formik = useFormik({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-    },
-    validate: (data) => {
-      let errors = {};
-      if (!data.firstName) {
-        errors.firstName = 'First Name is required';
-      }
-      if (!data.lastName) {
-        errors.lastName = 'Last Name is required';
-      }
-      if (!data.email) {  
-        errors.email = 'Email is required';
-      }
-      else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
-        errors.email = 'Invalid email address. E.g. example@email.com';
-      }
 
-      return errors;
-    },
-    onSubmit: async (data) => {
-      setShowPassword(true);
-      onHide();
-     }
-  })
   const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
   const getFormErrorMessage = (name) => {
     return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
   };
+
   return (
     <>
       <div>
         <Modal.Body>
-          <div className="text-center">
-            <h3>
-              <b>Create An Account</b>
-            </h3>
-            <p>
-              Or,
-              <span
-                className="create-account-text"
-                onClick={() => {
-                  setShow(true);
-                  onHide();
-                }}
-              >
-                Sign Into Your Account
-              </span>
-            </p>
-          </div>
           <form onSubmit={formik.handleSubmit}>
+            <div className="text-center">
+              <h3>
+                <b>Create An Account</b>
+              </h3>
+              <p>
+                Or,
+                <span
+                  className="create-account-text"
+                  onClick={() => {
+                    setShow(true);
+                    onHide();
+                  }}
+                >
+                  Sign Into Your Account
+                </span>
+              </p>
+            </div>
+
             <div className="pt-3">
               <div className="form-group">
                 <div className="signle_line_input">
-                  <div style={{ width: "100%" }}>
+                  <div>
                     <CustomInput
                       type="text"
                       name="firstName"
-                      id="firstName"
                       placeholder="First Name"
                       className="input_text_signup_first"
                       // onChange={inputHandler}
-                      maxLength={25}
                       onChange={formik.handleChange}
-
+                      maxLength={25}
                     />
-                    {getFormErrorMessage('firstName')}
+                    {getFormErrorMessage("firstName")}
                   </div>
-                  <div style={{ width: "100%" }}>
+
+                  <div>
                     <CustomInput
                       type="text"
                       name="lastName"
-                      id="lastName"
                       placeholder="Last Name"
                       className="input_text_signup"
                       // onChange={inputHandler}
-                      maxLength={25}
                       onChange={formik.handleChange}
+                      maxLength={25}
                     />
-                    {getFormErrorMessage('lastName')}
+                    {getFormErrorMessage("lastName")}
                   </div>
                 </div>
 
-                <div>
+                <>
                   <CustomInput
                     type="email"
                     name="email"
-                    id="email"
                     placeholder="Email Address"
                     className="input_text_login"
                     // onChange={inputHandler}
-                    maxLength={40}
                     onChange={formik.handleChange}
+                    maxLength={40}
                   />
-                  {getFormErrorMessage('email')}
-                </div>
+                  {getFormErrorMessage("email")}
+                </>
 
                 <div className="pt-2">
                   <input type="checkbox" />
                   <span>Agree to Terms & Condition</span>
                 </div>
               </div>
-
               <div className="pt-3">
-                <button className="sign_button" type="submit"
-                // onClick={saveHandler}
-                >
+                <button className="sign_button" type="submit" onClick={() => formik.handleSubmit()}>
+                  {/* <button className="sign_button" type="button" onClick={saveHandler}> */}
                   Sign Up
                 </button>
               </div>
-
-
               <div className="pt-2 pb-2">
                 <hr className="hr_clas"></hr>
                 <span className="or_clas">Or</span>

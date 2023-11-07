@@ -13,7 +13,7 @@ export const UNPROTECTED_PAGE = [
     subMenu: [
       {
         title: "Properties",
-        path: "/managepropertyindex",
+        path: "/manageproperty",
       },
 
       {
@@ -85,7 +85,7 @@ export const PROTECTED_PAGE = [
     subMenu: [
       {
         title: "Properties",
-        path: "/managepropertyindex",
+        path: "/manageproperty",
       },
       {
         title: "Add Another Property",
@@ -141,7 +141,7 @@ export const PROTECTED_PAGE = [
   },
   {
     title: "INBOX",
-    path: "/products",
+    path: "/chatindex",
     // // icon: <FaIcons.FaCartPlus />,
     cName: "nav-text",
   },
@@ -178,7 +178,7 @@ export const PROTECTED_PAGE = [
   },
   {
     title: "SAVED",
-    path: "/support",
+    path: "/savedproperties",
     // // icon: <IoIcons.IoMdHelpCircle />,
     cName: "nav-text",
   },

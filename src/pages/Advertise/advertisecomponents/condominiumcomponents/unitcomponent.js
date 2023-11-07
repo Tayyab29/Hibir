@@ -6,7 +6,7 @@ import CustomInput from "../../../../ui-components/custominput";
 import { ToastContext } from "../../../../context/toast";
 import axios from "axios";
 
-const UnitComponent = () => {
+const UnitComponent = ({ uploadedImages }) => {
   // Redux
   const { screens } = useSelector(mainViewState);
   const dispatch = useDispatch();
@@ -208,7 +208,9 @@ const UnitComponent = () => {
                       <span>
                         <BsImages /> &nbsp;{" "}
                         {formAttachment[index]?.images.length === 0
-                          ? "jpg,png,jpeg"
+                          ? uploadedImages
+                            ? uploadedImages[index] + " " + "Files"
+                            : "jpg,png,jpeg"
                           : formAttachment[index]?.images.length + " " + "Files"}
                       </span>
                       <input

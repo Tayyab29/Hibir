@@ -5,6 +5,8 @@ import { logout, updateUser } from "../../../services/users";
 import { ToastContext } from "../../../context/toast";
 import CustomDropdown from "../../../ui-components/customdropdown";
 import CustomInput from "../../../ui-components/custominput";
+import { fetchCountries, fetchZipCode } from "../../../services/genral-apis";
+import { ADVERTISE_BEDS } from "../../../utils/Constants/global";
 // import "../accounts.css"
 
 const InformationData = (props) => {
@@ -21,6 +23,9 @@ const InformationData = (props) => {
   const toast = useContext(ToastContext);
 
   const { user } = useSelector(loginState);
+
+  // State
+  const [country, setCountry] = useState([]);
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
@@ -52,16 +57,63 @@ const InformationData = (props) => {
     }
   };
 
-  useEffect(() => {}, []);
+  const getCountries = async () => {
+    try {
+      const res = await fetchCountries();
+      const temp = [{ value: "", label: "Select Country" }];
+      if (res?.data?.status) {
+        res.data.records.map((item) => {
+          temp.push({ value: item.name, label: item.name });
+        });
+        setCountry(temp);
+      } else {
+        toast.showMessage("Error", "Sorry, Countries could not be fetched.", "error");
+      }
+    } catch (error) {
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
+    }
+  };
 
-  const data = [
-    {
-      value: "pakistan",
-      label: "Pakistan",
-      value: "india",
-      label: "India",
-    },
-  ];
+  const getZipCodes = async () => {
+    try {
+      const res = await fetchZipCode({ zip: userDetails.zip });
+      if (res.data.status) {
+        const data = res?.data.records[0];
+        setUserDetails({
+          ...userDetails,
+          zip: data?.zip,
+          state: data?.state_name,
+          city: data?.city,
+        });
+      } else {
+        setUserDetails({ ...userDetails, zip: "", state: "", city: "" });
+        toast.showMessage("Error", "No record found with a similar zip.", "error");
+      }
+    } catch (error) {
+      toast.showMessage(
+        "Error",
+        "Sorry, we are unable to process your request at this time.",
+        "error"
+      );
+    }
+  };
+
+  // Fetch Countries
+  useEffect(() => {
+    getCountries();
+  }, []);
+
+  useEffect(() => {
+    if (userDetails.zip && userDetails.zip.length > 4) {
+      getZipCodes();
+    } else if (userDetails.zip.length <= 0) {
+      setUserDetails({ ...userDetails, zip: "", state: "", city: "" });
+    }
+  }, [userDetails.zip]);
 
   return (
     <>
@@ -147,17 +199,14 @@ const InformationData = (props) => {
                       <b>Country</b>
                     </label>
                     <div>
-                      <select
+                      <CustomDropdown
                         className="myaccount_input"
+                        id="country"
                         name="country"
                         value={userDetails.country}
                         onChange={inputHandler}
-                      >
-                        <option value="">Select</option>
-                        <option value="pk">Pakistan</option>
-                        <option value="ind">India</option>
-                        <option value="eng">England</option>
-                      </select>
+                        options={country}
+                      />
                     </div>
                     <div>
                       <CustomInput
@@ -192,10 +241,12 @@ const InformationData = (props) => {
                       <CustomInput
                         className="myaccount_input"
                         type="text"
-                        placeholder="Enter"
+                        keyfilter="int"
+                        placeholder="Search zip..."
                         name="zip"
                         value={userDetails.zip}
                         onChange={inputHandler}
+                        maxLength={5}
                       />
                     </div>
                   </div>
@@ -206,24 +257,13 @@ const InformationData = (props) => {
                       <b>State</b>
                     </label>
                     <div>
-                      {/* <select
-                        className="myaccount_input"
-                        name="state"
-                        value={userDetails.state}
-                        onChange={inputHandler}
-                      >
-                        <option value="">Select</option>
-                        <option value="pj">Punjab</option>
-                        <option value="si">Sindh</option>
-                        <option value="kpk">Kpk</option>
-                      </select> */}
-                      <input
+                      <CustomInput
                         className="myaccount_input"
                         type="text"
                         placeholder="State"
                         name="state"
                         value={userDetails.state}
-                        onChange={inputHandler}
+                        disabled
                       />
                     </div>
                   </div>
@@ -240,8 +280,7 @@ const InformationData = (props) => {
                         placeholder="City"
                         name="city"
                         value={userDetails.city}
-                        onChange={inputHandler}
-                        maxLength={5}
+                        disabled
                       />
                     </div>
                   </div>

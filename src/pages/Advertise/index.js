@@ -12,9 +12,9 @@ const Advertise = () => {
 
   const [activeCard, setActiveCard] = useState(screens.advertise.activeScreen);
 
-  // const handleCardClick = (index) => {
-  //   setActiveCard(index);
-  // };
+  const handleCardClick = (index) => {
+    setActiveCard(index);
+  };
 
   const renderCardComponent = () => {
     if (activeCard === 0) {
@@ -52,7 +52,7 @@ const Advertise = () => {
             </div>
             <div
               className={`col-md-4 col-12 ${activeCard === 2 ? "active_card" : "noactive_card"}`}
-              // onClick={() => handleCardClick(2)}
+              onClick={() => handleCardClick(2)}
             >
               <div className="text-center">
                 <span className={activeCard === 2 ? "count_bg" : "nocount_bg"}>3</span>

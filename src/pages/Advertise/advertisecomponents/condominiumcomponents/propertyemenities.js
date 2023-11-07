@@ -42,7 +42,12 @@ const PropertyEmenities = () => {
               <b>Pets Allowed</b>
             </label>
             <div>
-              <select className="condominium_input" name="petsAllowed" onChange={inputHandler}>
+              <select
+                className="condominium_input"
+                name="petsAllowed"
+                onChange={inputHandler}
+                value={screens.advertise.data?.petsAllowed}
+              >
                 <option value="">Select</option>
                 <option value="Cats">Cats</option>
                 <option value="Dogs">Dogs</option>
@@ -56,7 +61,12 @@ const PropertyEmenities = () => {
               <b>Laundry Type</b>
             </label>
             <div>
-              <select className="condominium_input" name="laundryType" onChange={inputHandler}>
+              <select
+                className="condominium_input"
+                name="laundryType"
+                onChange={inputHandler}
+                value={screens.advertise.data?.laundryType}
+              >
                 <option value="">Select</option>
                 <option value="1">Washer/Dryer - In Unit</option>
                 <option value="2">Washer/Dryer Hookup</option>
@@ -71,7 +81,12 @@ const PropertyEmenities = () => {
               <b>Parking Type</b>
             </label>
             <div>
-              <select className="condominium_input" name="parkingType" onChange={inputHandler}>
+              <select
+                className="condominium_input"
+                name="parkingType"
+                onChange={inputHandler}
+                value={screens.advertise.data?.parkingType}
+              >
                 <option value="">Select</option>
                 <option value="1">Covered</option>
                 <option value="2">Street</option>
@@ -85,7 +100,8 @@ const PropertyEmenities = () => {
           <div key={checkbox.id} className="col-md-3 col-6 mb-3">
             <input
               type="checkbox"
-              checked={checkbox.checked}
+              // checked={checkbox.checked}
+              checked={screens?.advertise?.data?.amenities.includes(checkbox.id)}
               onChange={() => handleCheckboxChange(checkbox.id)}
             />
             <span>{checkbox.label}</span>

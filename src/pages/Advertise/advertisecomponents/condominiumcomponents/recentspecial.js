@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
 import CustomInput from "../../../../ui-components/custominput";
+import moment from "moment/moment";
 
 const RecentSpecial = () => {
   // Redux
@@ -11,6 +12,7 @@ const RecentSpecial = () => {
   // Handler
   const inputHandler = (e) => {
     const { name, value } = e.target;
+    console.log({ name, value });
     dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: value }));
   };
   return (
@@ -31,6 +33,7 @@ const RecentSpecial = () => {
                 <CustomInput
                   type="text"
                   name="rentTitle"
+                  value={screens.advertise.data?.rentTitle}
                   onChange={inputHandler}
                   className="condominium_input"
                   placeholder="Enter title"
@@ -50,6 +53,7 @@ const RecentSpecial = () => {
                 <CustomInput
                   type="date"
                   name="rentStartDate"
+                  value={moment(screens.advertise.data?.rentStartDate).format("YYYY-MM-DD")}
                   onChange={inputHandler}
                   className="condominium_input"
                   placeholder=""
@@ -68,6 +72,8 @@ const RecentSpecial = () => {
                 <CustomInput
                   type="date"
                   name="rentEndDate"
+                  value={moment(screens.advertise.data?.rentEndDate).format("YYYY-MM-DD")}
+                  // value="2023-11-07"
                   onChange={inputHandler}
                   className="condominium_input"
                   placeholder=""
@@ -84,6 +90,7 @@ const RecentSpecial = () => {
             <textarea
               className="text_area"
               name="rentDescription"
+              value={screens.advertise.data?.rentDescription}
               onChange={inputHandler}
               rows="5"
               placeholder=""

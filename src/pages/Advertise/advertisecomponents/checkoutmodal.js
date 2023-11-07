@@ -25,7 +25,7 @@ const CheckoutModal = () => {
                 <button
                   className="addprop_btn"
                   type="button"
-                  onClick={() => history.push("./managepropertyindex")}
+                  onClick={() => history.push("./manageproperty")}
                 >
                   Manage Property
                 </button>

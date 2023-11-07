@@ -3,12 +3,20 @@ import Modal from "react-bootstrap/Modal";
 // import { Link } from "react-router-dom";
 import { googleLogin, login } from "../../../services/users";
 import { useGoogleLogin } from "@react-oauth/google";
-import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import "./modal.css";
 import { ToastContext } from "../../../context/toast";
 import CustomInput from "../../../ui-components/custominput";
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 import { classNames } from "primereact/utils";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required("Email is required").email("Invalid email address"),
+  password: Yup.string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters"),
+});
 
 const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
   // Context
@@ -20,24 +28,8 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
     password: "",
   });
   const formik = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validate: (data) => {
-      let errors = {};
-      if (!data.email) {
-        errors.email = 'Email is required.';
-      }
-      else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
-        errors.email = 'Invalid email address. E.g. example@email.com';
-      }
-
-      if (!data.password) {
-        errors.password = 'Password is required.';
-      }
-      return errors;
-    },
+    validationSchema: validationSchema,
+    initialValues: { email: "", password: "" },
     onSubmit: async (data) => {
       try {
         let resp = await login(data);
@@ -46,22 +38,62 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
           localStorage.setItem("accessToken", resp.data.access_token);
           localStorage.setItem("Id", resp.data.user._id);
           onHide();
-
           window.location.reload();
         } else {
           // Handle login failure
-          toast.showMessage("Error", "Invalid email & password", "error");
+          toast.showMessage("Error", "Invalid user credentials", "error");
         }
       } catch (error) {
-        console.log(error);
         toast.showMessage(
           "Error",
           "Sorry, we are unable to process your request at this time.",
           "error"
         );
       }
-    }
-  })
+    },
+  });
+  // const formik = useFormik({
+  //   initialValues: {
+  //     email: "",
+  //     password: "",
+  //   },
+  //   validate: (data) => {
+  //     let errors = {};
+  //     if (!data.email) {
+  //       errors.email = "Email is required.";
+  //     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)) {
+  //       errors.email = "Invalid email address. E.g. example@email.com";
+  //     }
+
+  //     if (!data.password) {
+  //       errors.password = "Password is required.";
+  //     }
+  //     return errors;
+  //   },
+  //   onSubmit: async (data) => {
+  //     try {
+  //       let resp = await login(data);
+  //       if (resp.data.status) {
+  //         toast.showMessage("Success", "User has been login successfully.", "success");
+  //         localStorage.setItem("accessToken", resp.data.access_token);
+  //         localStorage.setItem("Id", resp.data.user._id);
+  //         onHide();
+
+  //         window.location.reload();
+  //       } else {
+  //         // Handle login failure
+  //         toast.showMessage("Error", "Invalid email & password", "error");
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //       toast.showMessage(
+  //         "Error",
+  //         "Sorry, we are unable to process your request at this time.",
+  //         "error"
+  //       );
+  //     }
+  //   },
+  // });
 
   // const inputHandler = (e) => {
   //   const { name, value } = e.target;
@@ -79,7 +111,6 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
     //     localStorage.setItem("accessToken", resp.data.access_token);
     //     localStorage.setItem("Id", resp.data.user._id);
     //     onHide();
-
     //     window.location.reload();
     //   } else {
     //     // Handle login failure
@@ -121,7 +152,7 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
   };
   const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
   const getFormErrorMessage = (name) => {
-      return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+    return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
   };
   return (
     <div>
@@ -157,7 +188,7 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
                 onChange={formik.handleChange}
                 autoFocus
               />
-               {getFormErrorMessage('email')}
+              {getFormErrorMessage("email")}
 
               {/* <CustomInput
               type="password"
@@ -169,22 +200,19 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
             /> */}
               <div className="custom_position">
                 <CustomInput
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="Enter New Password"
                   className="input_text_login"
                   maxLength={20}
                   onChange={formik.handleChange}
-                // onChange={inputHandler}
+                  // onChange={inputHandler}
                 />
-                 
-                <button
-                  onClick={togglePasswordVisibility}
-                  className="new_pass"
-                >
+
+                <button onClick={togglePasswordVisibility} className="new_pass">
                   {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
                 </button>
-                {getFormErrorMessage('password')}
+                {getFormErrorMessage("password")}
               </div>
 
               <div className="pt-2 forgot_text">

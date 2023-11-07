@@ -220,6 +220,21 @@
   cursor: pointer;
   font-size: 14px;
 }
+
+.condominium_save_not,
+.condominium_save_not:hover,
+.condominium_save_not:active,
+.condominium_save_not:focus {
+  border: 1px solid #1eb560;
+  width: 120px;
+  border-radius: 6px;
+  padding: 7px 12px;
+  color: #1eb560;
+  outline: none;
+  background-color: transparent;
+  font-size: 14px;
+  cursor: not-allowed;
+}
 .condominium_publish,
 .condominium_publish:hover,
 .condominium_publish:active,
@@ -234,7 +249,21 @@
   border: 0;
   font-size: 14px;
 }
-
+.condominium_publish_not,
+.condominium_publish_not:hover,
+.condominium_publish_not:active,
+.condominium_publish_not:focus {
+  background-color: #1eb560;
+  width: 120px;
+  border-radius: 6px;
+  padding: 7px 12px;
+  color: #fff;
+  outline: none;
+  /* cursor: pointer; */
+  border: 0;
+  font-size: 14px;
+  cursor: not-allowed;
+}
 .condominum_p_text {
   color: #757575;
   font-size: 14px;
