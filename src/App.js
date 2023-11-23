@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
 
 // Components
@@ -34,9 +34,13 @@ import ChatIndex from "./pages/Chat";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
+import { SocketContext } from "./context/socket";
+import AllProperties from "./pages/Properties";
+import SingleProperty from "./pages/Properties/SingleProperty";
 
 function App() {
   const dispatch = useDispatch();
+  const socketContext = useContext(SocketContext);
 
   // Handler
   const redirectToLogin = () => {
@@ -49,6 +53,8 @@ function App() {
         if (localStorage.getItem("accessToken")) {
           const res = await getUserDetails();
           dispatch(setUser(res?.data));
+          socketContext.createSocketInstance(res?.data?._id);
+          socketContext.setUserId(res?.data?._id);
         }
       } catch (error) {
         console.log(error);
@@ -64,7 +70,6 @@ function App() {
         <Route path="/" exact component={Home} />
         <Route path="/" component={redirectToLogin} exact />
         <Route path="/manage" component={Manage} exact />
-
         {/* <Switch> */}
         {/* <Route component={notfound} /> */}
         {/* <Route path="*" component={home} /> */}
@@ -95,8 +100,13 @@ function App() {
         <ProtectedRoute path="/chatindex" exact>
           <ChatIndex />
         </ProtectedRoute>
-
-        {/* <Route path="/advertise" exact component={Advertise} /> */}
+        <ProtectedRoute path="/allproperties" exact>
+          <AllProperties />
+        </ProtectedRoute>
+        <ProtectedRoute path="/propertyById" exact>
+          <SingleProperty />
+        </ProtectedRoute>
+        {/* <Route path="/advertise" exact component={Advertise} /> ///*/}
         {/* <Route path="/condominiumdetails" exact component={CondominiumDetails} /> */}
         {/* <Route path="/checkoutmodal" exact component={CheckoutModal} /> */}
         {/* <Route path="/managepropertyindex" exact component={ManagePropertyIndex} /> */}

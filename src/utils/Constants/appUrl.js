@@ -23,5 +23,12 @@ const appUrl = {
     getAdvertise: "advertise/getAdvertisement",
     getAdvertiseById: "advertise/getAdvertiseById",
   },
+  chat: {
+    findChatById: "chat/getUserChatById",
+  },
+  message: {
+    findMessageByChatId: "message/chatId",
+    sendMessage: "message",
+  },
 };
 export default appUrl;
