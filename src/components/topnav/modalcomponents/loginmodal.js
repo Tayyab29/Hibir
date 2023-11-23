@@ -209,7 +209,7 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
                   // onChange={inputHandler}
                 />
 
-                <button onClick={togglePasswordVisibility} className="new_pass">
+                <button type="button" onClick={togglePasswordVisibility} className="new_pass">
                   {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
                 </button>
                 {getFormErrorMessage("password")}
