@@ -19,6 +19,7 @@ const ChatMainArea = (props) => {
   const sendMessageHandler = async () => {
     let payload = {
       chatId: selectedChat.chatId,
+      recieverId: selectedChat?.receiverId,
       senderId: user?._id,
       text: newMessage,
     };
@@ -91,6 +92,7 @@ const ChatMainArea = (props) => {
                 </div>
                 <div className="col-2">
                   <button
+                    type="submit"
                     className={newMessage === "" ? "send_btn_not" : "send_btn"}
                     onClick={newMessage === "" ? null : () => sendMessageHandler()}
                   >

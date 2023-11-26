@@ -40,6 +40,14 @@ export const ToastStateProvider = ({ children }) => {
       life: 5000,
     });
   };
+  const notifyToast = (title) => {
+    toast.current.show({
+      severity: "info",
+      summary: `Notification.`,
+      detail: `You have recieved a new message.`,
+      life: 5000,
+    });
+  };
 
   const showMessage = (title, message, type) => {
     toast.current.show({ severity: type, summary: title, detail: message, life: 5000 });
@@ -63,6 +71,7 @@ export const ToastStateProvider = ({ children }) => {
         deleteToast,
         showMessage,
         assignmentToast,
+        notifyToast,
       }}
     >
       <Toast ref={toast} style={{ width: "390px" }} />
