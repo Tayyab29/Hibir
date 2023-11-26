@@ -74,7 +74,9 @@
   border-bottom: 1px solid #cbcbcb;
   cursor: pointer;
 }
-
+.chat_container {
+  margin: 0px 15px;
+}
 .active_user .user_names {
   font-size: 14px;
   color: #000;

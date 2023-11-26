@@ -1,20 +1,23 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import "./chatindex.scss";
 import ChatSidebar from "./chatsidebar";
 import ChatMainArea from "./chatmainarea";
 import { fetchMessageByChatId } from "../../services/messages";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginState } from "../../redux/login";
-import io from "socket.io-client";
 import { SocketContext } from "../../context/socket";
+import "./chatindex.scss";
+import { mainViewState, onNotificationMutated } from "../../redux/main-view";
+import { readNotification } from "../../services/notification";
 
 const socket_url = process.env.REACT_APP_SOCKET_URL;
 var selectedChatCompare;
 
 const ChatIndex = () => {
   const { user } = useSelector(loginState);
+  const { screens } = useSelector(mainViewState);
 
   const socketContext = useContext(SocketContext);
+  const dispatch = useDispatch();
 
   const [selectedChat, setSelectedChat] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -31,16 +34,30 @@ const ChatIndex = () => {
     }
   };
 
+  const readUserNotification = async (id) => {
+    readNotification({
+      userId: id,
+    })
+      .then(() => {
+        dispatch(onNotificationMutated());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     if (selectedChat) {
       getMessageByChatId();
     }
   }, [selectedChat]);
+
   useEffect(() => {
     // Update the local state when onlineUsers change in the context
     setOnlineUsers(socketContext.onlineUsers);
   }, [socketContext.onlineUsers]);
 
+  // Socket Send Message
   useEffect(() => {
     if (sendMessage) {
       socketContext.sendSocketMessage(sendMessage);
@@ -54,66 +71,34 @@ const ChatIndex = () => {
       socketContext.recieveSocketMessageOff();
     };
   });
+
+  // Socket Recieving Message
   useEffect(() => {
     if (socketContext.recieveMessage) {
-      setMessages((prev) => [...prev, socketContext.recieveMessage]);
+      if (selectedChat?.receiverId === socketContext?.recieveMessage?.latestmessage?.senderId) {
+        setMessages((prev) => [...prev, socketContext.recieveMessage.latestmessage]);
+        readUserNotification(selectedChat?.receiverId);
+      }
     }
   }, [socketContext.recieveMessage]);
 
-  // useEffect(() => {
-  //   socket.current = io(socket_url);
-  //   socket.current.emit("new-user-add", user?._id);
-  //   socket.current.on("get-users", (users) => {
-  //     setOnlineUsers(users);
-  //   });
-  //   // socket.current.emit("setup", user);
-  //   socket.current.on("connection", () => setIsSocket(true));
-  // }, []);
+  // If user select chat from Notification Box
+  useEffect(() => {
+    if (screens.notification?.chatData) {
+      setSelectedChat(screens.notification.chatData);
+    }
+  }, [screens.notification?.chatData]);
 
-  // useEffect(() => {
-  //   if (sendMessage) {
-  //     socket.current.emit("send-message", sendMessage);
+  // useEffect(()=>{
+  //   if(selectedChat){
+
   //   }
-  // }, [sendMessage]);
-
-  // useEffect(() => {
-  //   // // if (sendMessage) {
-  //   // socket.current.on("recieve-message", (data) => {
-  //   //   console.log({ data });
-  //   //   // console.log({ first: data.length });
-  //   //   setRecieveMessage(data);
-  //   //   // messages.push(data.latestmessage);
-  //   // });
-  //   // // }
-  //   const handleReceiveMessage = (data) => {
-  //     console.log("Handling received message:", data);
-  //     setRecieveMessage((prevData) => data.latestmessage);
-  //     console.log("Updated recieveMessage:", recieveMessage);
-  //   };
-
-  //   // Attach the event listener
-  //   socket.current.on("recieve-message", handleReceiveMessage);
-
-  //   // Clean up the event listener when the component unmounts
-  //   return () => {
-  //     socket.current.off("recieve-message", handleReceiveMessage);
-  //   };
-  // });
-
-  // console.log({ sendMessage });
-  // console.log({ recieveMessage });
-
-  // useEffect(() => {
-  //   console.log("Component rendered with recieveMessage:", recieveMessage);
-  //   if (recieveMessage) {
-  //     setMessages((prev) => [...prev, recieveMessage]);
-  //   }
-  // }, [recieveMessage]);
+  // },[selectedChat])
 
   return (
     <>
       <div className="chat_sidebar">
-        <div className="container">
+        <div className="chat_container">
           <div className="row">
             <div className="col-12 col-md-3" style={{ paddingRight: "0" }}>
               <ChatSidebar

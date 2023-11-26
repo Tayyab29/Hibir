@@ -30,5 +30,10 @@ const appUrl = {
     findMessageByChatId: "message/chatId",
     sendMessage: "message",
   },
+  notification: {
+    findNotificationById: "notification/id",
+    findNotificationCount: "notification/notification-count",
+    readingNotification: "notification/mark-as-read",
+  },
 };
 export default appUrl;
