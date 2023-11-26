@@ -68,7 +68,6 @@ const GeneralPropertyInfo = () => {
       formData.append(`_id`, "65396068100d696567559a27");
       formData.append(`index`, 0);
       for (let file of files) {
-        console.log({ file });
         formData.append(`attachments`, file);
       }
       const res = await axios.post(`${url}advertise/upload`, formData, {
@@ -98,8 +97,6 @@ const GeneralPropertyInfo = () => {
     accept: "image/*",
     onDrop,
   });
-  // console.log({ formAttachment });
-
   return (
     <div className="container">
       <div className="row">

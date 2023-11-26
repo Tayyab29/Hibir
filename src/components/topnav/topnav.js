@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 
 import { Link, useHistory } from "react-router-dom";
@@ -30,7 +30,11 @@ import Dropdown from "react-bootstrap/Dropdown";
 // import Button from 'react-bootstrap/Button';
 import { Offcanvas, ListGroup, ListGroupItem } from "react-bootstrap";
 import { loginState } from "../../redux/login";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import NotificationBox from "../../pages/Notification";
+import { SocketContext } from "../../context/socket";
+import { mainViewState, onNotificationCount } from "../../redux/main-view";
+import { ToastContext } from "../../context/toast";
 
 const TopNav = () => {
   // History
@@ -38,7 +42,16 @@ const TopNav = () => {
   // Local Storage
   const token = localStorage.getItem("accessToken");
   const { user } = useSelector(loginState);
+  const { screens } = useSelector(mainViewState);
+
+  const dispatch = useDispatch();
+  // Context
+  const toast = useContext(ToastContext);
+
   const userName = user ? user.firstName ?? "" + " " + user.lastName ?? "" : "";
+
+  // Socket
+  const socketContext = useContext(SocketContext);
 
   // View State
   const [show, setShow] = useState(false);
@@ -46,6 +59,7 @@ const TopNav = () => {
   const [showpassword, setShowPassword] = useState(false);
   const [sidebar, setSidebar] = useState(false);
   const [showforgotmodal, setShowForgotModal] = useState(false);
+  const [showNotify, setShowNotify] = useState(false);
 
   // States
   const [menu, setMenu] = useState(token === null ? UNPROTECTED_PAGE : PROTECTED_PAGE);
@@ -92,6 +106,24 @@ const TopNav = () => {
   const closeSubMenu = () => {
     setOpenSubMenuIndex(null);
   };
+  useEffect(() => {
+    socketContext.recieveSocketNotifyOn();
+
+    return () => {
+      socketContext.recieveSocketNotifyOff();
+    };
+  });
+
+  useEffect(() => {
+    if (socketContext.count) {
+      const newCount = screens.notification.count + 1;
+      dispatch(onNotificationCount(newCount));
+      toast.notifyToast();
+      // if (selectedChat?.receiverId === socketContext?.recieveMessage?.latestmessage?.senderId) {
+      // setMessages((prev) => [...prev, socketContext.recieveMessage.latestmessage]);
+      // }
+    }
+  }, [socketContext.count]);
 
   return (
     <>
@@ -137,6 +169,18 @@ const TopNav = () => {
             <Link to="/manage" className="link_deco commonheader_btn">
               <div className="">Manage</div>
             </Link>
+            {token && token !== "undefined" && (
+              <div className="bell_icon_wrapper" onClick={() => setShowNotify(!showNotify)}>
+                {screens.notification.count > 0 ? (
+                  <div className="notify_count"> {screens.notification.count} </div>
+                ) : (
+                  ""
+                )}
+
+                <FaIcons.FaBell className="bell_icon" />
+              </div>
+            )}
+
             {token === "undefined" || token === null ? (
               <>
                 <div className="link_deco log_plain">
@@ -213,6 +257,7 @@ const TopNav = () => {
           </Offcanvas.Body>
         </Offcanvas>
       </IconContext.Provider>
+      {showNotify && <NotificationBox close={() => setShowNotify(false)} />}
     </>
   );
 };

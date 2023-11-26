@@ -13,6 +13,7 @@ export const SocketStateProvider = ({ children }) => {
   const [connected, setConnected] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [recieveMessage, setRecieveMessage] = useState(null);
+  const [count, setCount] = useState(null);
 
   const createSocketInstance = async (userId) => {
     const id = userId ?? user?.id;
@@ -60,23 +61,36 @@ export const SocketStateProvider = ({ children }) => {
   function recieveSocketMessageOn() {
     if (socketCon) {
       const handleReceiveMessage = (data) => {
-        setRecieveMessage((prevData) => data.latestmessage);
+        setRecieveMessage((prevData) => data);
       };
       socketCon.on("recieve-message", handleReceiveMessage);
     }
   }
-  function recieveSocketMessageOff(data) {
+  function recieveSocketMessageOff() {
     if (socketCon) {
       const handleReceiveMessage = (data) => {
-        setRecieveMessage((prevData) => data.latestmessage);
+        setRecieveMessage((prevData) => data);
       };
       socketCon.off("recieve-message", handleReceiveMessage);
     }
   }
+  function recieveSocketNotifyOn() {
+    if (socketCon) {
+      const handleReceiveNotification = (data) => {
+        setCount(data);
+      };
+      socketCon.on("recieve-notification", handleReceiveNotification);
+    }
+  }
+  function recieveSocketNotifyOff() {
+    if (socketCon) {
+      const handleReceiveNotification = (data) => {
+        setCount(data);
+      };
+      socketCon.off("recieve-notification", handleReceiveNotification);
+    }
+  }
 
-  //   const disconnectSocket = async () => {
-  //     socket.close();
-  //   };
   const disconnectSocket = async () => {
     if (socketCon) {
       socketCon.removeAllListeners();
@@ -95,10 +109,13 @@ export const SocketStateProvider = ({ children }) => {
         sendSocketMessage,
         recieveSocketMessageOn,
         recieveSocketMessageOff,
+        recieveSocketNotifyOn,
+        recieveSocketNotifyOff,
         createSocketInstance,
         disconnectSocket,
         onlineUsers,
         recieveMessage,
+        count,
       }}
     >
       {children}
