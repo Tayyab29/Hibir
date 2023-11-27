@@ -35,6 +35,7 @@ import NotificationBox from "../../pages/Notification";
 import { SocketContext } from "../../context/socket";
 import { mainViewState, onNotificationCount } from "../../redux/main-view";
 import { ToastContext } from "../../context/toast";
+import DeactivateModal from "./modalcomponents/deactivateModal";
 
 const TopNav = () => {
   // History
@@ -60,6 +61,7 @@ const TopNav = () => {
   const [sidebar, setSidebar] = useState(false);
   const [showforgotmodal, setShowForgotModal] = useState(false);
   const [showNotify, setShowNotify] = useState(false);
+  const [isDeactivate, setIsDeactivate] = useState(false);
 
   // States
   const [menu, setMenu] = useState(token === null ? UNPROTECTED_PAGE : PROTECTED_PAGE);
@@ -132,6 +134,7 @@ const TopNav = () => {
           onHide={handleClose}
           setShowForgotModal={setShowForgotModal}
           setShowSignup={setShowSignup}
+          setIsDeactivate={setIsDeactivate}
         />
       </Modal>
       <Modal show={showsignup} onHide={handleSignUpClose}>
@@ -148,6 +151,9 @@ const TopNav = () => {
       </Modal>
       <Modal show={showforgotmodal} onHide={() => setShowForgotModal(false)}>
         <ForgotModal onHide={() => setShowForgotModal(false)} />
+      </Modal>
+      <Modal show={isDeactivate} onHide={() => setIsDeactivate(false)}>
+        <DeactivateModal onHide={() => setIsDeactivate(false)} />
       </Modal>
       <IconContext.Provider value={{ color: "#fff" }}>
         <div className="navbar">

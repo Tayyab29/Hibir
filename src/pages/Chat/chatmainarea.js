@@ -37,6 +37,34 @@ const ChatMainArea = (props) => {
     setNewMessage(msg);
   };
 
+  const renderMessageTime = (createdAt) => {
+    const today = new Date();
+    const messageDate = new Date(createdAt);
+
+    if (today.toDateString() === messageDate.toDateString()) {
+      // If the message is from today, format as "HH:mm am/pm"
+      return messageDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    } else if (
+      today.getFullYear() === messageDate.getFullYear() &&
+      today.getMonth() === messageDate.getMonth() &&
+      today.getDate() - messageDate.getDate() === 1
+    ) {
+      // If the message is from yesterday, show "Yesterday" and time
+      return `Yesterday ${messageDate.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      })}`;
+    } else {
+      // Show the full date and time for messages older than yesterday
+      return messageDate.toLocaleString([], {
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    }
+  };
+
   useEffect(() => {
     if (selectedChat) {
       if (chatWindowRef.current) {
@@ -66,7 +94,8 @@ const ChatMainArea = (props) => {
                     key={index}
                   >
                     <p>{item.text}</p>
-                    <p>{format(item.createdAt)}</p>
+                    {/* <p>{format(item.createdAt)}</p> */}
+                    <p className="chat_time_show">{renderMessageTime(item.createdAt)}</p>
                   </div>
                 );
               })}

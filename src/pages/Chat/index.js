@@ -25,6 +25,7 @@ const ChatIndex = () => {
   const [sendMessage, setSendMessage] = useState(null);
   const [recieveMessage, setRecieveMessage] = useState(null);
   const [isSocket, setIsSocket] = useState(false);
+
   const socket = useRef();
 
   const getMessageByChatId = async () => {

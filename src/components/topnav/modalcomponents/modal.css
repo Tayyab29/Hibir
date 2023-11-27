@@ -195,3 +195,31 @@
   border: 0;
   cursor: not-allowed !important;
 }
+
+/* Deactivate CSS */
+.de_container {
+  height: 300px;
+}
+.de_cross_icon_wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+.de_cross_icon {
+  margin: 10px;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+.heading_text_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.de_text_wrap {
+  margin-left: 54px;
+}
+.highlight_text {
+  text-decoration: underline;
+  color: rgb(0, 153, 255);
+  margin-left: 50px;
+}
