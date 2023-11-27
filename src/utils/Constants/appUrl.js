@@ -11,6 +11,7 @@ const appUrl = {
     updateUser: "users/edit-user",
     validateEmail: "users/getByEmail",
     forgetPassword: "users/resetpassword",
+    deactivate: "users/deactivate-user",
   },
   google: {
     login: "auth/google",
@@ -22,6 +23,18 @@ const appUrl = {
     fileUpload: "advertise/upload",
     getAdvertise: "advertise/getAdvertisement",
     getAdvertiseById: "advertise/getAdvertiseById",
+  },
+  chat: {
+    findChatById: "chat/getUserChatById",
+  },
+  message: {
+    findMessageByChatId: "message/chatId",
+    sendMessage: "message",
+  },
+  notification: {
+    findNotificationById: "notification/id",
+    findNotificationCount: "notification/notification-count",
+    readingNotification: "notification/mark-as-read",
   },
 };
 export default appUrl;

@@ -5,35 +5,13 @@ const initialState = {
   screens: {
     advertise: {
       isFormDirty: false,
-      // data: {
-      //   isPackage: "",
-      //   propertyUnit: "",
-      //   propertyAdress: "",
-      //   propertyType: "",
-      //   propertyBeds: "",
-      //   propertyBaths: "",
-      //   sizeSqft: [],
-      //   rent: [],
-      //   deposit: [],
-      //   leaseLength: [],
-      //   availableDate: [],
-      //   images: [],
-      //   description: "",
-      //   rentTitle: "",
-      //   rentStartDate: "",
-      //   rentEndDate: "",
-      //   rentDescription: "",
-      //   petsAllowed: "",
-      //   laundryType: "",
-      //   parkingType: "",
-      //   amenities: "",
-      //   userType: "",
-      //   contactPreference: "",
-      //   isHideName: false,
-      //   user: "65072634a3cda33ef8d7bbc4",
-      // },
       data: { ...ADVERTISE_INTIAL_STATE },
       activeScreen: 0,
+    },
+    notification: {
+      count: 0,
+      isMutated: false,
+      chatData: null,
     },
   },
 };
@@ -51,6 +29,15 @@ const mainViewSlice = createSlice({
     onAdvertiseCurrentScreen: (state, action) => {
       state.screens.advertise.activeScreen = action.payload;
     },
+    onNotificationCount: (state, action) => {
+      state.screens.notification.count = action.payload;
+    },
+    onNotificationMutated: (state, action) => {
+      state.screens.notification.isMutated = !state.screens.notification.isMutated;
+    },
+    onNotificationSelectedChat: (state, action) => {
+      state.screens.notification.chatData = action.payload;
+    },
   },
 });
 
@@ -59,6 +46,11 @@ export const {
   onFormDirty,
   onFormAdvertiseDataChange,
   onAdvertiseCurrentScreen,
+
+  // Notification
+  onNotificationCount,
+  onNotificationMutated,
+  onNotificationSelectedChat,
 } = mainViewSlice.actions;
 export const mainViewState = (state) => state.mainView;
 

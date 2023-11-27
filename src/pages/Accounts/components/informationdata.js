@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { loginState } from "../../../redux/login";
-import { logout, updateUser } from "../../../services/users";
+import { deactivateAccount, logout, updateUser } from "../../../services/users";
 import { ToastContext } from "../../../context/toast";
 import CustomDropdown from "../../../ui-components/customdropdown";
 import CustomInput from "../../../ui-components/custominput";
@@ -38,11 +38,12 @@ const InformationData = (props) => {
   const deactivateHandler = async () => {
     try {
       let payload = {
+        _id: user._id,
         isActive: false,
       };
-      const resp = await updateUser(payload);
+      const resp = await deactivateAccount(payload);
       if (resp.data.status) {
-        toast.updateToast("User");
+        // toast.updateToast("User");
         logout();
         toast.showMessage("Success", "Your account has been deactivated successfully!", "success");
       } else {

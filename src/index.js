@@ -7,14 +7,17 @@ import { Provider } from "react-redux";
 import { store } from "./redux";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ToastStateProvider } from "./context/toast";
+import { SocketStateProvider } from "./context/socket";
 
 ReactDOM.render(
   <Provider store={store}>
     <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
       <ToastStateProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
+        <SocketStateProvider>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </SocketStateProvider>
       </ToastStateProvider>
     </GoogleOAuthProvider>
   </Provider>,
