@@ -11,6 +11,7 @@ const appUrl = {
     updateUser: "users/edit-user",
     validateEmail: "users/getByEmail",
     forgetPassword: "users/resetpassword",
+    deactivate: "users/deactivate-user",
   },
   google: {
     login: "auth/google",

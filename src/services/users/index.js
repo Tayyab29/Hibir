@@ -23,6 +23,9 @@ export async function valideUserEmail(data) {
 export async function forgetPassword(data) {
   return postData(appUrl["users"].forgetPassword, data);
 }
+export async function deactivateAccount(data) {
+  return putData(appUrl["users"].deactivate, data);
+}
 
 // Google Login and Sign Up
 export async function googleLogin(data) {

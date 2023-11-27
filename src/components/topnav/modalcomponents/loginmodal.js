@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
     .min(6, "Password must be at least 6 characters"),
 });
 
-const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
+const LoginModal = ({ onHide, setShowForgotModal, setShowSignup, setIsDeactivate }) => {
   // Context
   const toast = useContext(ToastContext);
   const [showPassword, setShowPassword] = useState(false);
@@ -34,11 +34,16 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
       try {
         let resp = await login(data);
         if (resp.data.status) {
-          toast.showMessage("Success", "User has been login successfully.", "success");
-          localStorage.setItem("accessToken", resp.data.access_token);
-          localStorage.setItem("Id", resp.data.user._id);
-          onHide();
-          window.location.reload();
+          if (resp.data.account) {
+            toast.showMessage("Success", "User has been login successfully.", "success");
+            localStorage.setItem("accessToken", resp.data.access_token);
+            localStorage.setItem("Id", resp.data.user._id);
+            onHide();
+            window.location.reload();
+          } else {
+            onHide();
+            setIsDeactivate(true);
+          }
         } else {
           // Handle login failure
           toast.showMessage("Error", "Invalid user credentials", "error");
@@ -135,10 +140,15 @@ const LoginModal = ({ onHide, setShowForgotModal, setShowSignup }) => {
       try {
         const resp = await googleLogin({ token: response.access_token });
         if (resp.data.status) {
-          localStorage.setItem("accessToken", resp.data.access_token);
-          localStorage.setItem("Id", resp.data.user._id);
-          onHide();
-          window.location.reload();
+          if (resp.data.account) {
+            localStorage.setItem("accessToken", resp.data.access_token);
+            localStorage.setItem("Id", resp.data.user._id);
+            onHide();
+            window.location.reload();
+          } else {
+            onHide();
+            setIsDeactivate(true);
+          }
         } else {
           // Handle Google login failure
         }
