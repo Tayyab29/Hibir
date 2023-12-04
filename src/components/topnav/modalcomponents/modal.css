@@ -60,6 +60,21 @@
   padding: 12px 10px;
   border-radius: 5px;
 }
+
+.sign_button_not,
+.sign_button_not:focus,
+.sign_button_not:hover,
+.sign_button_not:active {
+  width: 100%;
+  background: #1eb560;
+  color: #fff;
+  font-weight: 500;
+  outline: none;
+  border: 0;
+  padding: 12px 10px;
+  border-radius: 5px;
+  cursor: not-allowed;
+}
 .create-account-text {
   text-decoration: underline;
   margin-left: "5px";

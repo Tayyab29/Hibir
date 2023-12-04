@@ -19,18 +19,14 @@ const manage = () => {
                 </b>
               </h1>
               <p className="manage_heaader_ptext">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.
               </p>
               <h5>
                 <b>Enter Your Email To Get Started!</b>
               </h5>
               <div className="manage_main_div">
-                <input
-                  type="text"
-                  className="manage_input"
-                  placeholder="Enter A Location"
-                />
+                <input type="text" className="manage_input" placeholder="Enter A Location" />
                 <button className="manage_getstarted">Get Started</button>
               </div>
             </div>

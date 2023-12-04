@@ -203,3 +203,7 @@ span {
 .bell_icon {
   color: #1eb560 !important;
 }
+
+.text_sign_wrapper {
+  width: 100%;
+}

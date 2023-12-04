@@ -11,6 +11,19 @@ import UpdatePassword from "./components/updatePassword";
 import ConfirmDialog from "./components/confirmDialog";
 import { ToastContext } from "../../context/toast";
 
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object().shape({
+  firstName: Yup.string().required("First Name is required"),
+  lastName: Yup.string().required("Last Name is required"),
+  zip: Yup.string()
+    .required("Zip Code is required")
+    .min(5, "Zip Code must be at least 5 characters"),
+  state: Yup.string().required("State is required"),
+  city: Yup.string().required("City is required"),
+});
+
 const AccountsIndex = () => {
   // Context
   const toast = useContext(ToastContext);
@@ -26,61 +39,56 @@ const AccountsIndex = () => {
 
   const [userDetails, setUserDetails] = useState({
     _id: user ? user?._id : "",
-    firstName: user ? user?.firstName ?? "" : "",
-    lastName: user ? user?.lastName ?? "" : "",
-    phoneNo: user ? user?.phoneNo ?? "" : "",
-    address: user ? user?.address ?? "" : "",
-    addressMain: user ? user?.addressMain ?? "" : "",
-    country: user ? user?.country ?? "" : "",
-    state: user ? user?.state ?? "" : "",
-    city: user ? user?.city ?? "" : "",
-    zip: user ? user?.zip ?? "" : "",
     email: user ? user?.email ?? "" : "",
-    language: user ? user?.language ?? "eng" : "eng",
   });
 
-  const inputHandler = (e) => {
-    const { name, value } = e.target;
-    setUserDetails({
-      ...userDetails,
-      [name]: value,
-    });
-  };
-
-  const saveHandler = async () => {
-    try {
-      const { email, ...rest } = userDetails;
-      const resp = await updateUser(rest);
-      if (resp.data.status) {
-        dispatch(setUser(resp?.data.user));
-        toast.updateToast("Account");
-      } else {
-        toast.showMessage("Error", "Sorry, User could not be updated.", "error");
+  // Handlers
+  const formik = useFormik({
+    validationSchema: validationSchema,
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      zip: "",
+      city: "",
+      state: "",
+    },
+    onSubmit: async (data) => {
+      try {
+        const resp = await updateUser(data);
+        if (resp.data.status) {
+          dispatch(setUser(resp?.data.user));
+          toast.updateToast("Account");
+        } else {
+          toast.showMessage("Error", "Sorry, User could not be updated.", "error");
+        }
+      } catch (error) {
+        toast.showMessage(
+          "Error",
+          "Sorry, we are unable to process your request at this time.",
+          "error"
+        );
       }
-    } catch (error) {
-      toast.showMessage(
-        "Error",
-        "Sorry, we are unable to process your request at this time.",
-        "error"
-      );
-    }
-  };
+    },
+  });
 
   useEffect(() => {
-    setUserDetails({
-      _id: user ? user?._id : "",
-      firstName: user ? user?.firstName ?? "" : "",
-      lastName: user ? user?.lastName ?? "" : "",
-      phoneNo: user ? user?.phoneNo ?? "" : "",
-      address: user ? user?.address ?? "" : "",
-      addressMain: user ? user?.addressMain ?? "" : "",
-      country: user ? user?.country ?? "" : "",
-      state: user ? user?.state ?? "" : "",
-      city: user ? user?.city ?? "" : "",
-      zip: user ? user?.zip ?? "" : "",
-      email: user ? user?.email ?? "" : "",
-      language: user ? user?.language ?? "eng" : "eng",
-    });
+    if (user) {
+      formik.setFieldValue("_id", user?._id);
+      formik.setFieldValue("firstName", user?.firstName);
+      formik.setFieldValue("lastName", user?.lastName);
+      formik.setFieldValue("phoneNo", user?.phoneNo);
+      formik.setFieldValue("address", user?.address);
+      formik.setFieldValue("addressMain", user?.addressMain);
+      formik.setFieldValue("country", user?.country);
+      formik.setFieldValue("state", user?.state);
+      formik.setFieldValue("city", user?.city);
+      formik.setFieldValue("zip", user?.zip);
+      formik.setFieldValue("language", user?.language ?? "eng");
+      setUserDetails({
+        _id: user ? user?._id : "",
+        email: user ? user?.email ?? "" : "",
+      });
+    }
   }, [user]);
 
   return (
@@ -107,7 +115,7 @@ const AccountsIndex = () => {
             <div className="col-md-6"></div>
             <div className="col-md-2">
               <div className="align_savebtn">
-                <button className="myaccount_btn" type="button" onClick={saveHandler}>
+                <button className="myaccount_btn" type="button" onClick={formik.handleSubmit}>
                   Save Settings
                 </button>
               </div>
@@ -126,25 +134,23 @@ const AccountsIndex = () => {
               <div className="checkbox_class">
                 <label className="container_radio">
                   English
-                  {/* <input type="radio" checked="checked" name="radio" value="english" /> */}
                   <input
                     type="radio"
-                    checked={userDetails.language === "eng"}
+                    checked={formik.values.language === "eng"}
                     name="language"
                     value="eng"
-                    onChange={inputHandler}
+                    onChange={formik.handleChange}
                   />
                   <span className="checkmark"></span>
                 </label>
                 <label className="container_radio">
                   Espanol
-                  {/* <input type="radio" name="radio" value="espanol" /> */}
                   <input
                     type="radio"
-                    checked={userDetails.language === "esp"}
+                    checked={formik.values.language === "esp"}
                     name="language"
                     value="esp"
-                    onChange={inputHandler}
+                    onChange={formik.handleChange}
                   />
                   <span className="checkmark"></span>
                 </label>
@@ -160,6 +166,7 @@ const AccountsIndex = () => {
                 setShow={setShow}
                 setShowPassword={setShowPassword}
                 setShowPopup={setShowPopup}
+                formik={formik}
               />
             </div>
           </div>
