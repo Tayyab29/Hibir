@@ -15,11 +15,7 @@ const Contrary = () => {
               <div className="col-md-4 col-12">
                 <div className="contrary_border" key={index}>
                   <div className="d-flex justify-content-center align-items-center">
-                    <img
-                      src={item.img}
-                      alt="Images"
-                      className="icon_image_contrary"
-                    />
+                    <img src={item.img} alt="Images" className="icon_image_contrary" />
                     {/* </p> */}
                   </div>
                   <div className="icon_text">
@@ -29,7 +25,7 @@ const Contrary = () => {
                   </div>
 
                   <div className="learnmore_contrary">
-                    <button className="learn-btn">View More</button>
+                    <button className="learn-btn">Learn More</button>
                   </div>
                 </div>
               </div>

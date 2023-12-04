@@ -14,6 +14,16 @@ import { advertiseCreate } from "../../../../services/advertise";
 import { useHistory } from "react-router-dom";
 import { loginState } from "../../../../redux/login";
 
+const initialValidationState = {
+  propertyNames: false,
+  propertyBeds: false,
+  propertyBaths: false,
+};
+const intialValidations = {
+  propertyAdress: false,
+  propertyType: false,
+};
+
 const MultiUnit = () => {
   const history = useHistory();
   const { user } = useSelector(loginState);
@@ -28,12 +38,18 @@ const MultiUnit = () => {
     propertyUnit: "mu",
     propertyAdress: "",
     propertyType: "",
+    validations: {
+      ...intialValidations,
+    },
   });
   const [formArray, setFormArray] = useState([
     {
       propertyNames: "",
       propertyBeds: "",
       propertyBaths: "",
+      validations: {
+        ...initialValidationState,
+      },
     },
   ]);
 
@@ -46,6 +62,9 @@ const MultiUnit = () => {
           propertyNames: "",
           propertyBeds: "",
           propertyBaths: "",
+          validations: {
+            ...initialValidationState,
+          },
         },
       ]);
     }
@@ -60,19 +79,68 @@ const MultiUnit = () => {
 
   const inputHandler = (e, index) => {
     const { name, value } = e.target;
+    const _validation = localForm.validations;
     const updatedFormArray = [...formArray];
     if (name === "propertyBaths" || name === "propertyBeds" || name === "propertyNames") {
       updatedFormArray[index][name] = value;
+      updatedFormArray[index].validations[name] = false;
       setFormArray(updatedFormArray);
     } else {
       setLocalForm({
         ...localForm,
         [name]: value,
+        validations: {
+          ..._validation,
+          [name]: false,
+        },
       });
     }
   };
 
   const saveHandler = async () => {
+    let hasError = false;
+    const updatedFormArray = formArray.map((item) => {
+      const { validations, ...rest } = item;
+
+      if (
+        item.propertyNames === "" ||
+        item.propertyBeds === "" ||
+        item.propertyBaths === "" ||
+        localForm.propertyAdress === "" ||
+        localForm.propertyType === ""
+      ) {
+        hasError = true;
+        return {
+          ...rest,
+          validations: {
+            ...validations,
+            propertyNames: item.propertyNames === "",
+            propertyBeds: item.propertyBeds === "",
+            propertyBaths: item.propertyBaths === "",
+          },
+        };
+      } else {
+        return {
+          ...rest,
+          validations,
+        };
+      }
+    });
+
+    if (hasError) {
+      if (localForm.propertyAdress === "" || localForm.propertyType === "") {
+        setLocalForm({
+          ...localForm,
+          validations: {
+            propertyAdress: localForm.propertyAdress === "",
+            propertyType: localForm.propertyType === "",
+          },
+        });
+      }
+      setFormArray(updatedFormArray);
+      return;
+    }
+
     const dummyNames = [];
     const dummyBeds = [];
     const dummyBaths = [];
@@ -82,20 +150,20 @@ const MultiUnit = () => {
       dummyBeds.push(propertyBeds);
       dummyBaths.push(propertyBaths);
     });
+    const { validations, ...rest } = localForm;
 
     try {
       const res = await advertiseCreate({
-        ...localForm,
+        ...rest,
         propertyNames: dummyNames,
         propertyBaths: dummyBaths,
         propertyBeds: dummyBeds,
         user: user?._id,
-        // isFullfilled: fa
       });
       if (res.data.status) {
         dispatch(
           onFormAdvertiseDataChange({
-            ...localForm,
+            ...rest,
             _id: res.data.advertise,
             propertyNames: dummyNames,
             propertyBaths: dummyBaths,
@@ -137,6 +205,9 @@ const MultiUnit = () => {
                 onChange={inputHandler}
                 maxLength={100}
               />
+              {localForm.validations.propertyAdress && (
+                <small className="p-error">Address is required</small>
+              )}
             </div>
           </div>
           <div className="form-group">
@@ -150,6 +221,9 @@ const MultiUnit = () => {
               onChange={inputHandler}
               options={ADVERTISE_PROPERTY_TYPE}
             />
+            {localForm.validations.propertyType && (
+              <small className="p-error">Property Type is required</small>
+            )}
           </div>
           {formArray.map((field, index) => (
             <div key={index} className="inline_select_unit">
@@ -163,11 +237,14 @@ const MultiUnit = () => {
                   name="propertyNames"
                   id="propertyNames"
                   className="single_unit_input"
-                  placeholder="Enter name"
+                  placeholder="Enter Unit Name"
                   value={field.propertyNames}
                   onChange={(e) => inputHandler(e, index)}
                   maxLength={50}
                 />
+                {field.validations.propertyNames && (
+                  <small className="p-error">Unit Name is required</small>
+                )}
               </div>
               <div className="form-group">
                 <label>
@@ -182,6 +259,9 @@ const MultiUnit = () => {
                   onChange={(e) => inputHandler(e, index)}
                   options={ADVERTISE_BEDS}
                 />
+                {field.validations.propertyBeds && (
+                  <small className="p-error">Beds is required</small>
+                )}
               </div>
               <div className="form-group">
                 <label>
@@ -196,6 +276,9 @@ const MultiUnit = () => {
                   onChange={(e) => inputHandler(e, index)}
                   options={ADVERTISE_BATHS}
                 />
+                {field.validations.propertyBaths && (
+                  <small className="p-error">Baths is required</small>
+                )}
               </div>
               {index === 0 ? (
                 <div className="none_icon"></div>

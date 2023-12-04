@@ -163,7 +163,7 @@ const CondominiumDetails = () => {
       </section>
       <section className="pt-3">
         <div className="container">
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-8 col-12">
               <p className="condominum_p_text">
                 <b>There Are Many Variations of-Lorem Ipsum, QC H1PZ4</b>
@@ -176,7 +176,7 @@ const CondominiumDetails = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
       <section className="pt-3">

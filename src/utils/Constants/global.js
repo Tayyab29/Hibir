@@ -5,33 +5,33 @@ export const UNPROTECTED_PAGE = [
     // icon: <AiIcons.AiFillHome />,
     cName: "nav-text",
   },
-  {
-    title: "MANAGE RENTALS",
-    cName: "nav-text",
-    path: "/",
+  // {
+  //   title: "MANAGE RENTALS",
+  //   cName: "nav-text",
+  //   path: "/",
 
-    subMenu: [
-      {
-        title: "Properties",
-        path: "/manageproperty",
-      },
+  //   subMenu: [
+  //     {
+  //       title: "Properties",
+  //       path: "/manageproperty",
+  //     },
 
-      {
-        title: "Add Another Property",
-        path: "/advertise",
-      },
+  //     {
+  //       title: "Add Another Property",
+  //       path: "/advertise",
+  //     },
 
-      {
-        title: "Cancel Property",
-        path: "/",
-      },
+  //     {
+  //       title: "Cancel Property",
+  //       path: "/",
+  //     },
 
-      {
-        title: "Reactivate Property",
-        path: "/",
-      },
-    ],
-  },
+  //     {
+  //       title: "Reactivate Property",
+  //       path: "/",
+  //     },
+  //   ],
+  // },
   {
     title: "APARTMENTS",
     path: "/products",
@@ -255,7 +255,7 @@ export const ADVERTISE_EMENTITIES = [
 ];
 
 export const ADVERTISE_BATHS = [
-  { value: "", label: "Select a number of baths" },
+  { value: "", label: "Select" },
   { value: "0.5", label: "0.5" },
   { value: "1", label: "1" },
   { value: "1.5", label: "1.5" },
@@ -272,7 +272,7 @@ export const ADVERTISE_BATHS = [
 ];
 
 export const ADVERTISE_BEDS = [
-  { value: "", label: "Select a number of beds" },
+  { value: "", label: "Select" },
   { value: "Studio", label: "Studio" },
   { value: "1", label: "1" },
   { value: "2", label: "2" },
@@ -283,7 +283,7 @@ export const ADVERTISE_BEDS = [
 ];
 
 export const ADVERTISE_PROPERTY_TYPE = [
-  { value: "", label: "Select a Property Type" },
+  { value: "", label: "Select" },
   { value: "ap", label: "Apartment" },
   { value: "sh", label: "Single Family House" },
   { value: "con", label: "Condominium" },

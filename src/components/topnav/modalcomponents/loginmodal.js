@@ -12,7 +12,15 @@ import { classNames } from "primereact/utils";
 import * as Yup from "yup";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required("Email is required").email("Invalid email address"),
+  email: Yup.string()
+    .required("Email is required")
+    .email("Invalid email address")
+    .test("valid-email", "Invalid email address", (value) => {
+      if (!value) return false; // Fail if the value is empty
+      const atSymbolCount = (value.match(/@/g) || []).length;
+      const dotSymbolCount = (value.match(/\./g) || []).length;
+      return atSymbolCount === 1 && dotSymbolCount === 1;
+    }),
   password: Yup.string()
     .required("Password is required")
     .min(6, "Password must be at least 6 characters"),

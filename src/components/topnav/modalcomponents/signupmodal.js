@@ -12,7 +12,20 @@ import * as Yup from "yup";
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("First Name is required"),
   lastName: Yup.string().required("Last Name is required"),
-  email: Yup.string().required("Email is required").email("Invalid email address"),
+  email: Yup.string()
+    .required("Email is required")
+    .email("Invalid email address")
+    .test("valid-email", "Invalid email address", (value) => {
+      if (!value) return false; // Fail if the value is empty
+      const atSymbolCount = (value.match(/@/g) || []).length;
+      const dotSymbolCount = (value.match(/\./g) || []).length;
+      return atSymbolCount === 1 && dotSymbolCount === 1;
+    }),
+  isCheck: Yup.boolean().test(
+    "isChecked",
+    "Terms agreement is required",
+    (value) => value === true
+  ),
 });
 
 const SignupModal = (props) => {
@@ -22,17 +35,9 @@ const SignupModal = (props) => {
   const toast = useContext(ToastContext);
 
   // Handlers
-  const inputHandler = (e) => {
-    const { name, value } = e.target;
-    setUserData({
-      ...userData,
-      [name]: value,
-    });
-  };
-
   const formik = useFormik({
     validationSchema: validationSchema,
-    initialValues: { email: "", firstName: "", lastName: "" },
+    initialValues: { email: "", firstName: "", lastName: "", isCheck: false },
     onSubmit: async (data) => {
       setUserData({
         ...userData,
@@ -42,33 +47,9 @@ const SignupModal = (props) => {
       });
       setShowPassword(true);
       onHide();
-      // try {
-      //   let resp = await login(data);
-      //   if (resp.data.status) {
-      //     toast.showMessage("Success", "User has been login successfully.", "success");
-      //     localStorage.setItem("accessToken", resp.data.access_token);
-      //     localStorage.setItem("Id", resp.data.user._id);
-      //     onHide();
-      //     window.location.reload();
-      //   } else {
-      //     // Handle login failure
-      //     toast.showMessage("Error", "Invalid email & password", "error");
-      //   }
-      // } catch (error) {
-      //   console.log(error);
-      //   toast.showMessage(
-      //     "Error",
-      //     "Sorry, we are unable to process your request at this time.",
-      //     "error"
-      //   );
-      // }
     },
   });
 
-  const saveHandler = async () => {
-    setShowPassword(true);
-    onHide();
-  };
   const googleHandler = useGoogleLogin({
     onSuccess: (CodeResponse) => responseGoogle(CodeResponse),
   });
@@ -107,6 +88,8 @@ const SignupModal = (props) => {
     return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
   };
 
+  console.log({ first: formik.values });
+
   return (
     <>
       <div>
@@ -133,7 +116,7 @@ const SignupModal = (props) => {
             <div className="pt-3">
               <div className="form-group">
                 <div className="signle_line_input">
-                  <div>
+                  <div className="text_sign_wrapper">
                     <CustomInput
                       type="text"
                       name="firstName"
@@ -146,7 +129,7 @@ const SignupModal = (props) => {
                     {getFormErrorMessage("firstName")}
                   </div>
 
-                  <div>
+                  <div className="text_sign_wrapper">
                     <CustomInput
                       type="text"
                       name="lastName"
@@ -174,9 +157,17 @@ const SignupModal = (props) => {
                 </>
 
                 <div className="pt-2">
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    checked={formik.values.isCheck}
+                    value={formik.values.isCheck}
+                    name="isCheck"
+                    onChange={formik.handleChange}
+                  />
+
                   <span>Agree to Terms & Condition</span>
                 </div>
+                {getFormErrorMessage("isCheck")}
               </div>
               <div className="pt-3">
                 <button className="sign_button" type="submit" onClick={() => formik.handleSubmit()}>

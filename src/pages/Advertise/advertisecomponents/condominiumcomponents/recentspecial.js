@@ -1,6 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
+import {
+  mainViewState,
+  onAdvertiseValidate,
+  onFormAdvertiseDataChange,
+} from "../../../../redux/main-view";
 import CustomInput from "../../../../ui-components/custominput";
 import moment from "moment/moment";
 
@@ -12,8 +16,8 @@ const RecentSpecial = () => {
   // Handler
   const inputHandler = (e) => {
     const { name, value } = e.target;
-    console.log({ name, value });
     dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: value }));
+    dispatch(onAdvertiseValidate({ ...screens.advertise.validations, [name]: false }));
   };
   return (
     <div className="container">
@@ -39,6 +43,9 @@ const RecentSpecial = () => {
                   placeholder="Enter title"
                   maxLength={45}
                 />
+                {screens.advertise.validations.rentTitle && (
+                  <small className="p-error">Rent Special Title is required</small>
+                )}
               </div>
             </div>
           </div>
@@ -58,6 +65,9 @@ const RecentSpecial = () => {
                   className="condominium_input"
                   placeholder=""
                 />
+                {screens.advertise.validations.rentStartDate && (
+                  <small className="p-error">Rent Special Start is required</small>
+                )}
               </div>
             </div>
           </div>
@@ -78,6 +88,9 @@ const RecentSpecial = () => {
                   className="condominium_input"
                   placeholder=""
                 />
+                {screens.advertise.validations.rentEndDate && (
+                  <small className="p-error">Rent Special End is required</small>
+                )}
               </div>
             </div>
           </div>
