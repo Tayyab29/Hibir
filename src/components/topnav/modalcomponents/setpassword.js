@@ -7,14 +7,16 @@ import CustomInput from "../../../ui-components/custominput";
 
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 const validationSchema = Yup.object().shape({
   password: Yup.string()
-    .required("Password is required")
+    .required("New Password is required")
     .min(6, "Password must be at least 6 characters"),
+
   confirm_password: Yup.string()
     .required("Confirm Password is required")
-    .min(6, "Confirm Password must be at least 6 characters"),
+    .oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
 const SetPassordModal = (props) => {
@@ -27,13 +29,16 @@ const SetPassordModal = (props) => {
     password: "",
     confirm_password: "",
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   // Handlers
-  const inputHandler = (e) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value,
-    });
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   const formik = useFormik({
@@ -104,27 +109,41 @@ const SetPassordModal = (props) => {
 
             <div className="pt-3">
               <div className="form-group">
-                <CustomInput
-                  type="password"
-                  name="password"
-                  placeholder="Enter Password"
-                  className="input_text_login"
-                  // onChange={inputHandler}
-                  onChange={formik.handleChange}
-                  maxLength={20}
-                />
-                {getFormErrorMessage("password")}
+                <div className="custom_position">
+                  <CustomInput
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Enter Password"
+                    className="input_text_login"
+                    // onChange={inputHandler}
+                    onChange={formik.handleChange}
+                    maxLength={20}
+                  />
+                  {getFormErrorMessage("password")}
+                  <button type="button" onClick={togglePasswordVisibility} className="new_pass">
+                    {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
+                  </button>
+                </div>
 
-                <CustomInput
-                  type="password"
-                  name="confirm_password"
-                  placeholder="Enter Confirm Password"
-                  className="input_text_login"
-                  // onChange={inputHandler}
-                  onChange={formik.handleChange}
-                  maxLength={20}
-                />
-                {getFormErrorMessage("confirm_password")}
+                <div className="custom_position">
+                  <CustomInput
+                    type={showConfirmPassword ? "text" : "password"}
+                    name="confirm_password"
+                    placeholder="Enter Confirm Password"
+                    className="input_text_login"
+                    // onChange={inputHandler}
+                    onChange={formik.handleChange}
+                    maxLength={20}
+                  />
+                  {getFormErrorMessage("confirm_password")}
+                  <button
+                    type="button"
+                    onClick={toggleConfirmPasswordVisibility}
+                    className="confirm_pass"
+                  >
+                    {showConfirmPassword ? <IoIosEyeOff /> : <IoIosEye />}
+                  </button>
+                </div>
               </div>
               <div className="pt-3">
                 <button className="sign_button" type="submit">

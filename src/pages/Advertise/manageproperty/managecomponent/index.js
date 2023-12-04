@@ -135,7 +135,7 @@ const PropertySet = (props) => {
                       <p className="propset_ptext">{item.description}</p>
                     </div>
                     <div className="cancel_property_detail">
-                      <button className="cancel_property">View More</button>
+                      <button className="cancel_property">Cancel Property</button>
                     </div>
                   </div>
                 </div>

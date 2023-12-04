@@ -1,7 +1,11 @@
 import React from "react";
 // import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
+import {
+  mainViewState,
+  onAdvertiseValidate,
+  onFormAdvertiseDataChange,
+} from "../../../../redux/main-view";
 import { ADVERTISE_EMENTITIES } from "../../../../utils/Constants/global";
 
 const PropertyEmenities = () => {
@@ -13,6 +17,7 @@ const PropertyEmenities = () => {
   const inputHandler = (e) => {
     const { name, value } = e.target;
     dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: value }));
+    dispatch(onAdvertiseValidate({ ...screens.advertise.validations, [name]: false }));
   };
 
   const handleCheckboxChange = (id) => {
@@ -52,6 +57,9 @@ const PropertyEmenities = () => {
                 <option value="Cats">Cats</option>
                 <option value="Dogs">Dogs</option>
               </select>
+              {screens.advertise.validations.petsAllowed && (
+                <small className="p-error">Pets Allowed is required</small>
+              )}
             </div>
           </div>
         </div>
@@ -72,6 +80,9 @@ const PropertyEmenities = () => {
                 <option value="2">Washer/Dryer Hookup</option>
                 <option value="3">Laundry Facilities</option>
               </select>
+              {screens.advertise.validations.laundryType && (
+                <small className="p-error">Laundry Type is required</small>
+              )}
             </div>
           </div>
         </div>
@@ -93,6 +104,9 @@ const PropertyEmenities = () => {
                 <option value="3">Garage</option>
                 <option value="4">Other</option>
               </select>
+              {screens.advertise.validations.parkingType && (
+                <small className="p-error">Parking Type is required</small>
+              )}
             </div>
           </div>
         </div>

@@ -121,9 +121,6 @@ const TopNav = () => {
       const newCount = screens.notification.count + 1;
       dispatch(onNotificationCount(newCount));
       toast.notifyToast();
-      // if (selectedChat?.receiverId === socketContext?.recieveMessage?.latestmessage?.senderId) {
-      // setMessages((prev) => [...prev, socketContext.recieveMessage.latestmessage]);
-      // }
     }
   }, [socketContext.count]);
 
@@ -172,9 +169,12 @@ const TopNav = () => {
               </Link>
             )}
 
-            <Link to="/manage" className="link_deco commonheader_btn">
-              <div className="">Manage</div>
-            </Link>
+            {!(token && token !== "undefined") && (
+              <Link to="/manage" className="link_deco commonheader_btn">
+                <div className="">Manage</div>
+              </Link>
+            )}
+
             {token && token !== "undefined" && (
               <div className="bell_icon_wrapper" onClick={() => setShowNotify(!showNotify)}>
                 {screens.notification.count > 0 ? (

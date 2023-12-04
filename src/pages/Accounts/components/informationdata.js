@@ -6,8 +6,8 @@ import { ToastContext } from "../../../context/toast";
 import CustomDropdown from "../../../ui-components/customdropdown";
 import CustomInput from "../../../ui-components/custominput";
 import { fetchCountries, fetchZipCode } from "../../../services/genral-apis";
-import { ADVERTISE_BEDS } from "../../../utils/Constants/global";
-// import "../accounts.css"
+import { Modal } from "react-bootstrap";
+import ConfirmPopup from "./ConfirmPopup";
 
 const InformationData = (props) => {
   const {
@@ -17,6 +17,7 @@ const InformationData = (props) => {
     setShow,
     setShowPassword,
     setShowPopup,
+    formik,
   } = props;
 
   // Context
@@ -26,14 +27,7 @@ const InformationData = (props) => {
 
   // State
   const [country, setCountry] = useState([]);
-
-  const inputHandler = (e) => {
-    const { name, value } = e.target;
-    setUserDetails({
-      ...userDetails,
-      [name]: value,
-    });
-  };
+  const [isDeactivate, setIsDeactivate] = useState(false);
 
   const deactivateHandler = async () => {
     try {
@@ -81,17 +75,17 @@ const InformationData = (props) => {
 
   const getZipCodes = async () => {
     try {
-      const res = await fetchZipCode({ zip: userDetails.zip });
+      const res = await fetchZipCode({ zip: formik.values.zip });
       if (res.data.status) {
         const data = res?.data.records[0];
-        setUserDetails({
-          ...userDetails,
-          zip: data?.zip,
-          state: data?.state_name,
-          city: data?.city,
-        });
+
+        formik.setFieldValue("zip", data?.zip);
+        formik.setFieldValue("state", data?.state_name);
+        formik.setFieldValue("city", data?.city);
       } else {
-        setUserDetails({ ...userDetails, zip: "", state: "", city: "" });
+        formik.setFieldValue("zip", "");
+        formik.setFieldValue("state", "");
+        formik.setFieldValue("city", "");
         toast.showMessage("Error", "No record found with a similar zip.", "error");
       }
     } catch (error) {
@@ -109,187 +103,219 @@ const InformationData = (props) => {
   }, []);
 
   useEffect(() => {
-    if (userDetails.zip && userDetails.zip.length > 4) {
+    if (formik.values.zip && formik.values.zip.length > 4) {
       getZipCodes();
-    } else if (userDetails.zip.length <= 0) {
-      setUserDetails({ ...userDetails, zip: "", state: "", city: "" });
+    } else if (formik.values.zip.length <= 0) {
+      formik.setFieldValue("zip", "");
+      formik.setFieldValue("state", "");
+      formik.setFieldValue("city", "");
     }
-  }, [userDetails.zip]);
+  }, [formik.values.zip]);
+
+  const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
+  const getFormErrorMessage = (name) => {
+    return isFormFieldValid(name) && <small className="p-error">{formik.errors[name]}</small>;
+  };
 
   return (
     <>
+      <Modal show={isDeactivate} onHide={() => setIsDeactivate(false)}>
+        <ConfirmPopup onHide={() => setIsDeactivate(false)} />
+      </Modal>
       <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="headingOne">
-            <button
-              class="accordion-button"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
-              aria-expanded="true"
-              aria-controls="collapseOne"
+        <form onSubmit={formik.handleSubmit}>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne"
+                aria-expanded="true"
+                aria-controls="collapseOne"
+              >
+                <b> Personal Information</b>
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse show"
+              aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample"
             >
-              <b> Personal Information</b>
-            </button>
-          </h2>
-          <div
-            id="collapseOne"
-            class="accordion-collapse collapse show"
-            aria-labelledby="headingOne"
-            data-bs-parent="#accordionExample"
-          >
-            <div class="accordion-body">
-              <div className="row">
-                <div className="col-12 col-md-4 ">
-                  <div className="form-group">
-                    <label>
-                      <b>First Name </b>
-                    </label>
-                    <div>
-                      <CustomInput
-                        className="myaccount_input"
-                        placeholder="Enter first name"
-                        type="text"
-                        name="firstName"
-                        value={userDetails.firstName}
-                        onChange={inputHandler}
-                        maxLength={25}
-                      />
+              <div class="accordion-body">
+                <div className="row">
+                  <div className="col-12 col-md-4 ">
+                    <div className="form-group">
+                      <label>
+                        <b>First Name </b>
+                      </label>
+                      <div>
+                        <CustomInput
+                          className="myaccount_input"
+                          placeholder="Enter first name"
+                          type="text"
+                          name="firstName"
+                          value={formik.values.firstName}
+                          onChange={formik.handleChange}
+                          maxLength={25}
+                        />
+                        {getFormErrorMessage("firstName")}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-12 col-md-4 ">
-                  <div className="form-group">
-                    <label>
-                      <b>Last Name </b>
-                    </label>
-                    <div>
-                      <CustomInput
-                        className="myaccount_input"
-                        placeholder="Smith"
-                        type="text"
-                        name="lastName"
-                        value={userDetails.lastName}
-                        onChange={inputHandler}
-                        maxLength={25}
-                      />
+                  <div className="col-12 col-md-4 ">
+                    <div className="form-group">
+                      <label>
+                        <b>Last Name </b>
+                      </label>
+                      <div>
+                        <CustomInput
+                          className="myaccount_input"
+                          placeholder="Enter last name"
+                          type="text"
+                          name="lastName"
+                          // value={userDetails.lastName}
+                          // onChange={inputHandler}
+                          value={formik.values.lastName}
+                          onChange={formik.handleChange}
+                          maxLength={25}
+                        />
+                        {getFormErrorMessage("lastName")}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-12 col-md-4 ">
-                  <div className="form-group">
-                    <label>
-                      <b>Mobile Phone Number (Optional)</b>
-                    </label>
-                    <div>
-                      <CustomInput
-                        className="myaccount_input"
-                        type="number"
-                        placeholder="(123) 456 7890"
-                        name="phoneNo"
-                        value={userDetails.phoneNo}
-                        onChange={inputHandler}
-                        maxLength={14}
-                      />
+                  <div className="col-12 col-md-4 ">
+                    <div className="form-group">
+                      <label>
+                        <b>Mobile Phone Number (Optional)</b>
+                      </label>
+                      <div>
+                        <CustomInput
+                          className="myaccount_input"
+                          type="number"
+                          placeholder="(123) 456 7890"
+                          name="phoneNo"
+                          // value={userDetails.phoneNo}
+                          // onChange={inputHandler}
+                          value={formik.values.phoneNo}
+                          onChange={formik.handleChange}
+                          maxLength={14}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-12 ">
-                  <div className="form-group">
-                    <label>
-                      <b>Country</b>
-                    </label>
-                    <div>
-                      <CustomDropdown
-                        className="myaccount_input"
-                        id="country"
-                        name="country"
-                        value={userDetails.country}
-                        onChange={inputHandler}
-                        options={country}
-                      />
-                    </div>
-                    <div>
-                      <CustomInput
-                        className="myaccount_input"
-                        placeholder="Street Address Or P.O Box"
-                        type="text"
-                        name="addressMain"
-                        value={userDetails.addressMain}
-                        onChange={inputHandler}
-                        maxLength={150}
-                      />
-                    </div>
-                    <div>
-                      <CustomInput
-                        className="myaccount_input"
-                        placeholder="Apt, Suite, Unit, Building, Floor, Etc."
-                        type="text"
-                        name="address"
-                        value={userDetails.address}
-                        onChange={inputHandler}
-                        maxLength={150}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-12 col-md-4 ">
-                  <div className="form-group">
-                    <label>
-                      <b>Zip</b>
-                    </label>
-                    <div>
-                      <CustomInput
-                        className="myaccount_input"
-                        type="text"
-                        keyfilter="int"
-                        placeholder="Search zip..."
-                        name="zip"
-                        value={userDetails.zip}
-                        onChange={inputHandler}
-                        maxLength={5}
-                      />
+                  <div className="col-12 ">
+                    <div className="form-group">
+                      <label>
+                        <b>Country</b>
+                      </label>
+                      <div>
+                        <CustomDropdown
+                          className="myaccount_input"
+                          id="country"
+                          name="country"
+                          // value={userDetails.country}
+                          // onChange={inputHandler}
+                          value={formik.values.country}
+                          onChange={formik.handleChange}
+                          options={country}
+                        />
+                      </div>
+                      <div>
+                        <CustomInput
+                          className="myaccount_input"
+                          placeholder="Street Address Or P.O Box"
+                          type="text"
+                          name="addressMain"
+                          // value={userDetails.addressMain}
+                          // onChange={inputHandler}
+                          value={formik.values.addressMain}
+                          onChange={formik.handleChange}
+                          maxLength={150}
+                        />
+                      </div>
+                      <div>
+                        <CustomInput
+                          className="myaccount_input"
+                          placeholder="Apt, Suite, Unit, Building, Floor, Etc."
+                          type="text"
+                          name="address"
+                          // value={userDetails.address}
+                          // onChange={inputHandler}
+                          value={formik.values.address}
+                          onChange={formik.handleChange}
+                          maxLength={150}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-12 col-md-4">
-                  <div className="form-group">
-                    <label>
-                      <b>State</b>
-                    </label>
-                    <div>
-                      <CustomInput
-                        className="myaccount_input"
-                        type="text"
-                        placeholder="State"
-                        name="state"
-                        value={userDetails.state}
-                        disabled
-                      />
+                  <div className="col-12 col-md-4 ">
+                    <div className="form-group">
+                      <label>
+                        <b>Zip</b>
+                      </label>
+                      <div>
+                        <CustomInput
+                          className="myaccount_input"
+                          type="text"
+                          keyfilter="int"
+                          placeholder="Search zip..."
+                          name="zip"
+                          // value={userDetails.zip}
+                          // onChange={inputHandler}
+                          value={formik.values.zip}
+                          onChange={formik.handleChange}
+                          maxLength={5}
+                        />
+                        {getFormErrorMessage("zip")}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="col-12 col-md-4 ">
-                  <div className="form-group">
-                    <label>
-                      <b>City</b>
-                    </label>
-                    <div>
-                      <CustomInput
-                        className="myaccount_input"
-                        type="text"
-                        placeholder="City"
-                        name="city"
-                        value={userDetails.city}
-                        disabled
-                      />
+                  <div className="col-12 col-md-4">
+                    <div className="form-group">
+                      <label>
+                        <b>State</b>
+                      </label>
+                      <div>
+                        <CustomInput
+                          className="myaccount_input"
+                          type="text"
+                          placeholder="State"
+                          name="state"
+                          // value={userDetails.state}
+                          value={formik.values.state}
+                          disabled
+                        />
+                        {getFormErrorMessage("state")}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-12 col-md-4 ">
+                    <div className="form-group">
+                      <label>
+                        <b>City</b>
+                      </label>
+                      <div>
+                        <CustomInput
+                          className="myaccount_input"
+                          type="text"
+                          placeholder="City"
+                          name="city"
+                          // value={userDetails.city}
+                          value={formik.values.city}
+                          disabled
+                        />
+                        {getFormErrorMessage("city")}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </form>
+
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingTwo">
             <button
@@ -396,6 +422,7 @@ const InformationData = (props) => {
                       type="password"
                       className="accountpassupdate_input"
                       placeholder="********"
+                      disabled={true}
                     />
                     <button
                       className="updatepassbtn"
@@ -439,7 +466,7 @@ const InformationData = (props) => {
                     sign in to Hibir.com{" "}
                   </p>
                 </div>
-                <div className="col-12" onClick={() => deactivateHandler()}>
+                <div className="col-12" onClick={() => setIsDeactivate(true)}>
                   <button className="deactive_account_btn" type="button">
                     Deactivate Account
                   </button>

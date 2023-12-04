@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
+import {
+  mainViewState,
+  onAdvertiseValidate,
+  onFormAdvertiseDataChange,
+} from "../../../../redux/main-view";
 import { getUserDetailsById } from "../../../../services/users";
 import CustomInput from "../../../../ui-components/custominput";
 
@@ -24,6 +28,7 @@ const ContactInfo = () => {
       );
     } else {
       dispatch(onFormAdvertiseDataChange({ ...screens.advertise.data, [name]: value }));
+      dispatch(onAdvertiseValidate({ ...screens.advertise.validations, [name]: false }));
     }
   };
   useEffect(() => {
@@ -83,6 +88,9 @@ const ContactInfo = () => {
                 <span className="checkmark"></span>
               </label>
             </div>
+            {screens.advertise.validations.userType && (
+              <small className="p-error">User Type is required</small>
+            )}
           </div>
         </div>
         <div className="col-12 col-md-4 mb-3">
@@ -136,6 +144,9 @@ const ContactInfo = () => {
                 <option value="2">Phone Only</option>
                 <option value="3">Email Only</option>
               </select>
+              {screens.advertise.validations.contactPreference && (
+                <small className="p-error">Contact Preferences is required</small>
+              )}
             </div>
           </div>
         </div>

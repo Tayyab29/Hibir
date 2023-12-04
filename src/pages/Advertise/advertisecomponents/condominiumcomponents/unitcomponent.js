@@ -1,10 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import { BsImages, BsInfoCircle, BsPlus } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { mainViewState, onFormAdvertiseDataChange } from "../../../../redux/main-view";
+import {
+  mainViewState,
+  onAdvertiseMultiValidate,
+  onFormAdvertiseDataChange,
+} from "../../../../redux/main-view";
 import CustomInput from "../../../../ui-components/custominput";
 import { ToastContext } from "../../../../context/toast";
 import axios from "axios";
+
+const initialValidationState = {
+  sizeSqft: false,
+  rent: false,
+  deposit: false,
+  leaseLength: false,
+  availableDate: false,
+  images: false,
+};
 
 const UnitComponent = ({ uploadedImages }) => {
   // Redux
@@ -18,6 +31,9 @@ const UnitComponent = ({ uploadedImages }) => {
       deposit: "",
       leaseLength: "",
       availableDate: "",
+      validations: {
+        ...initialValidationState,
+      },
     },
   ]);
 
@@ -31,6 +47,8 @@ const UnitComponent = ({ uploadedImages }) => {
     const { name, value } = e.target;
     const updatedFormArray = [...formArray];
     updatedFormArray[index][name] = value;
+    updatedFormArray[index].validations[name] = true;
+
     setFormArray(updatedFormArray);
     const dummysizeSqft = [];
     const dummyrent = [];
@@ -45,6 +63,21 @@ const UnitComponent = ({ uploadedImages }) => {
       dummyleaseLength.push(leaseLength);
       dummyavailableDate.push(availableDate);
     });
+
+    const { validations } = updatedFormArray;
+    console.log({ updatedFormArray });
+    console.log({ validations });
+    // Validations
+    // const validate = [...screens.advertise.multiValidate];
+    // // validate[index][name] = true;
+    // console.log({ first: validate[index].hasOwnProperty(name) });
+    // if (!validate[index].hasOwnProperty(name)) {
+    //   console.log("dsadsdasfasfsafa");
+    //   validate[index][name] = true;
+    // }
+    // console.log({ validate: validate[index][name] });
+
+    // dispatch(onAdvertiseMultiValidate(validate));
 
     dispatch(
       onFormAdvertiseDataChange({
@@ -66,11 +99,22 @@ const UnitComponent = ({ uploadedImages }) => {
       leaseLength: "",
       availableDate: "",
     };
+    const _validate = {
+      sizeSqft: false,
+      rent: false,
+      deposit: false,
+      leaseLength: false,
+      availableDate: false,
+      images: false,
+    };
     const temp = [...formArray];
+    const local = [...screens.advertise.multiValidate];
     for (let i = 1; i < screens?.advertise?.data?.propertyBeds.length; i++) {
       temp.push({ ...object });
+      local.push({ ..._validate });
     }
     setFormArray(temp);
+    dispatch(onAdvertiseMultiValidate(local));
   }, [screens?.advertise?.data?.propertyBeds]);
 
   const onFileChange = async (e, index) => {
