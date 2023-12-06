@@ -159,6 +159,11 @@ const FilterMenueSection = () => {
                 </div>
                 <div style={{ clear: "both" }}></div>
             </div>
+            {/* Button Section */}
+            <div className='custom_width_100 filter_main_button'>
+                <button className='clearFilterbtn'>Clear Filter</button>
+                <button className='applyFilterbtn'>Apply Filter</button>
+            </div>
         </>
     );
 };
