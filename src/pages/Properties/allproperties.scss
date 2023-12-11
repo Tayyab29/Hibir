@@ -270,7 +270,7 @@
 .custom_width_50 {
   width: 49%;
   float: left;
-  height: 200px;
+  height: 180px;
   border-bottom: 1px solid #757575;
 }
 
@@ -283,7 +283,7 @@
 .homeType_width_50 {
   width: 49%;
   float: left;
-  height: 250px;
+  height: 235px;
   border-bottom: 1px solid #757575;
 }
 
@@ -475,4 +475,28 @@
   background-color: #fff;
   color: #1eb560;
   font-weight: 500;
+}
+.custom_width_50_profileimg {
+  width: 49%;
+  float: left;
+  height: 100px;
+  padding: 15px;
+ }
+ .profile_image img{
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+.profileimg_section_date{
+  text-align: right;
+}
+.date_btn{
+  border: 1px solid #757575;
+  color: #1eb560;
+  outline: none;
+  box-shadow: none;
+  font-weight: 500;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 4px 20px;
 }

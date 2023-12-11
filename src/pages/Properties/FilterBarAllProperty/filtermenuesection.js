@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import CustomInput from '../../../ui-components/custominput';
 import InputRange from 'react-input-range';
+import { BiBorderRadius } from 'react-icons/bi';
 
 const FilterMenueSection = () => {
     const [rangeValues, setRangeValues] = useState({ min: 0, max: 100 });
+    const [isDateInputVisible, setDateInputVisible] = useState(false);
 
+    const handleDateClick = () => {
+      // Toggle the visibility of the date input
+      setDateInputVisible(!isDateInputVisible);
+    };
     const handleRangeChange = (values) => {
         setRangeValues(values);
     };
@@ -155,6 +161,27 @@ const FilterMenueSection = () => {
                             />
                         </div>
 
+                    </div>
+                </div>
+                <div style={{ clear: "both" }}></div>
+            </div>
+            {/* Section 4 */}
+            <div className='custom_width_100'>
+                <div className='custom_width_50_profileimg'>
+                    <div className=''>
+                        <div className='profile_image'>
+                            <img src="images/propset1.png" alt="Avatar" />
+                            <span><b>My Profile</b></span>
+                        </div>
+                    </div>
+                </div>
+                <div className='custom_width_50_profileimg'>
+                    <div className='profileimg_section_date'>
+                        <label><b>Move in Date</b></label>
+                        <div>
+                            <button onClick={handleDateClick} className='date_btn'>Select A Date</button>
+                            {isDateInputVisible && <input type="date" style={{display:"none"}} />}
+                        </div>
                     </div>
                 </div>
                 <div style={{ clear: "both" }}></div>
