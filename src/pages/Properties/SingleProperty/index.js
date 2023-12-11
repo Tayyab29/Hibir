@@ -5,11 +5,11 @@ const SingleProperty = () => {
   return (
     <>
 
-<section className="">
-<div className="container">
-  <h2>Your Property Title Goes Here </h2>
-</div>
-</section>
+      <section className="">
+        <div className="container">
+          <h2>Your Property Title Goes Here </h2>
+        </div>
+      </section>
 
 
 
