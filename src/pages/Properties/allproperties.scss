@@ -476,21 +476,25 @@
   color: #1eb560;
   font-weight: 500;
 }
+
 .custom_width_50_profileimg {
   width: 49%;
   float: left;
   height: 100px;
   padding: 15px;
- }
- .profile_image img{
+}
+
+.profile_image img {
   border-radius: 50%;
   width: 80px;
   height: 80px;
 }
-.profileimg_section_date{
+
+.profileimg_section_date {
   text-align: right;
 }
-.date_btn{
+
+.date_btn {
   border: 1px solid #757575;
   color: #1eb560;
   outline: none;
@@ -499,4 +503,118 @@
   border-radius: 4px;
   font-size: 14px;
   padding: 4px 20px;
+}
+
+.single_property_view h2 {
+  margin-top: 1rem;
+}
+
+.single_property_view p span {
+  margin: 0;
+  color: #757575;
+
+}
+
+.single_property_view .brdr_text_one {
+  border-right: 1px solid #757575;
+  padding: 0px 16px 0px 0px;
+  font-size: 14px;
+}
+
+.single_property_view .brdr_text_two {
+  border-right: 1px solid #757575;
+  padding: 0px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1eb560;
+}
+
+.single_property_view .brdr_text_three {
+  // border-right: 1px solid #757575;
+  padding: 0px 16px;
+  font-size: 14px;
+}
+
+.custom_margin_div {
+  margin-top: 2rem;
+  text-align: right;
+}
+
+.doc_brdr {
+  border: 1px solid #757575;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.right_single_property_text {
+  text-align: right;
+}
+
+.right_single_property_text h2 {
+  margin-top: .5rem;
+}
+
+.single_social_suit {
+  display: flex;
+  column-gap: 20px;
+}
+
+.single_social_suit span {
+  margin: 0;
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+}
+
+.image_section {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.image_section img {
+  width: 100%;
+}
+
+.grid_5_img {
+  height: 442px;
+}
+
+// overview_card
+.overview_card {
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px 4px #ecebeb;
+}
+
+.data_show {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.data_inner_section {
+  display: flex;
+  column-gap: 15px;
+}
+.overview_icon_div{
+  padding: 5px 5px;
+  border: 1px solid #1eb560;
+  height: 50px;
+  width: 50px;
+  background-color: #deede5;
+  border-radius: 4px;
+  text-align: center;
+}
+.overview_icon{
+  font-size: 22px;
+  margin: 0;
+}
+.overview_text{
+  margin: 0 0 5px 0;
+}
+.description_text{
+  text-align: justify;
+}
+.description_text p{
+  color: #757575;
 }
