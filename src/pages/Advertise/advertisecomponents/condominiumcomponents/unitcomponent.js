@@ -45,9 +45,34 @@ const UnitComponent = ({ uploadedImages }) => {
 
   const inputHandler = (e, index) => {
     const { name, value } = e.target;
+    const _formArray = screens.advertise.multiValidate;
+    const localRedux = [..._formArray];
+
     const updatedFormArray = [...formArray];
-    updatedFormArray[index][name] = value;
-    updatedFormArray[index].validations[name] = true;
+    // Create a new object for the specific index
+    const updatedItem = {
+      ...updatedFormArray[index],
+      [name]: value,
+      validations: {
+        ...updatedFormArray[index].validations,
+        [name]: false,
+      },
+    };
+
+    const reduxItem = {
+      ...localRedux[index],
+      [name]: value,
+      validations: {
+        ...localRedux[index].validations,
+        [name]: false,
+      },
+    };
+
+    // Update the array with the new object
+    updatedFormArray[index] = updatedItem;
+    localRedux[index] = reduxItem;
+    // updatedFormArray[index][name] = value;
+    // updatedFormArray[index].validations[name] = true;
 
     setFormArray(updatedFormArray);
     const dummysizeSqft = [];
@@ -63,21 +88,10 @@ const UnitComponent = ({ uploadedImages }) => {
       dummyleaseLength.push(leaseLength);
       dummyavailableDate.push(availableDate);
     });
+    let updated = [...localRedux];
+    // let updated = [...updatedFormArray];
 
-    const { validations } = updatedFormArray;
-    console.log({ updatedFormArray });
-    console.log({ validations });
-    // Validations
-    // const validate = [...screens.advertise.multiValidate];
-    // // validate[index][name] = true;
-    // console.log({ first: validate[index].hasOwnProperty(name) });
-    // if (!validate[index].hasOwnProperty(name)) {
-    //   console.log("dsadsdasfasfsafa");
-    //   validate[index][name] = true;
-    // }
-    // console.log({ validate: validate[index][name] });
-
-    // dispatch(onAdvertiseMultiValidate(validate));
+    dispatch(onAdvertiseMultiValidate(updated));
 
     dispatch(
       onFormAdvertiseDataChange({
@@ -98,23 +112,17 @@ const UnitComponent = ({ uploadedImages }) => {
       deposit: "",
       leaseLength: "",
       availableDate: "",
+      validations: {
+        ...initialValidationState,
+      },
     };
-    const _validate = {
-      sizeSqft: false,
-      rent: false,
-      deposit: false,
-      leaseLength: false,
-      availableDate: false,
-      images: false,
-    };
+
     const temp = [...formArray];
-    const local = [...screens.advertise.multiValidate];
     for (let i = 1; i < screens?.advertise?.data?.propertyBeds.length; i++) {
       temp.push({ ...object });
-      local.push({ ..._validate });
     }
     setFormArray(temp);
-    dispatch(onAdvertiseMultiValidate(local));
+    dispatch(onAdvertiseMultiValidate(temp));
   }, [screens?.advertise?.data?.propertyBeds]);
 
   const onFileChange = async (e, index) => {
@@ -317,6 +325,9 @@ const UnitComponent = ({ uploadedImages }) => {
                         onChange={(e) => inputHandler(e, index)}
                         maxLength={6}
                       />
+                      {screens.advertise.multiValidate[index]?.validations.sizeSqft && (
+                        <small className="p-error">Required</small>
+                      )}
                     </td>
                     <td>
                       <CustomInput
@@ -328,6 +339,9 @@ const UnitComponent = ({ uploadedImages }) => {
                         onChange={(e) => inputHandler(e, index)}
                         maxLength={6}
                       />
+                      {screens.advertise.multiValidate[index]?.validations.rent && (
+                        <small className="p-error">Required</small>
+                      )}
                     </td>
                     <td>
                       <CustomInput
@@ -339,6 +353,9 @@ const UnitComponent = ({ uploadedImages }) => {
                         onChange={(e) => inputHandler(e, index)}
                         maxLength={6}
                       />
+                      {screens.advertise.multiValidate[index]?.validations.deposit && (
+                        <small className="p-error">Required</small>
+                      )}
                     </td>
                     <td>
                       <CustomInput
@@ -350,6 +367,9 @@ const UnitComponent = ({ uploadedImages }) => {
                         onChange={(e) => inputHandler(e, index)}
                         maxLength={30}
                       />
+                      {screens.advertise.multiValidate[index]?.validations.leaseLength && (
+                        <small className="p-error">Required</small>
+                      )}
                     </td>
                     <td>
                       <input
@@ -363,6 +383,9 @@ const UnitComponent = ({ uploadedImages }) => {
                         // onChange={handleDateChange}
                         min={new Date().toISOString().split("T")[0]}
                       />
+                      {screens.advertise.multiValidate[index]?.validations.availableDate && (
+                        <small className="p-error">Required</small>
+                      )}
                     </td>
                   </tr>
                 </tbody>

@@ -12,7 +12,6 @@ const AutocompleteComponent = () => {
   const handlePlaceSelect = () => {
     if (autocomplete !== null) {
       const place = autocomplete.getPlace();
-      console.log(place);
     }
   };
 

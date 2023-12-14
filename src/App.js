@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Route, BrowserRouter as Router, Redirect } from "react-router-dom";
+import { Route, BrowserRouter as Router, Redirect, useHistory } from "react-router-dom";
 
 // Components
 import Home from "./pages/Home/home";
@@ -42,6 +42,7 @@ import { mainViewState, onNotificationCount } from "./redux/main-view";
 function App() {
   const dispatch = useDispatch();
   const socketContext = useContext(SocketContext);
+  const history = useHistory();
 
   const { user } = useSelector(loginState);
   const { screens } = useSelector(mainViewState);

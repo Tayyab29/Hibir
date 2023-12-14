@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   mainViewState,
   onAdvertiseCurrentScreen,
+  onAdvertiseMultiValidate,
+  onAdvertiseValidate,
   onFormAdvertiseDataChange,
 } from "../../redux/main-view";
 
@@ -52,6 +54,64 @@ const CondominiumDetails = () => {
 
   const saveHandler = async () => {
     try {
+      const _validate = screens.advertise.validations;
+      const _data = screens.advertise.data;
+      const _formArray = screens.advertise.multiValidate;
+      let hasError = false;
+      if (
+        _validate.rentTitle ||
+        _validate.rentStartDate ||
+        _validate.rentEndDate ||
+        _validate.petsAllowed ||
+        _validate.laundryType ||
+        _validate.parkingType ||
+        _validate.contactPreference ||
+        _validate.userType
+      ) {
+        hasError = true;
+      }
+      const updatedFormArray = _formArray.map((item) => {
+        const { validations, ...rest } = item;
+
+        if (
+          item.availableDate === "" ||
+          item.deposit === "" ||
+          item.leaseLength === "" ||
+          item.rent === "" ||
+          item.sizeSqft === ""
+        ) {
+          hasError = true;
+          return {
+            ...rest,
+            validations: {
+              ...validations,
+              availableDate: item.availableDate === "",
+              deposit: item.deposit === "",
+              leaseLength: item.leaseLength === "",
+              rent: item.rent === "",
+              sizeSqft: item.sizeSqft === "",
+            },
+          };
+        }
+      });
+      if (hasError) {
+        dispatch(
+          onAdvertiseValidate({
+            rentTitle: _data.rentTitle === "",
+            rentStartDate: _data.rentStartDate === "",
+            rentEndDate: _data.rentStartDate === "",
+            petsAllowed: _data.petsAllowed === "",
+            laundryType: _data.laundryType === "",
+            parkingType: _data.parkingType === "",
+            contactPreference: _data.contactPreference === "",
+            userType: _data.userType === "",
+          })
+        );
+        dispatch(onAdvertiseMultiValidate(updatedFormArray));
+        toast.showMessage("Error", "Please fill the required field", "error");
+        return;
+      }
+
       const res = await advertiseUpdation({
         ...screens.advertise.data,
         isFullfilled: true,
@@ -60,6 +120,37 @@ const CondominiumDetails = () => {
       if (res.data.status) {
         toast.createdToast("Advertisement");
         dispatch(onFormAdvertiseDataChange(ADVERTISE_INTIAL_STATE));
+        dispatch(
+          onAdvertiseValidate({
+            rentTitle: false,
+            rentStartDate: false,
+            rentEndDate: false,
+            petsAllowed: false,
+            laundryType: false,
+            parkingType: false,
+            contactPreference: false,
+            userType: false,
+          })
+        );
+        dispatch(
+          onAdvertiseMultiValidate([
+            {
+              availableDate: "",
+              deposit: "",
+              leaseLength: "",
+              rent: "",
+              sizeSqft: "",
+              validations: {
+                sizeSqft: false,
+                rent: false,
+                deposit: false,
+                leaseLength: false,
+                availableDate: false,
+                images: false,
+              },
+            },
+          ])
+        );
         history.replace("/");
       } else {
         toast.showMessage("Error", "Incorrect Data", "error");
@@ -74,6 +165,63 @@ const CondominiumDetails = () => {
   };
 
   const PublishHandler = () => {
+    const _validate = screens.advertise.validations;
+    const _data = screens.advertise.data;
+    const _formArray = screens.advertise.multiValidate;
+    let hasError = false;
+    if (
+      _validate.rentTitle ||
+      _validate.rentStartDate ||
+      _validate.rentEndDate ||
+      _validate.petsAllowed ||
+      _validate.laundryType ||
+      _validate.parkingType ||
+      _validate.contactPreference ||
+      _validate.userType
+    ) {
+      hasError = true;
+    }
+    const updatedFormArray = _formArray.map((item) => {
+      const { validations, ...rest } = item;
+
+      if (
+        item.availableDate === "" ||
+        item.deposit === "" ||
+        item.leaseLength === "" ||
+        item.rent === "" ||
+        item.sizeSqft === ""
+      ) {
+        hasError = true;
+        return {
+          ...rest,
+          validations: {
+            ...validations,
+            availableDate: item.availableDate === "",
+            deposit: item.deposit === "",
+            leaseLength: item.leaseLength === "",
+            rent: item.rent === "",
+            sizeSqft: item.sizeSqft === "",
+          },
+        };
+      }
+    });
+    if (hasError) {
+      dispatch(
+        onAdvertiseValidate({
+          rentTitle: _data.rentTitle === "",
+          rentStartDate: _data.rentStartDate === "",
+          rentEndDate: _data.rentStartDate === "",
+          petsAllowed: _data.petsAllowed === "",
+          laundryType: _data.laundryType === "",
+          parkingType: _data.parkingType === "",
+          contactPreference: _data.contactPreference === "",
+          userType: _data.userType === "",
+        })
+      );
+      dispatch(onAdvertiseMultiValidate(updatedFormArray));
+      toast.showMessage("Error", "Please fill the required field", "error");
+      return;
+    }
     history.push("/advertise");
     dispatch(onAdvertiseCurrentScreen(2));
   };
