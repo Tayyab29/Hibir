@@ -290,3 +290,19 @@ export const ADVERTISE_PROPERTY_TYPE = [
   { value: "th", label: "TownHouse" },
   { value: "mh", label: "Mobile Home/Manufactured Home" },
 ];
+export const FILTERBAR_PRICE = [
+  { value: "", label: "Price" },
+  { value: "ap", label: "$20" },
+];
+export const FILTERBAR_BEDS = [
+  { value: "", label: "Beds" },
+  { value: "ap", label: "$20" },
+];
+export const FILTERBAR_HOMETYPE = [
+  { value: "", label: "Home Type" },
+  { value: "ap", label: "$20" },
+];
+export const FILTERBAR_MOVEINDATE = [
+  { value: "", label: "Move In Date" },
+  { value: "ap", label: "$20" },
+];
