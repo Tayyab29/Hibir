@@ -43,7 +43,6 @@ const UpdatePassword = (props) => {
       confirm_password: "",
     },
     onSubmit: async (data) => {
-      console.log({ data });
       let dto = {
         password: data.password,
         _id: data._id,

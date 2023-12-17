@@ -18,7 +18,11 @@ import SetPassordModal from "./modalcomponents/setpassword";
 import ForgotModal from "./modalcomponents/forgotmodal";
 
 // Constants
-import { PROTECTED_PAGE, UNPROTECTED_PAGE } from "../../utils/Constants/global";
+import {
+  ADVERTISE_INTIAL_STATE,
+  PROTECTED_PAGE,
+  UNPROTECTED_PAGE,
+} from "../../utils/Constants/global";
 
 // Services API'S
 import { logout } from "../../services/users";
@@ -33,7 +37,13 @@ import { loginState } from "../../redux/login";
 import { useDispatch, useSelector } from "react-redux";
 import NotificationBox from "../../pages/Notification";
 import { SocketContext } from "../../context/socket";
-import { mainViewState, onNotificationCount } from "../../redux/main-view";
+import {
+  mainViewState,
+  onAdvertiseMultiValidate,
+  onAdvertiseValidate,
+  onFormAdvertiseDataChange,
+  onNotificationCount,
+} from "../../redux/main-view";
 import { ToastContext } from "../../context/toast";
 import DeactivateModal from "./modalcomponents/deactivateModal";
 
@@ -108,6 +118,43 @@ const TopNav = () => {
   const closeSubMenu = () => {
     setOpenSubMenuIndex(null);
   };
+
+  const advertisementHandler = () => {
+    dispatch(onFormAdvertiseDataChange(ADVERTISE_INTIAL_STATE));
+    dispatch(
+      onAdvertiseValidate({
+        rentTitle: false,
+        rentStartDate: false,
+        rentEndDate: false,
+        petsAllowed: false,
+        laundryType: false,
+        parkingType: false,
+        contactPreference: false,
+        userType: false,
+      })
+    );
+    dispatch(
+      onAdvertiseMultiValidate([
+        {
+          availableDate: "",
+          deposit: "",
+          leaseLength: "",
+          rent: "",
+          sizeSqft: "",
+          validations: {
+            sizeSqft: false,
+            rent: false,
+            deposit: false,
+            leaseLength: false,
+            availableDate: false,
+            images: false,
+          },
+        },
+      ])
+    );
+  };
+
+  // UseEfects
   useEffect(() => {
     socketContext.recieveSocketNotifyOn();
 
@@ -158,19 +205,27 @@ const TopNav = () => {
             <FaIcons.FaBars onClick={showSidebar} className="baricon_color" /> Menu
           </Link>
           <div className="right_side_nav">
-            <Link className="logo_div" to="/">
+            <Link className="logo_div" to="/" onClick={() => advertisementHandler()}>
               <div>
                 <img src="images/Hibir Bet Logo-01 1.svg" alt="Logo" />
               </div>
             </Link>
             {token && token !== "undefined" && (
-              <Link to="/advertise" className="link_deco commonheader_btn">
+              <Link
+                to="/advertise"
+                className="link_deco commonheader_btn"
+                onClick={() => advertisementHandler()}
+              >
                 <div className="">Advertise</div>
               </Link>
             )}
 
             {!(token && token !== "undefined") && (
-              <Link to="/manage" className="link_deco commonheader_btn">
+              <Link
+                to="/manage"
+                className="link_deco commonheader_btn"
+                onClick={() => advertisementHandler()}
+              >
                 <div className="">Manage</div>
               </Link>
             )}
@@ -199,12 +254,22 @@ const TopNav = () => {
             ) : (
               <>
                 <DropdownButton id="dropdown-basic-button" title={userName}>
-                  <Dropdown.Item onClick={() => history.push("/accounts")}>
+                  <Dropdown.Item
+                    onClick={() => {
+                      history.push("/accounts");
+                      advertisementHandler();
+                    }}
+                  >
                     <div className="link_deco signUp_clrd">
                       <div>My Account</div>
                     </div>
                   </Dropdown.Item>
-                  <Dropdown.Item onClick={logoutHandler}>
+                  <Dropdown.Item
+                    onClick={() => {
+                      logoutHandler();
+                      advertisementHandler();
+                    }}
+                  >
                     <div className="link_deco signUp_clrd">
                       <div>Log Out</div>
                     </div>
@@ -222,6 +287,7 @@ const TopNav = () => {
                   src="images/Hibir Bet Logo-01 1.svg"
                   className="side_canvas_logo"
                   alt="Hibir Logo"
+                  onClick={() => advertisementHandler()}
                 />
               </Link>
             </Offcanvas.Title>
@@ -234,7 +300,11 @@ const TopNav = () => {
                   onMouseEnter={(e) => openSubMenu(e, index)}
                   onMouseLeave={closeSubMenu}
                 >
-                  <Link className="link_remove_underline" to={item.path}>
+                  <Link
+                    className="link_remove_underline"
+                    to={item.path}
+                    onClick={() => advertisementHandler()}
+                  >
                     <ListGroupItem action className={openSubMenuIndex === index ? "active" : ""}>
                       {item.title}
                     </ListGroupItem>
@@ -249,6 +319,7 @@ const TopNav = () => {
                           className="link_remove_underline"
                           to={submenuItem.path}
                           key={subIndex}
+                          onClick={() => advertisementHandler()}
                         >
                           <ListGroupItem key={subIndex} action>
                             {submenuItem.title}

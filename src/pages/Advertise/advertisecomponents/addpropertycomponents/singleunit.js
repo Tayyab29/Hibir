@@ -90,7 +90,6 @@ const SingleUnit = () => {
       propertyBaths: "",
     },
     onSubmit: async (data) => {
-      console.log({ data });
       try {
         const res = await advertiseCreate({ ...localForm, user: user?._id });
         if (res.data.status) {
