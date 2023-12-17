@@ -34,40 +34,40 @@ export const UNPROTECTED_PAGE = [
   // },
   {
     title: "APARTMENTS",
-    path: "/products",
+    path: `/allproperties?type=ap`,
     // // icon: <FaIcons.FaCartPlus />,
     cName: "nav-text",
   },
   {
     title: "HOMES",
-    path: "/team",
+    path: "/allproperties?type=sh",
     // // icon: <IoIcons.IoMdPeople />,
     cName: "nav-text",
   },
   {
     title: "CONDOS",
-    path: "/messages",
+    path: "/allproperties?type=con",
     // // icon: <FaIcons.FaEnvelopeOpenText />,
     cName: "nav-text",
   },
   {
     title: "TOWNHOMES",
-    path: "/support",
+    path: "/allproperties?type=th",
     // // icon: <IoIcons.IoMdHelpCircle />,
     cName: "nav-text",
   },
   {
-    title: "BASEMENT",
-    path: "/",
+    title: "MOBILE HOME",
+    path: "/allproperties?type=mh",
     // icon: <AiIcons.AiFillHome />,
     cName: "nav-text",
   },
-  {
-    title: "ROOMS",
-    path: "/reports",
-    // icon: <IoIcons.IoIosPaper />,
-    cName: "nav-text",
-  },
+  // {
+  //   title: "ROOMS",
+  //   path: "/reports",
+  //   // icon: <IoIcons.IoIosPaper />,
+  //   cName: "nav-text",
+  // },
 ];
 
 export const PROTECTED_PAGE = [
@@ -105,40 +105,40 @@ export const PROTECTED_PAGE = [
   },
   {
     title: "APARTMENTS",
-    path: "/products",
+    path: `/allproperties?type=ap`,
     // // icon: <FaIcons.FaCartPlus />,
     cName: "nav-text",
   },
   {
     title: "HOMES",
-    path: "/team",
+    path: "/allproperties?type=sh",
     // // icon: <IoIcons.IoMdPeople />,
     cName: "nav-text",
   },
   {
     title: "CONDOS",
-    path: "/messages",
+    path: "/allproperties?type=con",
     // // icon: <FaIcons.FaEnvelopeOpenText />,
     cName: "nav-text",
   },
   {
     title: "TOWNHOMES",
-    path: "/support",
+    path: "/allproperties?type=th",
     // // icon: <IoIcons.IoMdHelpCircle />,
     cName: "nav-text",
   },
   {
-    title: "BASEMENT",
-    path: "/",
+    title: "MOBILE HOME",
+    path: "/allproperties?type=mh",
     // icon: <AiIcons.AiFillHome />,
     cName: "nav-text",
   },
-  {
-    title: "ROOMS",
-    path: "/reports",
-    // icon: <IoIcons.IoIosPaper />,
-    cName: "nav-text",
-  },
+  // {
+  //   title: "ROOMS",
+  //   path: "/reports",
+  //   // icon: <IoIcons.IoIosPaper />,
+  //   cName: "nav-text",
+  // },
   {
     title: "INBOX",
     path: "/chatindex",
@@ -196,6 +196,15 @@ export const PROTECTED_PAGE = [
   },
 ];
 
+export const PROPERTY_TYPE = [
+  { value: "", label: "Select a Property Type" },
+  { value: "ap", label: "Apartment" },
+  { value: "sh", label: "Single Family House" },
+  { value: "con", label: "Condominium" },
+  { value: "th", label: "TownHouse" },
+  { value: "mh", label: "Mobile Home/Manufactured Home" },
+];
+
 // Advertise
 export const ADVERTISE_INTIAL_STATE = {
   _id: "",
@@ -212,6 +221,7 @@ export const ADVERTISE_INTIAL_STATE = {
   leaseLength: [],
   availableDate: [],
   images: [],
+  imagesLength: 0,
   description: "",
   rentTitle: "",
   rentStartDate: "",
@@ -256,19 +266,19 @@ export const ADVERTISE_EMENTITIES = [
 
 export const ADVERTISE_BATHS = [
   { value: "", label: "Select" },
-  { value: "0.5", label: "0.5" },
+  // { value: "0.5", label: "0.5" },
   { value: "1", label: "1" },
-  { value: "1.5", label: "1.5" },
+  // { value: "1.5", label: "1.5" },
   { value: "2", label: "2" },
-  { value: "2.5", label: "2.5" },
+  // { value: "2.5", label: "2.5" },
   { value: "3", label: "3" },
-  { value: "3.5", label: "3.5" },
+  // { value: "3.5", label: "3.5" },
   { value: "4", label: "4" },
-  { value: "4.5", label: "4.5" },
+  // { value: "4.5", label: "4.5" },
   { value: "5", label: "5" },
-  { value: "5.5", label: "5.5" },
+  // { value: "5.5", label: "5.5" },
   { value: "6", label: "6" },
-  { value: "6.5", label: "6.5" },
+  // { value: "6.5", label: "6.5" },
 ];
 
 export const ADVERTISE_BEDS = [
@@ -300,9 +310,53 @@ export const FILTERBAR_BEDS = [
 ];
 export const FILTERBAR_HOMETYPE = [
   { value: "", label: "Home Type" },
-  { value: "ap", label: "$20" },
+  { value: "ap", label: "Apartment" },
+  { value: "sh", label: "Single Family House" },
+  { value: "con", label: "Condominium" },
+  { value: "th", label: "TownHouse" },
+  { value: "mh", label: "Mobile Home/Manufactured Home" },
 ];
 export const FILTERBAR_MOVEINDATE = [
   { value: "", label: "Move In Date" },
   { value: "ap", label: "$20" },
+];
+export const PARKING_TYPE = [
+  { value: "", label: "Select" },
+  { value: "1", label: "Covered" },
+  { value: "2", label: "Street" },
+  { value: "3", label: "Garage" },
+  { value: "4", label: "Other" },
+];
+export const LAUNDRY_TYPE = [
+  { value: "", label: "Select" },
+  { value: "1", label: "Washer/Dryer - In Unit" },
+  { value: "2", label: "Washer/Dryer Hookup" },
+  { value: "3", label: "Laundry Facilities" },
+];
+export const PETS_TYPE = [
+  { value: "", label: "Select" },
+  { value: "Cats", label: "Cats" },
+  { value: "Dogs", label: "Dogs" },
+  { value: "None", label: "None" },
+];
+
+export const FILTER_PROPERTY_TYPE = [
+  { value: "ap", label: "Apartment" },
+  { value: "sh", label: "Single Family House" },
+  { value: "con", label: "Condominium" },
+  { value: "th", label: "TownHouse" },
+  { value: "mh", label: "Mobile Home/Manufactured Home" },
+];
+
+export const FILTER_PROPERTY_AMENTITIES = [
+  { name: "In Unit Washer & Dryer", count: 45 },
+  { name: "Air Conditioning", count: 75 },
+  { name: "Parking", count: 67 },
+  { name: "Dishwasher", count: 77 },
+  { name: "Furnished", count: 87 },
+  { name: "In Unit Washer & Dryer", count: 45 },
+  { name: "Air Conditioning", count: 75 },
+  { name: "Parking", count: 67 },
+  { name: "Dishwasher", count: 77 },
+  { name: "Furnished", count: 87 },
 ];

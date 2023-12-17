@@ -9,6 +9,7 @@ import {
 import CustomInput from "../../../../ui-components/custominput";
 import { ToastContext } from "../../../../context/toast";
 import axios from "axios";
+import moment from "moment";
 
 const initialValidationState = {
   sizeSqft: false,
@@ -49,6 +50,7 @@ const UnitComponent = ({ uploadedImages }) => {
     const localRedux = [..._formArray];
 
     const updatedFormArray = [...formArray];
+
     // Create a new object for the specific index
     const updatedItem = {
       ...updatedFormArray[index],
@@ -82,12 +84,15 @@ const UnitComponent = ({ uploadedImages }) => {
     const dummyavailableDate = [];
     updatedFormArray.forEach((item) => {
       const { sizeSqft, rent, deposit, leaseLength, availableDate } = item;
-      dummysizeSqft.push(sizeSqft);
-      dummyrent.push(rent);
+      const updatedRent = rent ? parseInt(rent) : rent;
+      const updatedSize = sizeSqft ? parseInt(sizeSqft) : sizeSqft;
+      dummysizeSqft.push(updatedSize);
+      dummyrent.push(updatedRent);
       dummydeposit.push(deposit);
       dummyleaseLength.push(leaseLength);
       dummyavailableDate.push(availableDate);
     });
+
     let updated = [...localRedux];
     // let updated = [...updatedFormArray];
 
@@ -117,9 +122,21 @@ const UnitComponent = ({ uploadedImages }) => {
       },
     };
 
-    const temp = [...formArray];
-    for (let i = 1; i < screens?.advertise?.data?.propertyBeds.length; i++) {
-      temp.push({ ...object });
+    // const temp = [...formArray];
+    const temp = [];
+    for (let i = 0; i < screens?.advertise?.data?.propertyBeds.length; i++) {
+      temp.push({
+        sizeSqft: screens?.advertise?.data?.sizeSqft[i] ?? "",
+        rent: screens?.advertise?.data?.rent[i] ?? "",
+        deposit: screens?.advertise?.data?.deposit[i] ?? "",
+        leaseLength: screens?.advertise?.data?.leaseLength[i] ?? "",
+        availableDate: screens?.advertise?.data?.availableDate[i]
+          ? moment(screens?.advertise?.data?.availableDate[i]).format("YYYY-MM-DD")
+          : "",
+        validations: {
+          ...initialValidationState,
+        },
+      });
     }
     setFormArray(temp);
     dispatch(onAdvertiseMultiValidate(temp));
@@ -199,6 +216,27 @@ const UnitComponent = ({ uploadedImages }) => {
       if (res.data.status) {
         _attachments[index].images = res.data.upload;
         setFormAttachment(_attachments);
+        const _formArray = screens.advertise.multiValidate;
+        const localRedux = [..._formArray];
+
+        const reduxItem = {
+          ...localRedux[index],
+          validations: {
+            ...localRedux[index].validations,
+            images: false,
+          },
+        };
+        localRedux[index] = reduxItem;
+
+        let updated = [...localRedux];
+        dispatch(onAdvertiseMultiValidate(updated));
+        dispatch(
+          onFormAdvertiseDataChange({
+            ...screens.advertise.data,
+            imagesLength: _attachments.length,
+          })
+        );
+
         // setFormAttachment(res.data.upload);
         toast.showMessage("Success", "File(s) uploaded succesfully.", "success");
       } else {
@@ -279,7 +317,10 @@ const UnitComponent = ({ uploadedImages }) => {
                         <p className="picture_btn">Uploading</p>
                       ) : (
                         <label className="picture_btn" htmlFor={`file-upload-${index}`}>
-                          Upload Picture
+                          Upload Picture{" "}
+                          {screens.advertise.multiValidate[index]?.validations.images && (
+                            <small className="p-error">Required</small>
+                          )}
                         </label>
                       )}
                     </td>
@@ -377,7 +418,13 @@ const UnitComponent = ({ uploadedImages }) => {
                         name="availableDate"
                         className="input_tbl"
                         placeholder="mm/dd/yyyy"
-                        value={screens.advertise.data.availableDate[index]}
+                        value={
+                          screens.advertise.data.availableDate[index]
+                            ? moment(screens?.advertise?.data?.availableDate[index]).format(
+                                "YYYY-MM-DD"
+                              )
+                            : ""
+                        }
                         onChange={(e) => inputHandler(e, index)}
                         // value={selectedDate}
                         // onChange={handleDateChange}

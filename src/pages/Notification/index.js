@@ -89,7 +89,9 @@ const NotificationBox = ({ close }) => {
 
   // UseEffect
   useEffect(() => {
-    getNotification();
+    if (user) {
+      getNotification();
+    }
   }, [user]);
 
   return (

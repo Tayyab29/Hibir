@@ -23,8 +23,10 @@ const appUrl = {
     fileUpload: "advertise/upload",
     getAdvertise: "advertise/getAdvertisement",
     getAdvertiseById: "advertise/getAdvertiseById",
+    getCustomerAdvertise: "advertise/getAllAdvertisement",
   },
   chat: {
+    chatCreate: "chat",
     findChatById: "chat/getUserChatById",
   },
   message: {

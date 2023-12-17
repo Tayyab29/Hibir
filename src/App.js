@@ -126,9 +126,9 @@ function App() {
         <ProtectedRoute path="/allproperties" exact>
           <AllProperties />
         </ProtectedRoute>
-        <ProtectedRoute path="/singleproperty" exact>
+        {/* <ProtectedRoute path="/singleproperty" exact>
           <SingleProperty />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path="/propertyById" exact>
           <SingleProperty />
         </ProtectedRoute>

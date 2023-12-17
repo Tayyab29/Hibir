@@ -15,6 +15,11 @@ const reducer = (state, action) => {
 export const makeStore = () =>
   configureStore({
     reducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        thunk: false, // Disable the thunk middleware if needed
+        serializableCheck: false, // Disable serializable state check
+      }),
   });
 
 export const store = makeStore();

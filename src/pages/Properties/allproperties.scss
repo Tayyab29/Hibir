@@ -45,7 +45,7 @@
 
 .input_border {
   border-right: 1px solid;
-  padding-right: 1rem
+  padding-right: 1rem;
 }
 
 .filter_button,
@@ -56,6 +56,9 @@
   outline: none;
   cursor: pointer;
   font-weight: 700;
+}
+.pointer_icon {
+  cursor: pointer;
 }
 
 // .allproperties_scrollbar {
@@ -83,7 +86,6 @@
 // .allproperties_scrollbar::-webkit-scrollbar-thumb:hover {
 //   background: #757575;
 // }
-
 
 .listing_wrappper {
   column-gap: 20px;
@@ -160,7 +162,7 @@
 }
 
 .email_btn_padding_top {
-  padding-top: .9rem;
+  padding-top: 0.9rem;
 }
 
 .email_btn {
@@ -275,7 +277,6 @@
 }
 
 .custom_width_50:first-child {
-
   margin-left: 10px;
   border-right: 1px solid #757575;
 }
@@ -288,7 +289,6 @@
 }
 
 .homeType_width_50:first-child {
-
   margin-left: 10px;
   border-right: 1px solid #757575;
 }
@@ -311,7 +311,6 @@
   width: 100%;
   padding: 5px 12px;
   font-size: 14px;
-
 }
 
 /* Include these styles in your project's CSS */
@@ -417,6 +416,10 @@
 .homeTypes_main .home_type_checkbox {
   margin-bottom: 5px;
 }
+.home_type_checkbox_property {
+  width: 18px;
+  height: 18px;
+}
 
 .amenities_scroll {
   overflow-x: hidden;
@@ -453,13 +456,12 @@
 }
 
 .filter_main_button {
-
   text-align: center;
 }
 
 .filter_main_button button {
   width: 47%;
-  margin: 1.5rem .7rem;
+  margin: 1.5rem 0.7rem;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #1eb560;
@@ -512,7 +514,6 @@
 .single_property_view p span {
   margin: 0;
   color: #757575;
-
 }
 
 .single_property_view .brdr_text_one {
@@ -522,11 +523,12 @@
 }
 
 .single_property_view .brdr_text_two {
-  border-right: 1px solid #757575;
+  // border-right: 1px solid #757575;
   padding: 0px 16px;
   font-size: 14px;
   font-weight: 600;
   color: #1eb560;
+  cursor: pointer;
 }
 
 .single_property_view .brdr_text_three {
@@ -551,7 +553,7 @@
 }
 
 .right_single_property_text h2 {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .single_social_suit {
@@ -723,7 +725,7 @@
   color: #666;
   outline: none;
   box-shadow: none;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .submit_now_btn {
@@ -734,4 +736,26 @@
   background-color: #1eb560;
   border-radius: 5px;
   padding: 7px 10px;
+}
+.single_border {
+  margin-top: 20px;
+}
+
+.single_user_name {
+  font-weight: bold;
+  font-size: 18px;
+  font-style: italic;
+  margin-left: 6px;
+}
+.single_phone_wrapper {
+  display: flex;
+  flex-direction: row;
+  font-weight: 500;
+  color: #757575;
+  font-size: 16px;
+  gap: 10px;
+}
+
+.single_allproperties_mobile_icon {
+  font-size: 24px;
 }
