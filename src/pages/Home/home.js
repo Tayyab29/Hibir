@@ -1,15 +1,52 @@
-import React from "react";
-import "./home.css";
+import React, { useState } from "react";
 import Property from "./homecomponents/propert";
 import AboutUs from "./homecomponents/aboutUs";
 import GooglePlay from "./homecomponents/playStore";
 import Footer from "../../components/Footer/footer";
-import AutocompleteComponent from "./autoComplete";
+import CustomDropdown from "../../ui-components/customdropdown";
+
 //useHistory
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
+// Constants
+import { PROPERTY_TYPE } from "../../utils/Constants/global";
+
+// Styles
+import "./home.css";
 
 const Home = () => {
-  // const history = useHistory();
+  const history = useHistory();
+
+  const [searchOption, setSearchOption] = useState({
+    propertyType: [],
+    keyword: "",
+  });
+
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    if (name === "propertyType") {
+      setSearchOption({
+        ...searchOption,
+        propertyType: [value],
+      });
+    } else {
+      setSearchOption({
+        ...searchOption,
+        keyword: value,
+      });
+    }
+  };
+
+  const handleSearch = () => {
+    // Use history.push to navigate to "/allproperties" with state
+    history.push({
+      pathname: "/allproperties",
+      state: {
+        searchOption: { propertyType: searchOption.propertyType, keyword: searchOption.keyword },
+      },
+    });
+  };
+
   return (
     <>
       <section>
@@ -25,20 +62,22 @@ const Home = () => {
             <AutocompleteComponent apiKey={process.env.REACT_APP_GOOGLE_API_KEY} /> */}
             <div className="wdth_55">
               <div className="flex_div">
-                <select className="select_style">
-                  <option value="0" selected>
-                    Enter A Property Type
-                  </option>
-                  <option value="1">property 1</option>
-                  <option value="2">property 2</option>
-                </select>
-                <input type="text" placeholder="Enter A Location" className="input_style" />
-                <button
-                  className="search_btn"
-                  // onClick={() => {
-                  //   history.push("./searchbypropertyindex");
-                  // }}
-                >
+                <CustomDropdown
+                  className="select_style"
+                  id="propertyType"
+                  name="propertyType"
+                  onChange={inputHandler}
+                  options={PROPERTY_TYPE}
+                />
+                <input
+                  type="text"
+                  id="keyword"
+                  name="keyword"
+                  className="input_style"
+                  placeholder="Enter A Location"
+                  onChange={inputHandler}
+                />
+                <button className="search_btn" onClick={() => handleSearch()}>
                   Search
                 </button>
               </div>

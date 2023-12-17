@@ -16,3 +16,6 @@ export async function fetchAdvertisement(data) {
 export async function fetchAdvertisementById(data) {
   return postData(appUrl["advertise"].getAdvertiseById, data);
 }
+export async function fetchCustomerAdvertisement(data) {
+  return postData(appUrl["advertise"].getCustomerAdvertise, data);
+}

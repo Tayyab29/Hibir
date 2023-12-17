@@ -6,7 +6,13 @@ import {
   onAdvertiseValidate,
   onFormAdvertiseDataChange,
 } from "../../../../redux/main-view";
-import { ADVERTISE_EMENTITIES } from "../../../../utils/Constants/global";
+import {
+  ADVERTISE_EMENTITIES,
+  LAUNDRY_TYPE,
+  PARKING_TYPE,
+  PETS_TYPE,
+} from "../../../../utils/Constants/global";
+import CustomDropdown from "../../../../ui-components/customdropdown";
 
 const PropertyEmenities = () => {
   // Redux
@@ -47,7 +53,7 @@ const PropertyEmenities = () => {
               <b>Pets Allowed</b>
             </label>
             <div>
-              <select
+              {/* <select
                 className="condominium_input"
                 name="petsAllowed"
                 onChange={inputHandler}
@@ -56,7 +62,16 @@ const PropertyEmenities = () => {
                 <option value="">Select</option>
                 <option value="Cats">Cats</option>
                 <option value="Dogs">Dogs</option>
-              </select>
+                <option value="none">None</option>
+              </select> */}
+              <CustomDropdown
+                className="condominium_input"
+                id="petsAllowed"
+                name="petsAllowed"
+                onChange={inputHandler}
+                value={screens.advertise.data?.petsAllowed}
+                options={PETS_TYPE}
+              />
               {screens.advertise.validations.petsAllowed && (
                 <small className="p-error">Pets Allowed is required</small>
               )}
@@ -69,7 +84,7 @@ const PropertyEmenities = () => {
               <b>Laundry Type</b>
             </label>
             <div>
-              <select
+              {/* <select
                 className="condominium_input"
                 name="laundryType"
                 onChange={inputHandler}
@@ -79,7 +94,15 @@ const PropertyEmenities = () => {
                 <option value="1">Washer/Dryer - In Unit</option>
                 <option value="2">Washer/Dryer Hookup</option>
                 <option value="3">Laundry Facilities</option>
-              </select>
+              </select> */}
+              <CustomDropdown
+                className="condominium_input"
+                id="laundryType"
+                name="laundryType"
+                onChange={inputHandler}
+                value={screens.advertise.data?.laundryType}
+                options={LAUNDRY_TYPE}
+              />
               {screens.advertise.validations.laundryType && (
                 <small className="p-error">Laundry Type is required</small>
               )}
@@ -92,7 +115,7 @@ const PropertyEmenities = () => {
               <b>Parking Type</b>
             </label>
             <div>
-              <select
+              {/* <select
                 className="condominium_input"
                 name="parkingType"
                 onChange={inputHandler}
@@ -103,7 +126,15 @@ const PropertyEmenities = () => {
                 <option value="2">Street</option>
                 <option value="3">Garage</option>
                 <option value="4">Other</option>
-              </select>
+              </select> */}
+              <CustomDropdown
+                className="condominium_input"
+                id="parkingType"
+                name="parkingType"
+                onChange={inputHandler}
+                value={screens.advertise.data?.parkingType}
+                options={PARKING_TYPE}
+              />
               {screens.advertise.validations.parkingType && (
                 <small className="p-error">Parking Type is required</small>
               )}
