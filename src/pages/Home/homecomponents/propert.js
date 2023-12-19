@@ -57,28 +57,6 @@ const Property = () => {
       </div>
       <div className="container">
         <div className="row pt-5">
-          {/* {data.map((item, index) => {
-            return (
-              <div className="col-md-3 col-12" key={index}>
-                <div className="img_div">
-                  <img src={item.img} alt="img" />
-                </div>
-                <div className="img_heading">
-                  <h4>
-                    <b>
-                      {item.title} <br></br>Goes Here
-                    </b>
-                  </h4>
-                </div>
-                <div className="d-flex justify-content-between align-items-center">
-                  <p className="img_plain_text">{item.description}</p>
-                  <img src="images/propertyicon.png" alt="propertimg" />
-                </div>
-              </div>
-            );
-          })} */}
-          {/* {true && <CustomLoader />} */}
-
           {viewProperties.length === 0 ? (
             isLoading ? (
               <CustomLoader height={"50vh"} />
@@ -88,7 +66,7 @@ const Property = () => {
           ) : (
             viewProperties.map((item, index) => {
               return (
-                <div className="col-md-3 col-12" key={index}>
+                <div className="col-md-3 col-12 home_property_mbl" key={index}>
                   <div className="img_div">
                     <img
                       src={renderImage(
