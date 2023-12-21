@@ -33,28 +33,26 @@ const Advertise = () => {
         <div className="container">
           <div className="row mt-5 mb-3">
             <div
-              className={`col-md-4 col-12 ${activeCard === 0 ? "active_card" : "noactive_card"}`}
-              // onClick={() => handleCardClick(0)}
+              className={`col-4  ${activeCard === 0 ? "active_card" : "noactive_card"}`}
             >
-              <div className="text-center">
+              <div className="Advertise_main_heading_text">
                 <span className={activeCard === 0 ? "count_bg" : "nocount_bg"}>1</span>
                 <b> Select Package</b>
               </div>
             </div>
             <div
-              className={`col-md-4 col-12 ${activeCard === 1 ? "active_card" : "noactive_card"}`}
-              // onClick={() => handleCardClick(1)}
+              className={`col-4  ${activeCard === 1 ? "active_card" : "noactive_card"}`}
             >
-              <div className="text-center">
+              <div className="Advertise_main_heading_text">
                 <span className={activeCard === 1 ? "count_bg" : "nocount_bg"}>2</span>
                 <b> Add Your Property</b>
               </div>
             </div>
             <div
-              className={`col-md-4 col-12 ${activeCard === 2 ? "active_card" : "noactive_card"}`}
+              className={`col-4  ${activeCard === 2 ? "active_card" : "noactive_card"}`}
               onClick={() => handleCardClick(2)}
             >
-              <div className="text-center">
+              <div className="Advertise_main_heading_text">
                 <span className={activeCard === 2 ? "count_bg" : "nocount_bg"}>3</span>
                 <b> Checkout</b>
               </div>

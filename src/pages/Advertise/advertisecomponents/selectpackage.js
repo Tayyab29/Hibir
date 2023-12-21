@@ -44,8 +44,8 @@ const SelectPackage = (props) => {
       </section>
       <section className="bg-overlay-color">
         <div className="container">
-          <div className="">
-            <div className="text-center">
+          <div className="text-center">
+            <div className="Marketing_Package">
               <h1>
                 <b>Select Your Marketing Package</b>
               </h1>
@@ -53,9 +53,7 @@ const SelectPackage = (props) => {
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                   incididunt ut labore et dolore magna aliqua.
-                  {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua. */}
-                </p>
+                  </p>
               </div>
             </div>
           </div>

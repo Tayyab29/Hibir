@@ -239,7 +239,79 @@ input[type="number"] {
     border: 1px solid #1eb560;
     border-radius: 4px;
   }
-  .footer_text_container .mr-5 img{
+
+  .footer_text_container .mr-5 img {
     width: 120px;
+  }
+
+  /* Advertise css media query */
+  .Advertise_main_heading_text {
+    text-align: center;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .count_bg,
+  .nocount_bg {
+    padding: 7px 10px;
+  }
+
+  .manage_header_img img {
+    width: 100%;
+  }
+
+  .manage_heaader_text {
+    font-size: 18px;
+    padding-top: 1.5rem;
+  }
+
+  .manage_heaader_ptext {
+    text-align: justify;
+  }
+
+  .Marketing_Package h1 {
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .Marketing_Package .pckg_text_header {
+    width: 100%;
+    margin: 0 auto;
+    color: #757575;
+  }
+
+  .inline_select_unit {
+    flex-direction: column;
+  }
+
+  .active_button,
+  .noactive_button {
+    margin-bottom: .3rem;
+  }
+
+  .checkout_header {
+    padding-top: .7rem;
+    margin-bottom: 1.3rem;
+  }
+
+  .checkout_header h1 {
+    font-size: 18px;
+  }
+
+  .radio_span {
+    font-size: 14px;
+  }
+
+  .packgr_card>.subs_header>h1 {
+    font-size: 18px;
+  }
+
+  .packgr_card {
+    margin-bottom: 2rem;
+  }
+
+  .align_savebtn {
+    margin-top: .7rem;
+    border: 0;
   }
 }

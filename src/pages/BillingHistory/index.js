@@ -46,48 +46,50 @@ const BillingHistory = () => {
                 <section className="custom_padding">
                     <div className='row'>
                         <div className='col-12'>
-                            <table className="table billing_history_tbl">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Confirmation No.</th>
-                                        <th>Status</th>
-                                        <th>Description</th>
-                                        <th>Property</th>
-                                        <th>Amount</th>
+                            <div className='table-responsive'>
+                                <table className="table billing_history_tbl">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Confirmation No.</th>
+                                            <th>Status</th>
+                                            <th>Description</th>
+                                            <th>Property</th>
+                                            <th>Amount</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Date</td>
-                                        <td>Confirmation No.</td>
-                                        <td>Status</td>
-                                        <td>Description</td>
-                                        <td>Property</td>
-                                        <td>Amount</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Date</td>
+                                            <td>Confirmation No.</td>
+                                            <td>Status</td>
+                                            <td>Description</td>
+                                            <td>Property</td>
+                                            <td>Amount</td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>Date</td>
-                                        <td>Confirmation No.</td>
-                                        <td>Status</td>
-                                        <td>Description</td>
-                                        <td>Property</td>
-                                        <td>Amount</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date</td>
+                                            <td>Confirmation No.</td>
+                                            <td>Status</td>
+                                            <td>Description</td>
+                                            <td>Property</td>
+                                            <td>Amount</td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>Date</td>
-                                        <td>Confirmation No.</td>
-                                        <td>Status</td>
-                                        <td>Description</td>
-                                        <td>Property</td>
-                                        <td>Amount</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date</td>
+                                            <td>Confirmation No.</td>
+                                            <td>Status</td>
+                                            <td>Description</td>
+                                            <td>Property</td>
+                                            <td>Amount</td>
 
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </section>

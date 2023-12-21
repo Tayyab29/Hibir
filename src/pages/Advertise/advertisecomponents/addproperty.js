@@ -48,7 +48,7 @@ const AddProperty = () => {
       </section>
       <section className="bg-overlay-color">
         <div className="container">
-          <div className="">
+          <div className="Marketing_Package">
             <div className="text-center">
               <h1>
                 <b>Add Your Property</b>
