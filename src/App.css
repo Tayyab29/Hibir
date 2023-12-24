@@ -97,6 +97,11 @@ input[type="number"] {
   color: #ff5757;
 }
 
+.description_wrapper {
+  word-break: break-all;
+
+}
+
 /* media Quries */
 
 
@@ -172,7 +177,10 @@ input[type="number"] {
 
   .img_plain_text {
     font-size: 14px;
+    word-break: break-all;
+
   }
+
 
   .about_img_div .over_lay_bg {
     width: 100%;
@@ -247,13 +255,13 @@ input[type="number"] {
   /* Advertise css media query */
   .Advertise_main_heading_text {
     text-align: center;
-    font-size: 12px;
+    font-size: 10px;
     white-space: nowrap;
   }
 
   .count_bg,
   .nocount_bg {
-    padding: 7px 10px;
+    padding: 4px 7px;
   }
 
   .manage_header_img img {
@@ -313,5 +321,36 @@ input[type="number"] {
   .align_savebtn {
     margin-top: .7rem;
     border: 0;
+  }
+
+  .filterbar_div_main {
+    overflow-x: auto;
+  }
+
+  .location_input_searh {
+    display: flex;
+    align-items: center;
+  }
+
+  .filterbar_div_main {
+    width: 100%;
+  }
+
+  .padding_right_0 {
+    padding-right: calc(var(--bs-gutter-x) * .5) !important;
+  }
+
+  .padding_left_0 {
+    padding-left: calc(var(--bs-gutter-x) * .5) !important;
+  }
+
+  .send_btn_chat .send_btn_not {
+    width: 40px;
+    font-size: 12px;
+
+  }
+
+  .send_btn_chat {
+    padding-left: 0;
   }
 }

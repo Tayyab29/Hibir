@@ -52,7 +52,7 @@ const PropertiesList = (props) => {
           return (
             <div className="listing_wrappper row" key={index}>
               <div
-                className="col-md-12 d-flex pointer_icon"
+                className="col-md-12 row pointer_icon"
                 onClick={() => singlePropertyRouting(item._id)}
               >
                 <div className="col-md-8">

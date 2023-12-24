@@ -101,7 +101,7 @@ const ChatIndex = () => {
       <div className="chat_sidebar">
         <div className="chat_container">
           <div className="row">
-            <div className="col-12 col-md-3" style={{ paddingRight: "0" }}>
+            <div className="col-12 col-md-3 padding_right_0" >
               <ChatSidebar
                 selectedChat={selectedChat}
                 setSelectedChat={setSelectedChat}
@@ -109,7 +109,7 @@ const ChatIndex = () => {
                 onlineUsers={onlineUsers}
               />
             </div>
-            <div className="col-12 col-md-9" style={{ paddingLeft: "0" }}>
+            <div className="col-12 col-md-9 padding_left_0">
               <ChatMainArea
                 socket={socket}
                 messages={messages}

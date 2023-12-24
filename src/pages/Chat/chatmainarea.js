@@ -84,7 +84,7 @@ const ChatMainArea = (props) => {
       <div className="main_area_style">
         {selectedChat ? (
           <>
-            <div className="custom-scrollbar_main_area" ref={chatWindowRef} onScroll={handleScroll}>
+            <div className="custom-scrollbar_main_area width_100" ref={chatWindowRef} onScroll={handleScroll}>
               {messages.map((item, index) => {
                 return (
                   <div
@@ -99,6 +99,7 @@ const ChatMainArea = (props) => {
                   </div>
                 );
               })}
+              <div style={{ clear: "both" }}></div>
             </div>
             <div className="fixed_input">
               <div className="row">
@@ -119,7 +120,7 @@ const ChatMainArea = (props) => {
                 onChange={inputHandler}
               /> */}
                 </div>
-                <div className="col-2">
+                <div className="col-2 send_btn_chat">
                   <button
                     type="submit"
                     className={newMessage === "" ? "send_btn_not" : "send_btn"}

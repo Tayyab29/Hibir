@@ -74,9 +74,11 @@
   border-bottom: 1px solid #cbcbcb;
   cursor: pointer;
 }
+
 .chat_container {
   margin: 0px 15px;
 }
+
 .active_user .user_names {
   font-size: 14px;
   color: #000;
@@ -101,6 +103,18 @@
 .user_date_time {
   font-size: 12px;
   color: #757575;
+}
+
+.padding_right_0 {
+  padding-right: 0;
+}
+
+.padding_left_0 {
+  padding-left: 0;
+}
+
+.width_100 {
+  width: 100%;
 }
 
 // Chat Main Area
@@ -145,6 +159,7 @@
   border-radius: 4px;
   padding: 5px 10px;
   margin: 3px 0;
+  background-color: rgba(30, 181, 95, 0.295);
 }
 
 .container_chat_darker {
@@ -152,7 +167,6 @@
   border-radius: 4px;
   padding: 5px 10px;
   margin: 3px 0;
-  // background-color: rgba(30, 181, 95, 0.295);
   // width: fit-content;
 }
 
@@ -200,13 +214,20 @@
   padding: 8px 0px;
   cursor: not-allowed !important;
 }
+
 .no_chat_wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   height: calc(100vh - 12.8rem);
 }
+
 .chat_time_show {
   font-size: 11px;
   color: #757575d5;
+}
+
+.send_btn_chat {
+  text-align: -webkit-right;
+  padding-top: .41rem;
 }

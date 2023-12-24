@@ -49,7 +49,7 @@ const FilterBarAllProperty = (props) => {
               style={{ position: "relative", cursor: "pointer" }}
               onClick={toggleDropdown}
             >
-              <div className="input_border">
+              <div className="input_border location_input_searh">
                 <MdOutlineMyLocation className="location_search_icon" />
                 <CustomInput
                   className="location_search"

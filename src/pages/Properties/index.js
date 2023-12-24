@@ -132,7 +132,7 @@ const AllProperties = (props) => {
 
   return (
     <>
-      <div className="main_container">
+      <div className="main_container container-fluid">
         <div className="filer_bar_wrapper">
           <FilterBarAllProperty
             setFilter={setFilter}
@@ -142,7 +142,8 @@ const AllProperties = (props) => {
           />
         </div>
         <hr />
-        <div className="col-12 col-md-12 d-flex">
+        <div className="row">
+          {/* <div className="col-12 col-md-12 d-flex"> */}
           <div className="col-md-7">Google Maps</div>
           <div className="col-md-5">
             <PropertiesList
@@ -153,6 +154,7 @@ const AllProperties = (props) => {
               isLoading={isLoading}
             />
           </div>
+          {/* </div> */}
         </div>
       </div>
       <footer>
