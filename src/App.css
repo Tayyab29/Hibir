@@ -1,4 +1,5 @@
-:root {}
+:root {
+}
 
 body {
   font-family: "Roboto";
@@ -99,13 +100,11 @@ input[type="number"] {
 
 .description_wrapper {
   word-break: break-all;
-
 }
 
 /* media Quries */
 
-
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .logo_div {
     margin-right: 0rem;
   }
@@ -118,7 +117,6 @@ input[type="number"] {
     width: 100px;
     padding: 5px 10px;
     font-size: 12px;
-
   }
 
   .notify_container {
@@ -129,7 +127,6 @@ input[type="number"] {
     width: 370px;
     top: 0px;
     right: 15px;
-
   }
 
   .pos_absolute {
@@ -178,9 +175,7 @@ input[type="number"] {
   .img_plain_text {
     font-size: 14px;
     word-break: break-all;
-
   }
-
 
   .about_img_div .over_lay_bg {
     width: 100%;
@@ -294,11 +289,11 @@ input[type="number"] {
 
   .active_button,
   .noactive_button {
-    margin-bottom: .3rem;
+    margin-bottom: 0.3rem;
   }
 
   .checkout_header {
-    padding-top: .7rem;
+    padding-top: 0.7rem;
     margin-bottom: 1.3rem;
   }
 
@@ -310,7 +305,7 @@ input[type="number"] {
     font-size: 14px;
   }
 
-  .packgr_card>.subs_header>h1 {
+  .packgr_card > .subs_header > h1 {
     font-size: 18px;
   }
 
@@ -319,7 +314,7 @@ input[type="number"] {
   }
 
   .align_savebtn {
-    margin-top: .7rem;
+    margin-top: 0.7rem;
     border: 0;
   }
 
@@ -337,17 +332,16 @@ input[type="number"] {
   }
 
   .padding_right_0 {
-    padding-right: calc(var(--bs-gutter-x) * .5) !important;
+    padding-right: calc(var(--bs-gutter-x) * 0.5) !important;
   }
 
   .padding_left_0 {
-    padding-left: calc(var(--bs-gutter-x) * .5) !important;
+    padding-left: calc(var(--bs-gutter-x) * 0.5) !important;
   }
 
   .send_btn_chat .send_btn_not {
     width: 40px;
     font-size: 12px;
-
   }
 
   .send_btn_chat {

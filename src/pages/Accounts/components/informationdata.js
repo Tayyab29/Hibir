@@ -75,8 +75,8 @@ const InformationData = (props) => {
 
   const getZipCodes = async () => {
     try {
-      const res = await fetchZipCode({ zip: formik.values.zip });
-      if (res.data.status) {
+      const res = await fetchZipCode({ zip: formik?.values?.zip });
+      if (res.data?.status) {
         const data = res?.data.records[0];
 
         formik.setFieldValue("zip", data?.zip);
@@ -103,14 +103,14 @@ const InformationData = (props) => {
   }, []);
 
   useEffect(() => {
-    if (formik.values.zip && formik.values.zip.length > 4) {
+    if (formik?.values?.zip && formik?.values?.zip.length > 4) {
       getZipCodes();
-    } else if (formik.values.zip.length <= 0) {
+    } else if (formik?.values?.zip.length <= 0) {
       formik.setFieldValue("zip", "");
       formik.setFieldValue("state", "");
       formik.setFieldValue("city", "");
     }
-  }, [formik.values.zip]);
+  }, [formik?.values?.zip]);
 
   const isFormFieldValid = (name) => !!(formik.touched[name] && formik.errors[name]);
   const getFormErrorMessage = (name) => {
@@ -264,7 +264,7 @@ const InformationData = (props) => {
                           name="zip"
                           // value={userDetails.zip}
                           // onChange={inputHandler}
-                          value={formik.values.zip}
+                          value={formik.values?.zip}
                           onChange={formik.handleChange}
                           maxLength={5}
                         />

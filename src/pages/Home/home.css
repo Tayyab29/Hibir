@@ -66,12 +66,16 @@
 .img_div img {
   width: 100%;
 }
+
 .img_plain_text {
-  font-size: 20px;
-  margin: 0;
+  /* font-size: 20px; */
+  /* margin: 0;
   padding-top: 0.5rem;
-  color: var(--text-light0-color);
-  font-weight: 400;
+  font-weight: 400; */
+  /* color: var(--text-light0-color); */
+  color: gray;
+  font-size: 14px;
+  word-break: break-all;
 }
 .view_more_div {
   margin-top: 4rem;

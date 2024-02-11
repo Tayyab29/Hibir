@@ -68,10 +68,10 @@ const ChatIndex = () => {
   useEffect(() => {
     socketContext.recieveSocketMessageOn();
 
-    return () => {
-      socketContext.recieveSocketMessageOff();
-    };
-  });
+    // return () => {
+    //   socketContext.recieveSocketMessageOff();
+    // };
+  }, []);
 
   // Socket Recieving Message
   useEffect(() => {
@@ -101,7 +101,7 @@ const ChatIndex = () => {
       <div className="chat_sidebar">
         <div className="chat_container">
           <div className="row">
-            <div className="col-12 col-md-3 padding_right_0" >
+            <div className="col-12 col-md-3 padding_right_0">
               <ChatSidebar
                 selectedChat={selectedChat}
                 setSelectedChat={setSelectedChat}

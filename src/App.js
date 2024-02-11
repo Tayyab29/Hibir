@@ -123,15 +123,17 @@ function App() {
         <ProtectedRoute path="/chatindex" exact>
           <ChatIndex />
         </ProtectedRoute>
-        <ProtectedRoute path="/allproperties" exact>
+        {/* <ProtectedRoute path="/allproperties" exact>
           <AllProperties />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         {/* <ProtectedRoute path="/singleproperty" exact>
           <SingleProperty />
         </ProtectedRoute> */}
-        <ProtectedRoute path="/propertyById" exact>
+        {/* <ProtectedRoute path="/propertyById" exact>
           <SingleProperty />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
+        <Route path="/allproperties" component={AllProperties} exact />
+        <Route path="/propertyById" component={SingleProperty} exact />
       </Router>
     </>
   );
